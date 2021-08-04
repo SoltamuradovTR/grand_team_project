@@ -24,7 +24,12 @@ const agentSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
+    },
+    location: {
+        type: String,
+        required: true
     }
+
 })
 
 const Agent = mongoose.model('Agent', agentSchema)

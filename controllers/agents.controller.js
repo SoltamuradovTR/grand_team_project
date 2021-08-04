@@ -1,4 +1,6 @@
 const Agent = require('../models/Agent.model');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 module.exports.agentsController = {
     getAllAgents: async (req, res) => {
@@ -33,7 +35,9 @@ module.exports.agentsController = {
     },
 
     createAgent: async (req, res) => {
-        const { name, login, password, phone, email } = req.body;
+        const { name, login, password, phone, email, location } = req.body;
+
+        const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS))
 
         if (!name) {
             return res.status(400).json({
@@ -65,9 +69,20 @@ module.exports.agentsController = {
             });
         }
 
+        if (!location) {
+            return res.status(400).json({
+                error: "Необходимо указать город агента!",
+            });
+        }
+
         try {
             const agent = await Agent.create({
-                name, login, password, phone, email
+                name: name,
+                login: login,
+                password: hash,
+                phone: phone,
+                email: email,
+                location: location
             })
 
             return res.json(agent)
@@ -102,11 +117,11 @@ module.exports.agentsController = {
 
     editAgent: async (req, res) => {
         const { id } = req.params;
-        const { name, login, password, phone, email } = req.body;
+        const { name, login, password, phone, email, location } = req.body;
 
         try {
             const edited = await Agent.findByIdAndUpdate(id, {
-                name, login, password, phone, email
+                name, login, password, phone, email, location
             }, { new: true});
 
             return res.json(edited)
@@ -116,4 +131,31 @@ module.exports.agentsController = {
             });
         }
     },
+
+    loginAgent: async (req, res) => {
+        const { login, password } = req.body
+
+        const candidate = await Agent.findOne({ login: login })
+
+        if (!candidate) {
+            return res.status(401).json('Неверный логин')
+        }
+
+        const valid = await bcrypt.compare(password, candidate.password)
+
+        if (!valid) {
+            return res.status(401).json('Неверный пароль')
+        }
+
+        const payload = {
+            id: candidate._id,
+            login: candidate.login
+        }
+
+        const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
+            expiresIn: '24h'
+        })
+
+        res.json("Авторизация прошла успешно")
+    }
 }

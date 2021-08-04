@@ -6,6 +6,7 @@ const router = Router();
 router.get("/agents", agentsController.getAllAgents);
 router.get("/agent/:id", agentsController.getAgentById);
 router.post("/agent", agentsController.createAgent);
+router.post('/login/agent', agentsController.loginAgent)
 router.delete("/agent/:id", agentsController.removeAgent);
 router.patch("/agent/:id", agentsController.editAgent);
 

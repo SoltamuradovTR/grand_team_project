@@ -1,4 +1,6 @@
 const Client = require('../models/Client.model');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 module.exports.clientsController = {
     getAllClients: async (req, res) => {
@@ -35,6 +37,8 @@ module.exports.clientsController = {
     createClient: async (req, res) => {
         const { name, login, password, phone, email } = req.body;
 
+        const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS))
+
         if (!name) {
             return res.status(400).json({
                 error: "Необходимо указать имя клиента!",
@@ -67,7 +71,11 @@ module.exports.clientsController = {
 
         try {
             const client = await Client.create({
-                name, login, password, phone, email
+                name: name,
+                login: login,
+                password: hash,
+                phone: phone,
+                email: email
             })
 
             return res.json(client)
@@ -104,16 +112,51 @@ module.exports.clientsController = {
         const { id } = req.params;
         const { name, login, password, phone, email } = req.body;
 
+        const { authorization } = req.headers;
+
+        const [ type, token] = authorization.split(' ');
+
+        if (type !== 'Bearer') {
+            return res.status(401).json('неверный тип токена')
+        }
+
         try {
+            const payload = jwt.verify(token, process.env.SECRET_JWT_KEY);
+
             const edited = await Client.findByIdAndUpdate(id, {
                 name, login, password, phone, email
             }, { new: true});
 
             return res.json(edited)
         } catch (e) {
-            return res.status(400).json({
-                error: e.toString(),
-            });
+            return res.status(401).json();
         }
     },
+
+    loginClient: async (req, res) => {
+        const { login, password } = req.body
+
+        const candidate = await Client.findOne({ login: login })
+
+        if (!candidate) {
+            return res.status(401).json('Неверный логин')
+        }
+
+        const valid = await bcrypt.compare(password, candidate.password)
+
+        if (!valid) {
+            return res.status(401).json('Неверный пароль')
+        }
+
+        const payload = {
+            id: candidate._id,
+            login: candidate.login
+        }
+
+        const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
+            expiresIn: '24h'
+        })
+
+        res.json("Авторизация прошла успешно")
+    }
 }
