@@ -157,6 +157,9 @@ module.exports.clientsController = {
             expiresIn: '24h'
         })
 
-        res.json("Авторизация прошла успешно")
+        res.json({
+            text: "Авторизация прошла успешно",
+            token: token
+        })
     }
 }
