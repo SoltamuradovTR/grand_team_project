@@ -18,13 +18,14 @@ const requestSchema = new mongoose.Schema({
         default: true
     },
     source: String,
-
     appraisers: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Agent'
         }
-    ]
+    ],
+    location: String
+
 }, {timestamps: true})
 
 
