@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 module.exports.requestsController = {
   getRequests: async (req, res) => {
     try {
-      const request = await Request.find();
+      const request = await Request.find().populate('author');
 
       return res.json(request);
     } catch (e) {
