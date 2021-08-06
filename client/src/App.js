@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from './components/Header/Header';
+import Header from './components/Header';
 import { Button, createTheme, MuiThemeProvider } from '@material-ui/core';
 import Routes from './components/Routes';
 
