@@ -114,7 +114,6 @@ function DialogLoginAgent({open, setOpen}) {
               label="Запомнить меня"
             />
             <Button
-              //type="submit"
               fullWidth
               variant="contained"
               color="primary"
