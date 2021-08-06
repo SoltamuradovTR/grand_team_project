@@ -1,5 +1,5 @@
 import React from 'react';
-import ContainerBox from '../components/Container/ContainerBox';
+import ContainerBox from '../components/DefaultComponents/Container/ContainerBox';
 
 function Main(props) {
   return (

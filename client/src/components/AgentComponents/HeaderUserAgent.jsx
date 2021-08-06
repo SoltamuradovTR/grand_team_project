@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-function HeaderUser(props) {
+function HeaderUserAgent(props) {
   const [theme, setTheme] = useState({
     light: true
   });
@@ -84,4 +84,4 @@ function HeaderUser(props) {
   );
 }
 
-export default HeaderUser;
+export default HeaderUserAgent;
