@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Dialog from "@material-ui/core/Dialog";
+import {useDispatch} from "react-redux";
+import {loginAgent, registrationAgent} from "../../redux/features/registration";
 
 
 
@@ -43,13 +45,48 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
+  buttonClose: {
+    marginLeft: 300,
+    marginTop: -50
+  }
 }));
 
 export default function DialogRegisterAgent({open, setOpen}) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [login, setLogin] = useState('')
+  const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [phone, setPhone] = useState();
+  const [email, setEmail] = useState();
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const handleAddLogin = (e) => {
+    setLogin(e.target.value)
+  }
+  const handleAddPassword = (e) => {
+    setPassword(e.target.value)
+  }
+  const handleAddFirstName = (e) => {
+    setFirstName(e.target.value)
+  }
+  const handleAddLastName = (e) => {
+    setLastName(e.target.value)
+  }
+  const handleAddNumber = (e) => {
+    setPhone(e.target.value)
+  }
+  const handleAddEmail = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const handleRegistration = () => {
+    dispatch(registrationAgent({login, password, firstName, lastName, phone, email}))
   }
 
   function Copyright() {
@@ -66,10 +103,11 @@ export default function DialogRegisterAgent({open, setOpen}) {
   }
 
   return (
-      <Dialog open={open}  onClick={handleClose}>
+      <Dialog open={open}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          <div className={classes.paper}>
+          <Box className={classes.paper}>
+            <Button className={classes.buttonClose} onClick={handleClose}>Закрыть</Button>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
@@ -88,6 +126,8 @@ export default function DialogRegisterAgent({open, setOpen}) {
                     id="имя"
                     label="Имя"
                     autoFocus
+                    value={firstName}
+                    onChange={handleAddFirstName}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -98,7 +138,9 @@ export default function DialogRegisterAgent({open, setOpen}) {
                     id="фамилия"
                     label="Фамилия"
                     name="фамилия"
-                    autoComplete="lname"
+                    autoComplete="name"
+                    value={lastName}
+                    onChange={handleAddLastName}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -110,6 +152,34 @@ export default function DialogRegisterAgent({open, setOpen}) {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    value={email}
+                    onChange={handleAddEmail}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="number"
+                      label="number"
+                      name="number"
+                      autoComplete="number"
+                      value={phone}
+                      onChange={handleAddNumber}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="login"
+                      label="login"
+                      name="login"
+                      autoComplete="login"
+                      value={login}
+                      onChange={handleAddLogin}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -122,6 +192,8 @@ export default function DialogRegisterAgent({open, setOpen}) {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={handleAddPassword}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -132,12 +204,12 @@ export default function DialogRegisterAgent({open, setOpen}) {
                 </Grid>
               </Grid>
                 <Button
-                  type="submit"
                   fullWidth
                   variant="contained"
                   color="primary"
                   className={classes.submit}
                   style={{marginRight: 15}}
+                  onClick={handleRegistration}
                 >
                   Зарегистрироваться
                 </Button>
@@ -149,7 +221,7 @@ export default function DialogRegisterAgent({open, setOpen}) {
                 </Grid>
               </Grid>
             </form>
-          </div>
+          </Box>
           <Box mt={5}>
             <Copyright />
           </Box>

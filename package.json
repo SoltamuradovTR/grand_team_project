@@ -5,11 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index",
-
     "client": "cd ./client && npm start",
-
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-
     "start": "node index.js"
   },
   "keywords": [],
