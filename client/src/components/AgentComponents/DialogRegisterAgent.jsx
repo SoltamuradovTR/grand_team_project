@@ -61,6 +61,7 @@ export default function DialogRegisterAgent({open, setOpen}) {
   const [lastName, setLastName] = useState();
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState();
+  const [location, setLocation] = useState();
 
   const handleClose = () => {
     setOpen(false)
@@ -84,9 +85,12 @@ export default function DialogRegisterAgent({open, setOpen}) {
   const handleAddEmail = (e) => {
     setEmail(e.target.value)
   }
+  const handleAddLocation = (e) => {
+    setLocation(e.target.value)
+  }
 
   const handleRegistration = () => {
-    dispatch(registrationAgent({login, password, firstName, lastName, phone, email}))
+    dispatch(registrationAgent({login, password, firstName, lastName, phone, email, location}))
   }
 
   function Copyright() {
@@ -194,6 +198,19 @@ export default function DialogRegisterAgent({open, setOpen}) {
                     autoComplete="current-password"
                     value={password}
                     onChange={handleAddPassword}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="город"
+                    label="Город"
+                    name="Город"
+                    autoComplete="name"
+                    value={location}
+                    onChange={handleAddLocation}
                   />
                 </Grid>
                 <Grid item xs={12}>

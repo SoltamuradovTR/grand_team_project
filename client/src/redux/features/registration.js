@@ -36,7 +36,7 @@ export default registration;
 export const registrationAgent = (data) => {
     return async (dispatch) => {
         dispatch({ type: "agent/signUp/pending" });
-
+        console.log(data)
         const res = await fetch("/agent", {
             method: "POST",
             body: JSON.stringify(data),

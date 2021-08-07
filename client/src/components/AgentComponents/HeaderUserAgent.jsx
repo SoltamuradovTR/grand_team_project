@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import CardMedia from '@material-ui/core/CardMedia';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, Popover } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
+import React, { useState } from "react";
+import CardMedia from "@material-ui/core/CardMedia";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Popover } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-
 
 const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
-    display: 'flex',
-    margin: 'auto'
+    display: "flex",
+    margin: "auto",
   },
-}))
-
+}));
 
 function HeaderUserAgent(props) {
   const [theme, setTheme] = useState({
-    light: true
+    light: true,
   });
 
-  const handleChangeTheme = event => {
+  const handleChangeTheme = (event) => {
     setTheme({ ...theme, [event.target.name]: event.target.checked });
   };
 
@@ -49,13 +47,18 @@ function HeaderUserAgent(props) {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? "simple-popover" : undefined;
   return (
     <>
       <div>
-        <CardMedia style={{marginRight: 200}}>
-          <a  aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-              <PersonIcon style={{fontSize: 40, cursor: 'pointer'}} />
+        <CardMedia style={{ marginRight: 200 }}>
+          <a
+            aria-describedby={id}
+            variant="contained"
+            color="primary"
+            onClick={handleClick}
+          >
+            <PersonIcon style={{ fontSize: 40, cursor: "pointer" }} />
           </a>
         </CardMedia>
         <Popover
@@ -64,22 +67,19 @@ function HeaderUserAgent(props) {
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
+            vertical: "bottom",
+            horizontal: "center",
           }}
           transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
+            vertical: "top",
+            horizontal: "center",
           }}
         >
-            <Button className={classes.typography}>Админ</Button>
-            <Button className={classes.typography}>Войти</Button>
-            <Button className={classes.typography}>Регистрация</Button>
+          <Button className={classes.typography}>Личный кабинет</Button>
+          <Button className={classes.typography}>Выйти</Button>
         </Popover>
       </div>
-      <FormControlLabel
-        control={toggleTheme}
-      />
+      <FormControlLabel control={toggleTheme} />
     </>
   );
 }

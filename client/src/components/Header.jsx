@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderBox from './DefaultComponents/Header/HeaderBox';
 import { useSelector } from 'react-redux';
 import { selectRole, selectToken } from '../redux/features/login';
+import HeaderBoxAgent from './AgentComponents/HeaderBoxAgent';
 
 function Header(props) {
 
@@ -9,10 +10,10 @@ function Header(props) {
 
   const role = useSelector(selectRole)
 
-  if (!token) {
+  if (role === 'Agent') {
     return (
       <>
-        <HeaderBox />
+      <HeaderBoxAgent/>
       </>
     )
   } else {
@@ -21,7 +22,9 @@ function Header(props) {
     }
   }
   return (
-<div></div>
+    <>
+      <HeaderBox />
+    </>
   );
 }
 

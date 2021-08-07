@@ -122,26 +122,9 @@ export const loginClient = (login, password) => {
   };
 };
 
-export const registrationAgent = (data) => {
-  return async (dispatch) => {
-    dispatch({ type: "agent/signUp/pending" });
+export const logout = () => {
 
-    const res = await fetch("/agent", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const json = await res.json();
-
-    if (json.error) {
-      dispatch({ type: "agent/signUp/rejected", error: json.error });
-    } else {
-      dispatch({ type: "agent/signUp/fulfilled", payload: json });
-    }
-  };
-};
+}
 
 export const selectToken = (state) => state.login.token;
 
