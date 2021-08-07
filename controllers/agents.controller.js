@@ -35,11 +35,15 @@ module.exports.agentsController = {
   },
 
   createAgent: async (req, res) => {
-    const { name, login, password, phone, email, location } = req.body;
-
+    const { fistName, lastName, login, password, phone, email, location } = req.body;
     const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
 
-    if (!name) {
+    if (!fistName) {
+      return res.status(400).json({
+        error: "Необходимо указать имя агента!",
+      });
+    }
+    if (!lastName) {
       return res.status(400).json({
         error: "Необходимо указать имя агента!",
       });
@@ -77,12 +81,13 @@ module.exports.agentsController = {
 
     try {
       const agent = await Agent.create({
-        name: name,
-        login: login,
+        fistName,
+        lastName,
+        login,
         password: hash,
-        phone: phone,
-        email: email,
-        location: location,
+        phone,
+        email,
+        location,
       });
 
       return res.json(agent);
@@ -117,13 +122,14 @@ module.exports.agentsController = {
 
   editAgent: async (req, res) => {
     const { id } = req.params;
-    const { name, login, password, phone, email, location } = req.body;
+    const { fistName, lastName, login, password, phone, email, location } = req.body;
 
     try {
       const edited = await Agent.findByIdAndUpdate(
         id,
         {
-          name,
+          fistName,
+          lastName,
           login,
           password,
           phone,
@@ -144,7 +150,7 @@ module.exports.agentsController = {
   loginAgent: async (req, res) => {
     const { login, password } = req.body;
 
-    const candidate = await Agent.findOne({ login: login });
+    const candidate = await Agent.findOne({  login });
 
     if (!candidate) {
       return res.status(401).json("Неверный логин");
@@ -165,9 +171,9 @@ module.exports.agentsController = {
       expiresIn: "24h",
     });
 
-    res.json({
+    return res.json({
       text: "Авторизация прошла успешно",
-      token: token,
+      token,
       role: "Agent",
     });
   },

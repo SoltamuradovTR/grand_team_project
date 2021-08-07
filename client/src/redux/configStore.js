@@ -5,6 +5,7 @@ import requests from './features/requests'
 import agent from './features/agent';
 import login from './features/login';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import registration from "./features/registration";
 
 const logger = createLogger({
   diff: true,
@@ -12,6 +13,6 @@ const logger = createLogger({
 })
 
 export const store = createStore(
-  combineReducers( {requests: requests, agent: agent, login: login}),
+  combineReducers( {requests: requests, agent, login, registration}),
   composeWithDevTools(applyMiddleware( thunk))
 )
