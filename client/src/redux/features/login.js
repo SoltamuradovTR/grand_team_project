@@ -67,6 +67,26 @@ const login = (state = initialState, action) => {
         signingIn: false,
         error: action.error,
       };
+    case 'user/logout/pending':
+      return {
+        ...state,
+        signingIn: true,
+        error: null,
+        token: null,
+      };
+    case 'user/logout/fulfilled':
+      return {
+        ...state,
+        signingIn: false,
+        token: null,
+        role: null
+      };
+    case 'user/logout/rejected':
+      return {
+        ...state,
+        signingIn: false,
+        error: action.error,
+      }
     default:
       return state;
   }
@@ -123,7 +143,18 @@ export const loginClient = (login, password) => {
 };
 
 export const logout = () => {
+    return async (dispatch) => {
+      dispatch({ type: 'user/logout/pending'})
 
+      try {
+        dispatch({ type: 'user/logout/fulfilled'})
+
+        localStorage.setItem('token', null)
+        localStorage.setItem('role', null)
+      } catch (e) {
+        dispatch({ type: 'user/logout/rejected'})
+      }
+    }
 }
 
 export const selectToken = (state) => state.login.token;
