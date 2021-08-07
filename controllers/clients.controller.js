@@ -35,13 +35,18 @@ module.exports.clientsController = {
   },
 
   createClient: async (req, res) => {
-    const { name, login, password, phone, email } = req.body;
+    const { firstName, lastName, login, password, phone, email } = req.body;
 
     const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
 
-    if (!name) {
+    if (!firstName) {
       return res.status(400).json({
         error: "Необходимо указать имя клиента!",
+      });
+    }
+    if (!lastName) {
+      return res.status(400).json({
+        error: "Необходимо указать фамилию клиента!",
       });
     }
 
@@ -71,11 +76,12 @@ module.exports.clientsController = {
 
     try {
       const client = await Client.create({
-        name: name,
-        login: login,
+        firstName,
+        lastName,
+        login,
         password: hash,
-        phone: phone,
-        email: email,
+        phone,
+        email,
       });
 
       return res.json(client);
@@ -110,7 +116,7 @@ module.exports.clientsController = {
 
   editClient: async (req, res) => {
     const { id } = req.params;
-    const { name, login, password, phone, email } = req.body;
+    const { firstName, lastName, login, password, phone, email } = req.body;
 
     const { authorization } = req.headers;
 
@@ -126,7 +132,8 @@ module.exports.clientsController = {
       const edited = await Client.findByIdAndUpdate(
         id,
         {
-          name,
+          firstName,
+          lastName,
           login,
           password,
           phone,
@@ -144,7 +151,7 @@ module.exports.clientsController = {
   loginClient: async (req, res) => {
     const { login, password } = req.body;
 
-    const candidate = await Client.findOne({ login: login });
+    const candidate = await Client.findOne({ login });
 
     if (!candidate) {
       return res.status(401).json("Неверный логин");
@@ -167,7 +174,7 @@ module.exports.clientsController = {
 
     res.json({
       text: "Авторизация прошла успешно",
-      token: token,
+      token,
       role: "Client",
     });
   },

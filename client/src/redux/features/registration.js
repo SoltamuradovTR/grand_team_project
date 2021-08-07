@@ -54,6 +54,24 @@ export const registrationAgent = (data) => {
     };
 };
 
-//export const selectToken = (state) => state.login.token;
+export const registrationClient = (data) => {
+    return async (dispatch) => {
+        dispatch({type: "client/signUp/pending"})
 
-//export const selectRole = (state) => state.login.role;
+        const res = await fetch('/client', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        const json = await res.json()
+
+        if (json.error) {
+            dispatch({type: "client/signUp/rejected", error: json.error})
+        } else {
+            dispatch({type: "client/isgnUp/fulfilled", payload: json})
+        }
+    }
+}
+
