@@ -13,6 +13,6 @@ const logger = createLogger({
 })
 
 export const store = createStore(
-  combineReducers( {requests: requests, agent, login, registration}),
+  combineReducers( {requests, agent, login, registration}),
   composeWithDevTools(applyMiddleware( thunk))
 )

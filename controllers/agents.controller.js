@@ -35,10 +35,10 @@ module.exports.agentsController = {
   },
 
   createAgent: async (req, res) => {
-    const { fistName, lastName, login, password, phone, email, location } = req.body;
+    const { firstName, lastName, login, password, phone, email, location } = req.body;
     const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
 
-    if (!fistName) {
+    if (!firstName) {
       return res.status(400).json({
         error: "Необходимо указать имя агента!",
       });
@@ -81,7 +81,7 @@ module.exports.agentsController = {
 
     try {
       const agent = await Agent.create({
-        fistName,
+        firstName,
         lastName,
         login,
         password: hash,
