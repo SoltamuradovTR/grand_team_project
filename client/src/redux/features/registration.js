@@ -31,17 +31,17 @@ const registration = (state = initialState, action) => {
                 signingUp: true,
                 error: null,
             };
-        case "client/signUp/rejected":
-            return {
-                ...state,
-                signingUp: false,
-            };
         case "client/signUp/fulfilled":
             return {
                 ...state,
                 signingUp: false,
+            };
+        case "client/signUp/rejected":
+            return {
+                ...state,
+                signingUp: false,
                 error: action.error,
-            }
+            };
         default:
             return state;
     }

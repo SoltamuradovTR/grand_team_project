@@ -16,7 +16,7 @@ function Header(props) {
         <HeaderBoxAgent />
       </>
     );
-  } else if (role === "Agent") {
+  } else if (role === "Client") {
     return (
       <>
         <HeaderBoxClient />

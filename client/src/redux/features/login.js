@@ -8,23 +8,6 @@ const initialState = {
 
 const login = (state = initialState, action) => {
   switch (action.type) {
-    case "agent/signUp/pending":
-      return {
-        ...state,
-        signingUp: true,
-        error: null,
-      };
-    case "agent/signUp/fulfilled":
-      return {
-        ...state,
-        signingUp: false,
-      };
-    case "agent/signUp/rejected":
-      return {
-        ...state,
-        signingUp: false,
-        error: action.error,
-      };
     case "agent/signIn/pending":
       return {
         ...state,
@@ -39,7 +22,6 @@ const login = (state = initialState, action) => {
         token: action.payload.token,
         role: action.payload.role,
       };
-
     case "agent/signIn/rejected":
       return {
         ...state,
@@ -67,26 +49,26 @@ const login = (state = initialState, action) => {
         signingIn: false,
         error: action.error,
       };
-    case 'user/logout/pending':
+    case "user/logout/pending":
       return {
         ...state,
         signingIn: true,
         error: null,
         token: null,
       };
-    case 'user/logout/fulfilled':
+    case "user/logout/fulfilled":
       return {
         ...state,
         signingIn: false,
         token: null,
-        role: null
+        role: null,
       };
-    case 'user/logout/rejected':
+    case "user/logout/rejected":
       return {
         ...state,
         signingIn: false,
         error: action.error,
-      }
+      };
     default:
       return state;
   }
@@ -143,19 +125,19 @@ export const loginClient = (login, password) => {
 };
 
 export const logout = () => {
-    return async (dispatch) => {
-      dispatch({ type: 'user/logout/pending'})
+  return async (dispatch) => {
+    dispatch({ type: "user/logout/pending" });
 
-      try {
-        dispatch({ type: 'user/logout/fulfilled'})
+    try {
+      dispatch({ type: "user/logout/fulfilled" });
 
-        localStorage.setItem('token', null)
-        localStorage.setItem('role', null)
-      } catch (e) {
-        dispatch({ type: 'user/logout/rejected'})
-      }
+      localStorage.setItem("token", null);
+      localStorage.setItem("role", null);
+    } catch (e) {
+      dispatch({ type: "user/logout/rejected" });
     }
-}
+  };
+};
 
 export const selectToken = (state) => state.login.token;
 

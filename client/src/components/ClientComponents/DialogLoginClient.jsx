@@ -17,8 +17,8 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {useDispatch} from "react-redux";
-import {loginClient} from "../../redux/features/login";
+import { useDispatch } from "react-redux";
+import { loginClient } from "../../redux/features/login";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -123,11 +123,11 @@ function DialogLoginAgent({ open, setOpen }) {
             />
             <Button
               type="submit"
-                fullWidth
+              fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-                onClick={handleLogin}
+              onClick={handleLogin}
             >
               Войти
             </Button>
