@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Button,
+  Button, FormControlLabel,
   Popover
 } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
@@ -85,9 +85,9 @@ function HeaderUser(props) {
               <HeaderUserSignUp />
         </Popover>
       </div>
-      {/*<FormControlLabel*/}
-      {/*  control={toggleTheme}*/}
-      {/*/>*/}
+      <FormControlLabel
+        control={toggleTheme}
+      />
     </>
   );
 }
