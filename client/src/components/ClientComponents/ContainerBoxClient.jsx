@@ -63,7 +63,6 @@ function ContainerBox(props) {
               </CardContent>
               <CardActions>
                 <Button size="small" className={classes.pos}>Подробнее</Button>
-                <Button size="small" className={classes.pos}>Откликнуться</Button>
               </CardActions>
             </Card>
           )
