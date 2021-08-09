@@ -2,8 +2,9 @@ const initialState = {
   signingUp: false,
   signingIn: false,
   error: null,
-  token: localStorage.getItem("token"),
-  role: localStorage.getItem("role"),
+  token: null,
+  role: null,
+  candidate: null
 };
 
 const login = (state = initialState, action) => {
@@ -21,6 +22,7 @@ const login = (state = initialState, action) => {
         signingIn: false,
         token: action.payload.token,
         role: action.payload.role,
+        candidate: action.payload.candidate
       };
     case "agent/signIn/rejected":
       return {
@@ -93,7 +95,6 @@ export const loginAgent = (login, password) => {
       dispatch({ type: "agent/signIn/rejected", error: json.error });
     } else {
       dispatch({ type: "agent/signIn/fulfilled", payload: json });
-
       localStorage.setItem("token", json.token);
       localStorage.setItem("role", json.role);
     }
@@ -117,7 +118,6 @@ export const loginClient = (login, password) => {
       dispatch({ type: "client/signIn/rejected", error: json.error });
     } else {
       dispatch({ type: "client/signIn/fulfilled", payload: json });
-
       localStorage.setItem("token", json.token);
       localStorage.setItem("role", json.role);
     }
@@ -142,3 +142,5 @@ export const logout = () => {
 export const selectToken = (state) => state.login.token;
 
 export const selectRole = (state) => state.login.role;
+
+export const selectCandidate = (state) => state.login.candidate

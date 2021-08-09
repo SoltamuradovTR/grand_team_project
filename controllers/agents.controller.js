@@ -171,10 +171,14 @@ module.exports.agentsController = {
       expiresIn: "24h",
     });
 
+    console.log(candidate)
     return res.json({
       text: "Авторизация прошла успешно",
       token,
       role: "Agent",
+      candidate
     });
   },
 };
+
+///
