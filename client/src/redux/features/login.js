@@ -4,6 +4,7 @@ const initialState = {
   error: null,
   token: localStorage.getItem("token"),
   role: localStorage.getItem("role"),
+  candidate: localStorage.getItem("candidate")
 };
 
 const login = (state = initialState, action) => {
@@ -93,9 +94,10 @@ export const loginAgent = (login, password) => {
       dispatch({ type: "agent/signIn/rejected", error: json.error });
     } else {
       dispatch({ type: "agent/signIn/fulfilled", payload: json });
-
+      console.log(json)
       localStorage.setItem("token", json.token);
       localStorage.setItem("role", json.role);
+      localStorage.setItem("candidate", json.candidate)
     }
   };
 };
@@ -117,7 +119,6 @@ export const loginClient = (login, password) => {
       dispatch({ type: "client/signIn/rejected", error: json.error });
     } else {
       dispatch({ type: "client/signIn/fulfilled", payload: json });
-
       localStorage.setItem("token", json.token);
       localStorage.setItem("role", json.role);
     }

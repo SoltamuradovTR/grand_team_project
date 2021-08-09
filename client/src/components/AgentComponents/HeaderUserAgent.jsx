@@ -7,6 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/features/login';
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -84,7 +85,11 @@ function HeaderUserAgent(props) {
             horizontal: "center",
           }}
         >
-          <Button className={classes.typography}>Личный кабинет</Button>
+          <Button className={classes.typography}>
+            <NavLink to="/cab">
+              Личный кабинет
+            </NavLink>
+            </Button>
           <Button className={classes.typography} onClick={handleLogout}>Выйти</Button>
         </Popover>
       </div>
