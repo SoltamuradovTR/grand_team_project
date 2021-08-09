@@ -200,19 +200,6 @@ export default function DialogRegisterAgent({open, setOpen}) {
                     onChange={handleAddPassword}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    id="город"
-                    label="Город"
-                    name="Город"
-                    autoComplete="name"
-                    value={location}
-                    onChange={handleAddLocation}
-                />
-              </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -227,6 +214,7 @@ export default function DialogRegisterAgent({open, setOpen}) {
               className={classes.submit}
               style={{marginRight: 15}}
               onClick={handleRegistration}
+              type='submit'
             >
               Зарегистрироваться
             </Button>

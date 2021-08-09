@@ -25,6 +25,23 @@ const registration = (state = initialState, action) => {
                 signingUp: false,
                 error: action.error,
             };
+        case "client/signUp/pending":
+            return {
+                ...state,
+                signingUp: true,
+                error: null,
+            };
+        case "client/signUp/rejected":
+            return {
+                ...state,
+                signingUp: false,
+            };
+        case "client/signUp/fulfilled":
+            return {
+                ...state,
+                signingUp: false,
+                error: action.error,
+            }
         default:
             return state;
     }
@@ -70,7 +87,7 @@ export const registrationClient = (data) => {
         if (json.error) {
             dispatch({type: "client/signUp/rejected", error: json.error})
         } else {
-            dispatch({type: "client/isgnUp/fulfilled", payload: json})
+            dispatch({type: "client/signUp/fulfilled", payload: json})
         }
     }
 }

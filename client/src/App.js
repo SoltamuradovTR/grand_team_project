@@ -4,14 +4,14 @@ import { Button, createTheme, MuiThemeProvider } from '@material-ui/core';
 import Routes from './components/Routes';
 
 const theme = {
-  light: createTheme({
-    palette: {
-      primary: {
-        main: '#00ff00',
-        dark: '#000000'
-      }
-    }
-  }),
+  // light: createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: '#00ff00',
+  //       dark: '#000000'
+  //     }
+  //   }
+  // }),
 
   // dark: createTheme({
   //   palette: {

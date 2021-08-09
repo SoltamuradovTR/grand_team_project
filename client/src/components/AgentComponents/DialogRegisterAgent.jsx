@@ -227,6 +227,7 @@ export default function DialogRegisterAgent({open, setOpen}) {
                   className={classes.submit}
                   style={{marginRight: 15}}
                   onClick={handleRegistration}
+                  type='submit'
                 >
                   Зарегистрироваться
                 </Button>

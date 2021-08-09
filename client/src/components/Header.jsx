@@ -1,26 +1,29 @@
-import React from 'react';
-import HeaderBox from './DefaultComponents/Header/HeaderBox';
-import { useSelector } from 'react-redux';
-import { selectRole, selectToken } from '../redux/features/login';
-import HeaderBoxAgent from './AgentComponents/HeaderBoxAgent';
+import React from "react";
+import HeaderBox from "./DefaultComponents/Header/HeaderBox";
+import { useSelector } from "react-redux";
+import { selectRole, selectToken } from "../redux/features/login";
+import HeaderBoxAgent from "./AgentComponents/HeaderBoxAgent";
+import HeaderBoxClient from "./ClientComponents/HeaderBoxClient";
 
 function Header(props) {
+  const token = useSelector(selectToken);
 
-  const token = useSelector(selectToken)
+  const role = useSelector(selectRole);
 
-  const role = useSelector(selectRole)
-
-  if (role === 'Agent') {
+  if (role === "Agent") {
     return (
       <>
-      <HeaderBoxAgent/>
+        <HeaderBoxAgent />
       </>
-    )
-  } else {
-    if (role === 'Agent') {
-
-    }
+    );
+  } else if (role === "Agent") {
+    return (
+      <>
+        <HeaderBoxClient />
+      </>
+    );
   }
+
   return (
     <>
       <HeaderBox />
