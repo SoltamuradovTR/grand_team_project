@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Box, Container } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllRequests, selectAllRequests } from '../../../redux/features/requests';
+import { loadAllRequests, selectAllRequests } from '../../redux/features/requests';
 
 
 
@@ -53,9 +53,7 @@ function ContainerBox(props) {
                   {request.title}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                  {request.author.firstName}
-                  {' '}
-                  {request.author.lastName}
+                  {request.author.name}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {request.description}
@@ -63,11 +61,11 @@ function ContainerBox(props) {
               </CardContent>
               <CardActions>
                 <Button size="small" className={classes.pos}>Подробнее</Button>
+                <Button size="small" className={classes.pos}>Откликнуться</Button>
               </CardActions>
             </Card>
           )
         })}
-
       </Container>
     </>
   );

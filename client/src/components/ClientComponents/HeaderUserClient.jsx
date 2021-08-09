@@ -5,6 +5,8 @@ import { Button, Popover } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import { logout } from '../../redux/features/login';
+import { useDispatch } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 function HeaderUserClient(props) {
+
+  const dispatch = useDispatch();
+
   const [theme, setTheme] = useState({
     light: true
   });
@@ -48,6 +53,10 @@ function HeaderUserClient(props) {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    dispatch(logout())
+  }
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
   return (
@@ -72,9 +81,8 @@ function HeaderUserClient(props) {
             horizontal: 'center',
           }}
         >
-            <Button className={classes.typography}>Админ</Button>
-            <Button className={classes.typography}>Войти</Button>
-            <Button className={classes.typography}>Регистрация</Button>
+            <Button className={classes.typography}>Личный кабинет</Button>
+            <Button className={classes.typography} onClick={handleLogout}>Выйти</Button>
         </Popover>
       </div>
       <FormControlLabel

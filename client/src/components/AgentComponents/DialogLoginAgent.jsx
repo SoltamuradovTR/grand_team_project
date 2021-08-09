@@ -1,40 +1,45 @@
-import React, { useState } from 'react';
-import { Checkbox, CssBaseline, Dialog, FormControlLabel, TextField } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
-import { loginAgent } from '../../redux/features/login';
-
+import React, { useState } from "react";
+import {
+  Checkbox,
+  CssBaseline,
+  Dialog,
+  FormControlLabel,
+  TextField,
+} from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import Avatar from "@material-ui/core/Avatar";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
+import { loginAgent } from "../../redux/features/login";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
-    display: 'flex',
-    margin: 'auto'
+    display: "flex",
+    margin: "auto",
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
+    color: "#fff",
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -42,40 +47,41 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonClose: {
     marginLeft: 300,
-    marginTop: -50
-  }
-}))
+    marginTop: -50,
+  },
+}));
 
-
-function DialogLoginAgent({open, setOpen}) {
-  const classes = useStyles()
+function DialogLoginAgent({ open, setOpen }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleAddLogin = (e) => {
-    setLogin(e.target.value)
-  }
+    setLogin(e.target.value);
+  };
 
   const handleAddPassword = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const handleLogin = () => {
-    dispatch(loginAgent(login, password))
-  }
+    dispatch(loginAgent(login, password));
+  };
 
   return (
-    <Dialog open={open} >
+    <Dialog open={open}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box className={classes.paper}>
-          <Button className={classes.buttonClose} onClick={handleClose}>Закрыть</Button>
+          <Button className={classes.buttonClose} onClick={handleClose}>
+            Закрыть
+          </Button>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -136,9 +142,7 @@ function DialogLoginAgent({open, setOpen}) {
             </Grid>
           </form>
         </Box>
-        <Box mt={8}>
-
-        </Box>
+        <Box mt={8}></Box>
       </Container>
     </Dialog>
   );
