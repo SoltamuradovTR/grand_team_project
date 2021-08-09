@@ -5,6 +5,7 @@ import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {useSelector} from "react-redux";
+import {selectCandidate} from "../../redux/features/login";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,9 +62,7 @@ function AgentCab() {
   const classes = useStyles();
   const [spacing, setSpacing] = React.useState(2);
 
-  const candidate = useSelector(state => state.login.candidate)
-  console.log(candidate)
-
+  const candidate = useSelector(selectCandidate)
   return (
     <>
       <Container style={{ display: "flex" }}>
@@ -88,13 +87,9 @@ function AgentCab() {
                       />
 
                     </StyledBadge>
-                    {/*{candidate.map((item)=> {*/}
-                    {/*  return (*/}
-                    {/*      <div>*/}
-                    {/*        {item.fistName}*/}
-                    {/*      </div>*/}
-                    {/*  )*/}
-                    {/*})}*/}
+                    <div>
+                      {candidate.firstName}
+                    </div>
                   </div>
                 </Paper>
               </Grid>
