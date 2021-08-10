@@ -1,10 +1,13 @@
 const Request = require("../models/Request");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 module.exports.requestsController = {
   getRequests: async (req, res) => {
     try {
-      const request = await Request.find().populate('author');
+      const request = await Request.find()
+        .populate("appraisers")
+        .populate("author");
 
       return res.json(request);
     } catch (e) {
@@ -13,10 +16,13 @@ module.exports.requestsController = {
       });
     }
   },
+
   getRequestsByClient: async (req, res) => {
     const { id } = req.params;
     try {
-      const request = await Request.find({ author: id });
+      const request = await Request.findById(id)
+        .populate("appraisers")
+        .populate("author");
 
       return res.json(request);
     } catch (e) {
@@ -26,8 +32,7 @@ module.exports.requestsController = {
     }
   },
   createRequest: async (req, res) => {
-    const { title, description, author, source, appraisers, location } =
-      req.body;
+    const { title, description, author, source, location } = req.body;
 
     const { authorization } = req.headers;
 
@@ -79,19 +84,18 @@ module.exports.requestsController = {
     const [type, token] = authorization.split(" ");
 
     try {
-        const request = await Request.findById(id)
+      const request = await Request.findById(id);
 
-        const payload = jwt.verify(token, process.env.SECRET_JWT_KEY);
+      const payload = jwt.verify(token, process.env.SECRET_JWT_KEY);
 
-        if (payload.id === request.author.toString()) {
-            await request.remove();
-            return res.json('Удалено');
-        }
+      if (payload.id === request.author.toString()) {
+        await request.remove();
+        return res.json("Удалено");
+      }
 
-        return res.status(401).json({
-            error: 'Ошибка, нет доступа'
-        })
-
+      return res.status(401).json({
+        error: "Ошибка, нет доступа",
+      });
     } catch (e) {
       return res.status(400).json({
         error: e.toString(),
@@ -127,7 +131,7 @@ module.exports.requestsController = {
     try {
       const request = await Request.updateOne(
         { _id: id },
-        { $addToSet: { appraisers: data } }
+        { $addToSet: { appraisers: data.request } }
       );
       return res.json(request);
     } catch (e) {
