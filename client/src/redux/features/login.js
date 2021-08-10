@@ -65,6 +65,7 @@ const login = (state = initialState, action) => {
         signingIn: false,
         token: null,
         role: null,
+        candidate: null
       };
     case "user/logout/rejected":
       return {
