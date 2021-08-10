@@ -10,6 +10,7 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HeaderUserClient from './HeaderUserClient';
+import {NavLink} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -83,9 +84,11 @@ function HeaderBoxClient(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            LOGO
-          </Typography>
+            <Typography className={classes.title} variant="h6" noWrap>
+              <NavLink to="/">
+                LOGO
+              </NavLink>
+            </Typography>
           <Box className={classes.search}>
             <Box className={classes.searchIcon}>
               <SearchIcon />
