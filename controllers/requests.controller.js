@@ -20,7 +20,9 @@ module.exports.requestsController = {
   getRequestsByClient: async (req, res) => {
     const { id } = req.params;
     try {
-      const request = await Request.find({ author: id });
+      const request = await Request.findById(id)
+        .populate("appraisers")
+        .populate("author");
 
       return res.json(request);
     } catch (e) {
