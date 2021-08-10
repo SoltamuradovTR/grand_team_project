@@ -15,8 +15,6 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import Backdrop from "@material-ui/core/Backdrop";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { useDispatch } from "react-redux";
 import { loginClient } from "../../redux/features/login";
 
@@ -122,7 +120,6 @@ function DialogLoginAgent({ open, setOpen }) {
               label="Запомнить меня"
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"

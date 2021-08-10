@@ -3,6 +3,7 @@ import ContainerBox from '../components/DefaultComponents/Container/ContainerBox
 import { useSelector } from 'react-redux';
 import { selectRole, selectToken } from '../redux/features/login';
 import ContainerBoxAgent from '../components/AgentComponents/ContainerBoxAgent';
+import ContainerBoxClient from '../components/ClientComponents/ContainerBoxClient';
 
 function Main(props) {
 
@@ -16,9 +17,10 @@ function Main(props) {
         <ContainerBoxAgent/>
       </>
     );
-  } else if (role === "Agent") {
+  } else if (role === "Client") {
     return (
       <>
+        <ContainerBoxClient/>
       </>
     );
   }
