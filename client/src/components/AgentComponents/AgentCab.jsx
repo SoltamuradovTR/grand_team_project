@@ -1,11 +1,12 @@
 import React from "react";
-import { Container, Paper } from "@material-ui/core";
+import {Container, Paper, Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {useSelector} from "react-redux";
 import {selectCandidate} from "../../redux/features/login";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -87,9 +88,15 @@ function AgentCab() {
                       />
 
                     </StyledBadge>
-                    <div>
-                      {candidate.firstName}
-                    </div>
+                    <Box>
+                      <Typography variant="h6">
+                      Имя: {candidate.firstName}
+                      </Typography>
+                      <Typography variant="h6">
+                      Фамилия: {candidate.lastName}
+                      </Typography>
+
+                    </Box>
                   </div>
                 </Paper>
               </Grid>
@@ -98,7 +105,42 @@ function AgentCab() {
                   <Grid container justifyContent="center" spacing={spacing}>
                     <Grid item>
                       <Paper className={classes.paper}>
-                        Block bottom
+                        <Typography variant="h6">Отзывы</Typography>
+                        <Box>
+                          <Typography variant="h6">Name</Typography>
+                          <Typography>description.description.description.description</Typography>
+                          <Typography>12.07.2021 10:10</Typography>
+                        </Box>
+                        <Box>
+                          <Typography variant="h6">Name</Typography>
+                          <Typography>description.description.description.description</Typography>
+                          <Typography>12.07.2021 10:10</Typography>
+                        </Box>
+                        <Box>
+                          <Typography variant="h6">Name</Typography>
+                          <Typography>description.description.description.description</Typography>
+                          <Typography>12.07.2021 10:10</Typography>
+                        </Box>
+                        <Box>
+                          <Typography variant="h6">Name</Typography>
+                          <Typography>description.description.description.description</Typography>
+                          <Typography>12.07.2021 10:10</Typography>
+                        </Box>
+                        <Box>
+                          <Typography variant="h6">Name</Typography>
+                          <Typography>description.description.description.description</Typography>
+                          <Typography>12.07.2021 10:10</Typography>
+                        </Box>
+                        <Box>
+                          <Typography variant="h6">Name</Typography>
+                          <Typography>description.description.description.description</Typography>
+                          <Typography>12.07.2021 10:10</Typography>
+                        </Box>
+                        <Box>
+                          <Typography variant="h6">Name</Typography>
+                          <Typography>description.description.description.description</Typography>
+                          <Typography>12.07.2021 10:10</Typography>
+                        </Box>
                       </Paper>
                     </Grid>
                   </Grid>
@@ -112,7 +154,9 @@ function AgentCab() {
             <Grid container justifyContent="center" spacing={spacing}>
               <Grid item>
                 <Paper className={classes.paper1}>
-                  block right
+                  <Typography variant="h6">
+                  Личные данные
+                  </Typography>
                 </Paper>
               </Grid>
             </Grid>
