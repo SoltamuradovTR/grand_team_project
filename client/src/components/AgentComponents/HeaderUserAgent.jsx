@@ -90,7 +90,11 @@ function HeaderUserAgent(props) {
               Личный кабинет
             </NavLink>
             </Button>
-          <Button className={classes.typography} onClick={handleLogout}>Выйти</Button>
+          <Button className={classes.typography} onClick={handleLogout}>
+            <NavLink to="/">
+              Выйти
+            </NavLink>
+            </Button>
         </Popover>
       </div>
       <FormControlLabel control={toggleTheme} />

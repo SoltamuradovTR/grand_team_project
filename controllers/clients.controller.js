@@ -176,6 +176,7 @@ module.exports.clientsController = {
       text: "Авторизация прошла успешно",
       token,
       role: "Client",
+      candidate,
     });
   },
 };
