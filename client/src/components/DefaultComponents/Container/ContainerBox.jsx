@@ -11,7 +11,6 @@ import {
   loadAllRequests,
   selectAllRequests,
 } from "../../../redux/features/requests";
-import videoBackground from "../../../assets/Tunnel.mp4";
 
 const useStyles = makeStyles({
   root: {
