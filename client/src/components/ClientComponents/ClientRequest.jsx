@@ -55,7 +55,7 @@ function ClientRequest() {
                   {item.description}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                  {item.author.firstName} {item.author.lastName}
+                  Автор: {item.author.firstName} {item.author.lastName}
                 </Typography>
                 <Typography>
                   <a href={item.source}>Местоположение</a>
@@ -68,7 +68,7 @@ function ClientRequest() {
                     borderRadius: 5,
                   }}
                 >
-                  <Box>Откликнувшиеся оценщики:</Box>
+                  <Typography>Откликнувшиеся оценщики:</Typography>
                   <Box
                     style={{
                       borderRadius: 5,
@@ -93,9 +93,9 @@ function ClientRequest() {
                               textAlign: "center",
                             }}
                           >
-                            <Typography>{elem.firstName}</Typography>
-                            <Typography>{elem.lastName}</Typography>
-                            <Typography>{elem.location}</Typography>
+                            <Typography>Имя: {elem.firstName}</Typography>
+                            <Typography>Фамилия: {elem.lastName}</Typography>
+                            <Typography>Адрес: {elem.location}</Typography>
                             <Box>
                               <Button variant="outlined" color="primary">
                                 Об оценщике

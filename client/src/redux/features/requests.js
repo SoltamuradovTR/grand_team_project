@@ -39,7 +39,22 @@ const requests = (state = initialState, action) => {
         ...state,
         loading: false,
       };
-
+    // case "request/addAppraiser/pending":
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
+    // case "request/addAppraiser/fulfilled":
+    //   return {
+    //     ...state,
+    //     items: [action.payload, ...state.items],
+    //     loading: false,
+    //   };
+    // case "request/addAppraiser/rejected":
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //   };
     default:
       return state;
   }
@@ -77,6 +92,25 @@ export const loadRequestById = (id) => {
   };
 };
 
+export const addAppraiser = (request, agent) => {
+  return async (dispatch) => {
+    dispatch({ type: "request/addAppraiser/pending" });
+
+    try {
+      const res = await fetch(`/appraisers/${request}`, {
+        method: "POST",
+        body: JSON.stringify({ request: agent }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const json = res.json();
+      dispatch({ type: "request/addAppraiser/fulfilled", payload: json });
+    } catch (e) {
+      dispatch({ type: "request/addAppraiser/rejected", error: e.toString() });
+    }
+  };
+};
 export const selectAllRequests = (state) => state.requests.items;
 
 export const selectRequestById = (state) => state.requests.itemsById;
