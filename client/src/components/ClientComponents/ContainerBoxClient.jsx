@@ -60,7 +60,7 @@ function ContainerBox(props) {
             <Card
               id="card"
               className={classes.root}
-              style={{ marginBottom: 25, width: 600 }}
+              style={{ marginBottom: 25, width: 600, border: '2px solid red', borderRadius: 10 }}
             >
               <CardContent>
                 <Typography
