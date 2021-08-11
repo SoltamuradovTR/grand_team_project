@@ -122,13 +122,13 @@ module.exports.agentsController = {
 
   editAgent: async (req, res) => {
     const { id } = req.params;
-    const { fistName, lastName, login, password, phone, email, location } = req.body;
+    const { firstName, lastName, login, password, phone, email, location } = req.body;
 
     try {
       const edited = await Agent.findByIdAndUpdate(
         id,
         {
-          fistName,
+          firstName,
           lastName,
           login,
           password,

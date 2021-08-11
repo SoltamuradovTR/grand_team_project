@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary, Button,
+  AccordionSummary,
+  Button,
   Container,
   Paper,
   Typography,
@@ -12,11 +13,10 @@ import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCandidate } from "../../redux/features/login";
+import { selectCandidate, setEditingAgent } from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { setEditingAgent } from '../../redux/features/agent';
-import EditingAgentDialog from './EditingAgentDialog';
+import EditingAgentDialog from "./EditingAgentDialog";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -80,7 +80,7 @@ function AgentCab() {
   const candidate = useSelector(selectCandidate);
 
   const handleClickOpenAgent = (agent) => {
-    dispatch(setEditingAgent(agent))
+    dispatch(setEditingAgent(agent));
   };
 
   return (
@@ -196,7 +196,7 @@ function AgentCab() {
           </div>
         </AccordionDetails>
       </Accordion>
-      <EditingAgentDialog setAgentOpen={setAgentOpen} agentOpen={agentOpen}/>
+      <EditingAgentDialog setAgentOpen={setAgentOpen} agentOpen={agentOpen} />
     </>
   );
 }

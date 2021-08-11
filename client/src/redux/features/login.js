@@ -5,6 +5,8 @@ const initialState = {
   token: null,
   role: null,
   candidate: null,
+  loading: false,
+  editingAgent: null,
 };
 
 const login = (state = initialState, action) => {
@@ -71,6 +73,43 @@ const login = (state = initialState, action) => {
       return {
         ...state,
         signingIn: false,
+        error: action.error,
+      };
+    case "close/dialog":
+      return {
+        ...state,
+        editingAgent: null,
+      };
+    case 'set/field':
+      const e = action.payload;
+      return {
+        ...state,
+        editingAgent: {
+          ...state.editingAgent,
+          [e.target.name]: e.target.value
+        }
+      }
+    case "agent/set-editing-agent":
+      return {
+        ...state,
+        editingAgent: action.payload
+      }
+    case "agent/edit/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "agent/edit/fulfilled":         //доделать изменение локалсторейдж
+      return {
+        ...state,
+        loading: false,
+        editingAgent: null,
+        candidate: action.payload.candidate
+      };
+    case "agent/edit/rejected":
+      return {
+        ...state,
+        loading: false,
         error: action.error,
       };
     default:
@@ -140,6 +179,49 @@ export const logout = () => {
     }
   };
 };
+
+export const closeEditingDialog = () => {
+  return {
+    type: "close/dialog",
+  };
+};
+
+export const setFormFields = (e) => {
+  return {
+    type: "set/field",
+    payload: e,
+  };
+};
+
+export const setEditingAgent = (agent) => {
+  return {
+    type: "agent/set-editing-agent",
+    payload: agent,
+  };
+};
+
+export const editAgent = () => {
+  return async (dispatch, getState) => {
+    dispatch({ type: "agent/edit/pending" });
+
+    const { login  } = getState();
+
+    try {
+      await fetch(`/agent/${login.editingAgent._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(login.editingAgent),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      dispatch({ type: "agent/edit/fulfilled" });
+    } catch (e) {
+      dispatch({ type: "agent/edit/rejected", error: e.toString() });
+    }
+  };
+};
+
+export const selectEditingAgent = (state) => state.login.editingAgent;
 
 export const selectToken = (state) => state.login.token;
 

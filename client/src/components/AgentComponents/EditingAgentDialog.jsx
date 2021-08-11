@@ -1,40 +1,40 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import {
   closeEditingDialog,
   editAgent,
   selectEditingAgent,
-  setFormFields
-} from '../../redux/features/agent';
-import {
-  Dialog, DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField
-} from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+  setFormFields,
+} from "../../redux/features/login";
 
 function EditingAgentDialog(props) {
-
   const dispatch = useDispatch();
 
-  const editingAgent = useSelector(selectEditingAgent)
+  const editingAgent = useSelector(selectEditingAgent);
 
   const handleClose = () => {
-    dispatch(closeEditingDialog())
-  }
+    dispatch(closeEditingDialog());
+  };
 
   const handleEdit = (e) => {
-    dispatch(setFormFields(e))
-  }
+    dispatch(setFormFields(e));
+  };
 
   const handleSave = () => {
     dispatch(editAgent());
-  }
+  };
 
   if (!editingAgent) {
-    return null
+    return null;
   }
   return (
     <Dialog
@@ -51,7 +51,7 @@ function EditingAgentDialog(props) {
           type="text"
           onChange={handleEdit}
           value={editingAgent.firstName}
-          name="name"
+          name="firstName"
           fullWidth
         />
         <TextField
@@ -60,7 +60,7 @@ function EditingAgentDialog(props) {
           type="text"
           onChange={handleEdit}
           value={editingAgent.lastName}
-          name="name"
+          name="lastName"
           fullWidth
         />
         <TextField
@@ -69,7 +69,7 @@ function EditingAgentDialog(props) {
           type="text"
           onChange={handleEdit}
           value={editingAgent.location}
-          name="name"
+          name="location"
           fullWidth
         />
         <TextField
@@ -78,7 +78,7 @@ function EditingAgentDialog(props) {
           type="text"
           onChange={handleEdit}
           value={editingAgent.phone}
-          name="name"
+          name="phone"
           fullWidth
         />
         <TextField
@@ -87,7 +87,7 @@ function EditingAgentDialog(props) {
           type="text"
           onChange={handleEdit}
           value={editingAgent.email}
-          name="name"
+          name="email"
           fullWidth
         />
       </DialogContent>

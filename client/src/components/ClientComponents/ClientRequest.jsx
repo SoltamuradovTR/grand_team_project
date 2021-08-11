@@ -79,6 +79,7 @@ function ClientRequest() {
                     marginTop: 20,
                   }}
                 >
+
                   <Box
                     style={{
                       justifyContent: "flex-start",
@@ -100,6 +101,7 @@ function ClientRequest() {
                           </Box>
                             <Box style={{marginTop: 20}}>
                               <Button variant="outlined" color="primary" style={{marginRight: 10}}>
+
                                 Об оценщике
                               </Button>
                               <Button variant="outlined" color="primary">
