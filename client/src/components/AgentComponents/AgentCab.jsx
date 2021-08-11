@@ -1,12 +1,22 @@
-import React from "react";
-import {Container, Paper, Typography} from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary, Button,
+  Container,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import {useSelector} from "react-redux";
-import {selectCandidate} from "../../redux/features/login";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCandidate } from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { setEditingAgent } from '../../redux/features/agent';
+import EditingAgentDialog from './EditingAgentDialog';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,10 +70,19 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 function AgentCab() {
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [spacing, setSpacing] = React.useState(2);
 
-  const candidate = useSelector(selectCandidate)
+  const [agentOpen, setAgentOpen] = useState(false);
+
+  const candidate = useSelector(selectCandidate);
+
+  const handleClickOpenAgent = (agent) => {
+    dispatch(setEditingAgent(agent))
+  };
+
   return (
     <>
       <Container style={{ display: "flex" }}>
@@ -86,16 +105,20 @@ function AgentCab() {
                         src="https://www.pngkey.com/png/full/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
                         style={{ width: 150, height: 150 }}
                       />
-
                     </StyledBadge>
                     <Box>
                       <Typography variant="h6">
-                      Имя: {candidate.firstName}
+                        Имя: {candidate.firstName}
                       </Typography>
                       <Typography variant="h6">
-                      Фамилия: {candidate.lastName}
+                        Фамилия: {candidate.lastName}
                       </Typography>
-
+                      <Typography variant="h6">
+                        Город: {candidate.location}
+                      </Typography>
+                      <Button onClick={() => handleClickOpenAgent(candidate)}>
+                        Изменить
+                      </Button>
                     </Box>
                   </div>
                 </Paper>
@@ -108,37 +131,9 @@ function AgentCab() {
                         <Typography variant="h6">Отзывы</Typography>
                         <Box>
                           <Typography variant="h6">Name</Typography>
-                          <Typography>description.description.description.description</Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>description.description.description.description</Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>description.description.description.description</Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>description.description.description.description</Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>description.description.description.description</Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>description.description.description.description</Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>description.description.description.description</Typography>
+                          <Typography>
+                            description.description.description.description
+                          </Typography>
                           <Typography>12.07.2021 10:10</Typography>
                         </Box>
                       </Paper>
@@ -154,15 +149,54 @@ function AgentCab() {
             <Grid container justifyContent="center" spacing={spacing}>
               <Grid item>
                 <Paper className={classes.paper1}>
-                  <Typography variant="h6">
-                  Личные данные
-                  </Typography>
+                  <Typography variant="h6">Личные данные</Typography>
                 </Paper>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Container>
+      <Accordion style={{ marginLeft: 32, width: 1143 }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>Accordion 1</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div
+            className="container"
+            style={{
+              width: "100%",
+              border: "2px solid #ccc",
+              backgroundColor: "#eee",
+              borderRadius: 5,
+              padding: 16,
+              margin: "16px auto",
+            }}
+          >
+            <img
+              src="https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg"
+              alt="avatar"
+              style={{
+                float: "left",
+                marginRight: 20,
+                borderRadius: "50%",
+                width: 90,
+              }}
+            />
+            <p>
+              <span style={{ fontSize: 18, marginRight: 15 }}>
+                Марина Белова
+              </span>{" "}
+              г. Москва
+            </p>
+            <p>Качество товара отличное, доставка быстрая.</p>
+          </div>
+        </AccordionDetails>
+      </Accordion>
+      <EditingAgentDialog setAgentOpen={setAgentOpen} agentOpen={agentOpen}/>
     </>
   );
 }

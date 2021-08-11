@@ -180,5 +180,3 @@ module.exports.agentsController = {
     });
   },
 };
-
-///
