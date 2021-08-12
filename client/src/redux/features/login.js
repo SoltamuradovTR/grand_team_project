@@ -67,7 +67,7 @@ const login = (state = initialState, action) => {
         signingIn: false,
         token: null,
         role: null,
-        candidate: null
+        candidate: null,
       };
     case "user/logout/rejected":
       return {
@@ -80,20 +80,20 @@ const login = (state = initialState, action) => {
         ...state,
         editingAgent: null,
       };
-    case 'set/field':
+    case "set/field":
       const e = action.payload;
       return {
         ...state,
         editingAgent: {
           ...state.editingAgent,
-          [e.target.name]: e.target.value
-        }
-      }
+          [e.target.name]: e.target.value,
+        },
+      };
     case "agent/set-editing-agent":
       return {
         ...state,
-        editingAgent: action.payload
-      }
+        editingAgent: action.payload,
+      };
     case "agent/edit/pending":
       return {
         ...state,
@@ -104,6 +104,7 @@ const login = (state = initialState, action) => {
         ...state,
         loading: false,
         editingAgent: null,
+
         candidate: action.payload
       };
     case "agent/edit/rejected":
@@ -204,8 +205,9 @@ export const editAgent = () => {
   return async (dispatch, getState) => {
     dispatch({ type: "agent/edit/pending" });
 
-    const { login  } = getState();
+    const { login } = getState();
 
+    console.log(login);
     try {
       const resp = await fetch(`/agent/${login.editingAgent._id}`, {
         method: "PATCH",
