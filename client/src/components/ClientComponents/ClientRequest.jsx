@@ -10,9 +10,7 @@ import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import { selectCandidate } from '../../redux/features/login';
 
 const useStyles = makeStyles({
@@ -69,9 +67,8 @@ function ClientRequest() {
               </Typography>
               <Typography>{item.location}</Typography>
               </Box>
-
               <Box>
-                {candidate.login === request.author?.login?
+                {candidate.login === item.author?.login?
                   <>
                   <Box
                     style={{ textAlign: "center", fontSize: 25, color: "red" }}
