@@ -16,7 +16,7 @@ import {
   setFormFields,
 } from "../../redux/features/login";
 
-function EditingAgentDialog(props) {
+function EditingAgentDialog() {
   const dispatch = useDispatch();
 
   const editingAgent = useSelector(selectEditingAgent);
