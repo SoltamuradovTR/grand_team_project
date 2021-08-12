@@ -37,7 +37,8 @@ body {
     align-items: center;
     z-index: 1;
     transform: translateY(200px);
-    background-image: url("https://le-cdn.hibuwebsites.com/37be2139d3304e3d8aaa4c819b8381a4/dms3rep/multi/opt/Car-600x200.-640w.jpg");
+    /*background-image: url("https://hlas.co.uk/wp-content/uploads/3-7.png");*/
+    background: #333;
 }
 
 .container .card:hover .face.face1 {
@@ -111,7 +112,7 @@ body {
 }
 
 a {
-    color: white;
+    /*color: white;*/
 }
 
 
