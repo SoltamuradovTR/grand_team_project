@@ -99,7 +99,7 @@ const login = (state = initialState, action) => {
         ...state,
         loading: true,
       };
-    case "agent/edit/fulfilled":         //доделать изменение локалсторейдж
+    case "agent/edit/fulfilled":
       return {
         ...state,
         loading: false,
