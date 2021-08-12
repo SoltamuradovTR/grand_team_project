@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> main
 import React, { useState } from "react";
 import { Box, Toolbar, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
@@ -10,6 +13,7 @@ import HeaderUserAgent from "./HeaderUserAgent";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchRequest } from "../../redux/features/requests";
+<<<<<<< HEAD
 =======
 import React from 'react';
 import {
@@ -24,6 +28,10 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HeaderUserAgent from './HeaderUserAgent';
 import {NavLink} from "react-router-dom";
+import HeaderUser from '../DefaultComponents/Header/HeaderUser';
+
+>>>>>>> main
+=======
 import HeaderUser from '../DefaultComponents/Header/HeaderUser';
 
 >>>>>>> main
@@ -99,6 +107,7 @@ function HeaderBoxAgent() {
   return (
     <>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Box
         component="header"
         style={{
@@ -112,11 +121,16 @@ function HeaderBoxAgent() {
             <IconButton
               edge="start"
 =======
+=======
+>>>>>>> main
       <Box component='header' style={{ backgroundColor: "rgba(0, 0, 0, .7)", backdropFilter: "blur(15px)", marginBottom: 20, color: 'white'}} >
         <Box className={classes.root}>
           <Toolbar>
             <IconButton
               edge='start'
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
               className={classes.menuButton}
               color="inherit"
@@ -126,8 +140,15 @@ function HeaderBoxAgent() {
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <NavLink to="/">LOGO</NavLink>
 =======
+              <NavLink to="/">
+                LOGO
+              </NavLink>
+>>>>>>> main
+=======
+
               <NavLink to="/">
                 LOGO
               </NavLink>
@@ -140,17 +161,25 @@ function HeaderBoxAgent() {
               <InputBase
                 placeholder="Search…"
 <<<<<<< HEAD
+<<<<<<< HEAD
                 onChange={(e) => setSearch(e.target.value)}
 =======
+>>>>>>> main
+=======
+                onChange={(e) => setSearch(e.target.value)}
 >>>>>>> main
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
                 inputProps={{ "aria-label": "search" }}
 =======
                 inputProps={{ 'aria-label': 'search' }}
+>>>>>>> main
+=======
+                inputProps={{ "aria-label": "search" }}
 >>>>>>> main
               />
             </Box>

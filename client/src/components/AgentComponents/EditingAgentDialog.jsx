@@ -17,8 +17,13 @@ import {
 } from "../../redux/features/login";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function EditingAgentDialog() {
 =======
+function EditingAgentDialog({ setAgentOpen, agentOpen }) {
+>>>>>>> main
+=======
+
 function EditingAgentDialog({ setAgentOpen, agentOpen }) {
 >>>>>>> main
   const dispatch = useDispatch();
