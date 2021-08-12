@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HeaderUserAgent from './HeaderUserAgent';
 import {NavLink} from "react-router-dom";
+import HeaderUser from '../DefaultComponents/Header/HeaderUser';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -73,36 +74,36 @@ function HeaderBoxAgent(props) {
 
   return (
     <>
-      <Box component='header' style={{boxShadow: '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)', marginBottom: 20}} >
+      <Box component='header' style={{ backgroundColor: "rgba(0, 0, 0, .7)", backdropFilter: "blur(15px)", marginBottom: 20, color: 'white'}} >
         <Box className={classes.root}>
           <Toolbar>
-          <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-              <Typography className={classes.title} variant="h6" noWrap>
-            <NavLink to="/">
+            <IconButton
+              edge='start'
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography className={classes.title} variant="h6" noWrap>
+              <NavLink to="/">
                 LOGO
-            </NavLink>
-              </Typography>
-          <Box className={classes.search}>
-            <Box className={classes.searchIcon}>
-              <SearchIcon />
+              </NavLink>
+            </Typography>
+            <Box className={classes.search}>
+              <Box className={classes.searchIcon}>
+                <SearchIcon />
+              </Box>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </Box>
-            <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-            />
-          </Box>
-          <HeaderUserAgent />
+            <HeaderUserAgent />
           </Toolbar>
         </Box>
       </Box>

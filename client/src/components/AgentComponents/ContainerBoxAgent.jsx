@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Container } from "@material-ui/core";
+import { Container, } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import {
@@ -16,14 +16,14 @@ import {
 import { NavLink } from "react-router-dom";
 import { selectCandidate } from "../../redux/features/login";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles( {
   root: {
     minWidth: 275,
   },
   bullet: {
     display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
+      margin: "0 2px",
+      transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -32,10 +32,11 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   respond: {
-    backgroundColor: "lightgreen",
-    marginBottom: 12,
+    backgroundColor: "white", color: 'black',
+      marginBottom: 12,
   },
 });
+
 
 function ContainerBox(props) {
   const dispatch = useDispatch();
@@ -93,7 +94,8 @@ function ContainerBox(props) {
                   <NavLink to={`request/${request._id}`}>Подробнее</NavLink>
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant="contained"
+                  color="primary"
                   onClick={() => handleAddAppraiser(request._id, candidate._id)}
                   size="small"
                   className={classes.respond}
