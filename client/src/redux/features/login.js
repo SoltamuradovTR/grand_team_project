@@ -104,8 +104,16 @@ const login = (state = initialState, action) => {
         ...state,
         loading: false,
         editingAgent: null,
+<<<<<<< HEAD
+<<<<<<< HEAD
+        candidate: action.payload.candidate,
+=======
+        candidate: action.payload
+>>>>>>> main
+=======
 
         candidate: action.payload
+>>>>>>> main
       };
     case "agent/edit/rejected":
       return {
