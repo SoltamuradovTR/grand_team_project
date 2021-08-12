@@ -55,6 +55,15 @@ const requests = (state = initialState, action) => {
     //     ...state,
     //     loading: false,
     //   };
+    case "request/search":
+      return {
+        ...state,
+        items: state.items.filter((item) => {
+          if (item.title.toLowerCase().indexOf(action.payload) > -1) {
+            return item;
+          }
+        }),
+      };
     default:
       return state;
   }
@@ -111,6 +120,14 @@ export const addAppraiser = (request, agent) => {
     }
   };
 };
+
+export const searchRequest = (data) => {
+  console.log(data);
+  return (dispatch) => {
+    dispatch({ type: "request/search", payload: data });
+  };
+};
+
 export const selectAllRequests = (state) => state.requests.items;
 
 export const selectRequestById = (state) => state.requests.itemsById;
