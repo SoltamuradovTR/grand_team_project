@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Box, Toolbar, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,6 +10,23 @@ import HeaderUserAgent from "./HeaderUserAgent";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchRequest } from "../../redux/features/requests";
+=======
+import React from 'react';
+import {
+  Box,
+  Toolbar,
+  Typography
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
+import { alpha, makeStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import HeaderUserAgent from './HeaderUserAgent';
+import {NavLink} from "react-router-dom";
+import HeaderUser from '../DefaultComponents/Header/HeaderUser';
+
+>>>>>>> main
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,6 +98,7 @@ function HeaderBoxAgent() {
 
   return (
     <>
+<<<<<<< HEAD
       <Box
         component="header"
         style={{
@@ -92,6 +111,13 @@ function HeaderBoxAgent() {
           <Toolbar>
             <IconButton
               edge="start"
+=======
+      <Box component='header' style={{ backgroundColor: "rgba(0, 0, 0, .7)", backdropFilter: "blur(15px)", marginBottom: 20, color: 'white'}} >
+        <Box className={classes.root}>
+          <Toolbar>
+            <IconButton
+              edge='start'
+>>>>>>> main
               className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
@@ -99,7 +125,13 @@ function HeaderBoxAgent() {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
+<<<<<<< HEAD
               <NavLink to="/">LOGO</NavLink>
+=======
+              <NavLink to="/">
+                LOGO
+              </NavLink>
+>>>>>>> main
             </Typography>
             <Box className={classes.search}>
               <Box className={classes.searchIcon}>
@@ -107,12 +139,19 @@ function HeaderBoxAgent() {
               </Box>
               <InputBase
                 placeholder="Search…"
+<<<<<<< HEAD
                 onChange={(e) => setSearch(e.target.value)}
+=======
+>>>>>>> main
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
+<<<<<<< HEAD
                 inputProps={{ "aria-label": "search" }}
+=======
+                inputProps={{ 'aria-label': 'search' }}
+>>>>>>> main
               />
             </Box>
             <HeaderUserAgent />

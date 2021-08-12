@@ -13,6 +13,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import { selectCandidate } from '../../redux/features/login';
 
 const useStyles = makeStyles({
   root: {
@@ -37,6 +38,8 @@ function ClientRequest() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const request = useSelector(selectRequestById);
+
+  const candidate = useSelector(selectCandidate);
 
   useEffect(() => dispatch(loadRequestById(id)), [dispatch]);
 
@@ -68,38 +71,40 @@ function ClientRequest() {
               </Box>
 
               <Box>
-                <Box
-                  style={{ textAlign: "center", fontSize: 25, color: "red" }}
-                >
-                  Откликнувшиеся оценщики:
-                </Box>
-                <Box
-                  style={{
-                    borderRadius: 5,
-                    padding: 10,
-                    marginTop: 20,
-                  }}
-                >
-
+                {candidate.login === request.author?.login?
+                  <>
+                  <Box
+                    style={{ textAlign: "center", fontSize: 25, color: "red" }}
+                  >
+                    Откликнувшиеся оценщики:
+                  </Box>
                   <Box
                     style={{
-                      justifyContent: "flex-start",
+                      borderRadius: 5,
+                      padding: 10,
+                      marginTop: 20,
                     }}
                   >
-                    {item.appraisers.map((elem) => {
-                      return (
-                        <Box style={{display: 'flex', border: '1px solid white', borderRadius: 5, marginBottom: 10, width: 600, marginLeft: 550 }}>
-                          <Box
-                            style={{
-                              padding: 10,
-                              margin: 5,
-                              borderRadius: 5,
-                              textAlign: "center",
-                            }}
-                          >
-                            <Typography>{elem.firstName} {elem.lastName}</Typography>
-                            <Typography>Город: {elem.location}</Typography>
-                          </Box>
+
+                    <Box
+                      style={{
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      {item.appraisers.map((elem) => {
+                        return (
+                          <Box style={{display: 'flex', border: '1px solid white', borderRadius: 5, marginBottom: 10, width: 600, marginLeft: 550 }}>
+                            <Box
+                              style={{
+                                padding: 10,
+                                margin: 5,
+                                borderRadius: 5,
+                                textAlign: "center",
+                              }}
+                            >
+                              <Typography>{elem.firstName} {elem.lastName}</Typography>
+                              <Typography>Город: {elem.location}</Typography>
+                            </Box>
                             <Box style={{marginTop: 20}}>
                               <Button variant="outlined" color="primary" style={{marginRight: 10, marginLeft: 70}}>
 
@@ -109,11 +114,14 @@ function ClientRequest() {
                                 Подтвердить
                               </Button>
                             </Box>
-                        </Box>
-                      );
-                    })}
+                          </Box>
+                        );
+                      })}
+                    </Box>
                   </Box>
-                </Box>
+                  </>: null
+                }
+
               </Box>
               <Typography>Дата создания записи: {item.createdAt}</Typography>
             </CardContent>

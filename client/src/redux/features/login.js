@@ -104,7 +104,11 @@ const login = (state = initialState, action) => {
         ...state,
         loading: false,
         editingAgent: null,
+<<<<<<< HEAD
         candidate: action.payload.candidate,
+=======
+        candidate: action.payload
+>>>>>>> main
       };
     case "agent/edit/rejected":
       return {
@@ -208,14 +212,16 @@ export const editAgent = () => {
 
     console.log(login);
     try {
-      await fetch(`/agent/${login.editingAgent._id}`, {
+      const resp = await fetch(`/agent/${login.editingAgent._id}`, {
         method: "PATCH",
         body: JSON.stringify(login.editingAgent),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
-      dispatch({ type: "agent/edit/fulfilled" });
+
+      const json = resp.json()
+      dispatch({ type: "agent/edit/fulfilled", payload: JSON.stringify(json) });
     } catch (e) {
       dispatch({ type: "agent/edit/rejected", error: e.toString() });
     }
