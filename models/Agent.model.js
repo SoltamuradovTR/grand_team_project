@@ -33,7 +33,13 @@ const agentSchema = new mongoose.Schema({
     location: {
         type: String,
         required: true
-    }
+    },
+    clients: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Client"
+        }
+    ]
 
 })
 

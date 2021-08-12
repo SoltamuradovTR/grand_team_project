@@ -12,6 +12,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import { selectCandidate } from '../../redux/features/login';
+import { addClientsToAgent } from '../../redux/features/agent';
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +41,10 @@ function ClientRequest() {
   const candidate = useSelector(selectCandidate);
 
   useEffect(() => dispatch(loadRequestById(id)), [dispatch]);
+
+  const handleApply = (client, agent) => {
+    dispatch(addClientsToAgent(client, agent))
+  }
 
   const classes = useStyles();
   return (
@@ -107,7 +112,7 @@ function ClientRequest() {
 
                                 Об оценщике
                               </Button>
-                              <Button variant="outlined" color="primary">
+                              <Button variant="outlined" color="primary" onClick={() => handleApply(candidate._id, elem._id)}>
                                 Подтвердить
                               </Button>
                             </Box>

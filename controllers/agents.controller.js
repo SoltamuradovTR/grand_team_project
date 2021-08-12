@@ -179,4 +179,21 @@ module.exports.agentsController = {
       candidate
     });
   },
+
+  addClientToAgent: async (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+
+    try {
+      const agent = await Agent.updateOne(
+        { _id: id },
+        { $addToSet: { clients: data.client }}
+      );
+      return res.json(agent);
+    } catch (e) {
+      return res.status(400).json({
+        error: e.toString()
+      })
+    }
+  }
 };

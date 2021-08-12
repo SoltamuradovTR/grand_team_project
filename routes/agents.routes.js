@@ -9,5 +9,6 @@ router.post("/agent", agentsController.createAgent);
 router.post('/login/agent', agentsController.loginAgent)
 router.delete("/agent/:id", agentsController.removeAgent);
 router.patch("/agent/:id", agentsController.editAgent);
+router.post('/add/client/to/:id', agentsController.addClientToAgent)
 
 module.exports = router;
