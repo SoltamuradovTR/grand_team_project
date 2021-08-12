@@ -39,22 +39,6 @@ const requests = (state = initialState, action) => {
         ...state,
         loading: false,
       };
-    // case "request/addAppraiser/pending":
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case "request/addAppraiser/fulfilled":
-    //   return {
-    //     ...state,
-    //     items: [action.payload, ...state.items],
-    //     loading: false,
-    //   };
-    // case "request/addAppraiser/rejected":
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //   };
     case "request/search":
       return {
         ...state,
