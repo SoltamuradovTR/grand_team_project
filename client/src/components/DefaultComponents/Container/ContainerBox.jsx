@@ -11,6 +11,7 @@ import {
   loadAllRequests,
   selectAllRequests,
 } from "../../../redux/features/requests";
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -46,39 +47,50 @@ function ContainerBox(props) {
           justifyContent: "space-around",
           display: "flex",
           flexWrap: "wrap",
+          backgroundColor: "rgba(0, 0, 0, .6)",
+          backdropFilter: "blur(10px)",
+          height: 800,
+          marginTop: 60
         }}
       >
         {requests.map((request) => {
           return (
-            <Card
-              id="card"
-              className={classes.root}
-              style={{ marginBottom: 25, width: 600 }}
-            >
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  {request.location}
-                </Typography>
-                <Typography variant="h5" component="h2" className={classes.pos}>
-                  {request.title}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  {request.author.firstName} {request.author.lastName}
-                </Typography>
-                <Typography variant="body2" component="p">
-                  {request.description}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" className={classes.pos}>
-                  Подробнее
-                </Button>
-              </CardActions>
-            </Card>
+            <Box className="container" style={{minWidth: 275, width: 600, borderRadius: 15,  height: 415}}>
+              <Box className="card">
+                <Box className="face face1">
+                  <Box className="content">
+                    <h3>{request.title}</h3>
+                  </Box>
+                </Box>
+                <Box className="face face2">
+                  <Box className="content">
+                    <CardContent>
+                      <Typography
+                        className={classes.title}
+                        color="textSecondary"
+                        gutterBottom
+                        style={{marginTop: 25, display: 'flex'}}
+                      >
+                        Город: {request.location}
+                      </Typography>
+                      <Typography color="textSecondary">
+                        {request.author.firstName} {request.author.lastName}
+                      </Typography>
+                      <Typography variant="body2" component="p">
+                        {request.description}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        className={classes.pos}
+                      >
+                        Подробнее
+                      </Button>
+                    </CardActions>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
           );
         })}
       </Container>

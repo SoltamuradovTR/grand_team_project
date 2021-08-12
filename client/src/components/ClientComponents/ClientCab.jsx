@@ -86,7 +86,6 @@ function ClientCab() {
                                                 src="https://www.pngkey.com/png/full/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
                                                 style={{ width: 150, height: 150 }}
                                             />
-
                                         </StyledBadge>
                                         <Box>
                                             <Typography variant="h6">
@@ -95,7 +94,6 @@ function ClientCab() {
                                             <Typography variant="h6">
                                                 Фамилия: {candidate.lastName}
                                             </Typography>
-
                                         </Box>
                                     </div>
                                 </Paper>
@@ -106,36 +104,6 @@ function ClientCab() {
                                         <Grid item>
                                             <Paper className={classes.paper}>
                                                 <Typography variant="h6">Отзывы</Typography>
-                                                <Box>
-                                                    <Typography variant="h6">Name</Typography>
-                                                    <Typography>description.description.description.description</Typography>
-                                                    <Typography>12.07.2021 10:10</Typography>
-                                                </Box>
-                                                <Box>
-                                                    <Typography variant="h6">Name</Typography>
-                                                    <Typography>description.description.description.description</Typography>
-                                                    <Typography>12.07.2021 10:10</Typography>
-                                                </Box>
-                                                <Box>
-                                                    <Typography variant="h6">Name</Typography>
-                                                    <Typography>description.description.description.description</Typography>
-                                                    <Typography>12.07.2021 10:10</Typography>
-                                                </Box>
-                                                <Box>
-                                                    <Typography variant="h6">Name</Typography>
-                                                    <Typography>description.description.description.description</Typography>
-                                                    <Typography>12.07.2021 10:10</Typography>
-                                                </Box>
-                                                <Box>
-                                                    <Typography variant="h6">Name</Typography>
-                                                    <Typography>description.description.description.description</Typography>
-                                                    <Typography>12.07.2021 10:10</Typography>
-                                                </Box>
-                                                <Box>
-                                                    <Typography variant="h6">Name</Typography>
-                                                    <Typography>description.description.description.description</Typography>
-                                                    <Typography>12.07.2021 10:10</Typography>
-                                                </Box>
                                                 <Box>
                                                     <Typography variant="h6">Name</Typography>
                                                     <Typography>description.description.description.description</Typography>

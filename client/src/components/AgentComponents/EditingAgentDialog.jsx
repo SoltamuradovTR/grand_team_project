@@ -16,7 +16,8 @@ import {
   setFormFields,
 } from "../../redux/features/login";
 
-function EditingAgentDialog() {
+
+function EditingAgentDialog({ setAgentOpen, agentOpen }) {
   const dispatch = useDispatch();
 
   const editingAgent = useSelector(selectEditingAgent);
@@ -31,6 +32,7 @@ function EditingAgentDialog() {
 
   const handleSave = () => {
     dispatch(editAgent());
+    handleClose()
   };
 
   if (!editingAgent) {

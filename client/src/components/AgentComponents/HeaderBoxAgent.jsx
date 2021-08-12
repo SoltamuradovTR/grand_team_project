@@ -9,6 +9,8 @@ import HeaderUserAgent from "./HeaderUserAgent";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchRequest } from "../../redux/features/requests";
+import HeaderUser from '../DefaultComponents/Header/HeaderUser';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,18 +82,11 @@ function HeaderBoxAgent() {
 
   return (
     <>
-      <Box
-        component="header"
-        style={{
-          boxShadow:
-            "0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)",
-          marginBottom: 20,
-        }}
-      >
+      <Box component='header' style={{ backgroundColor: "rgba(0, 0, 0, .7)", backdropFilter: "blur(15px)", marginBottom: 20, color: 'white'}} >
         <Box className={classes.root}>
           <Toolbar>
             <IconButton
-              edge="start"
+              edge='start'
               className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
@@ -99,7 +94,10 @@ function HeaderBoxAgent() {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-              <NavLink to="/">LOGO</NavLink>
+
+              <NavLink to="/">
+                LOGO
+              </NavLink>
             </Typography>
             <Box className={classes.search}>
               <Box className={classes.searchIcon}>
