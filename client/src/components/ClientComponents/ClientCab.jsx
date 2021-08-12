@@ -66,7 +66,7 @@ function ClientCab() {
     const candidate = useSelector(selectCandidate)
     return (
         <>
-            <Container style={{ display: "flex" }}>
+            <Container style={{ display: "flex",}}>
                 <Grid container className={classes.root} spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justifyContent="center" spacing={spacing}>

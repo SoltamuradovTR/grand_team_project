@@ -42,19 +42,19 @@ function ClientRequest() {
 
   const classes = useStyles();
   return (
-    <Container style={{ display: 'flex'}}>
+    <Container style={{ display: 'flex', backgroundColor: "rgba(0, 0, 0, .8)", backdropFilter: "blur(15px)",}}>
       {request.map((item) => {
         return (
           <Card
-            id="card"
             className={classes.root}
-            style={{ marginBottom: 25, width: 1200, }}
+            style={{ marginBottom: 25, width: 1200, background: 'none', color: 'white'}}
           >
             <CardContent>
 
               <Typography variant="h5" component="h2" className={classes.title}>
                 {item.title}
               </Typography>
+              <Box>
               <Typography variant="body2" component="p">
                 {item.description}
               </Typography>
@@ -65,6 +65,7 @@ function ClientRequest() {
                 <a href={item.source}>Местоположение</a>
               </Typography>
               <Typography>{item.location}</Typography>
+              </Box>
 
               <Box>
                 <Box
@@ -87,7 +88,7 @@ function ClientRequest() {
                   >
                     {item.appraisers.map((elem) => {
                       return (
-                        <Box style={{display: 'flex', border: '1px solid black', borderRadius: 5, marginBottom: 10}}>
+                        <Box style={{display: 'flex', border: '1px solid white', borderRadius: 5, marginBottom: 10, width: 600, marginLeft: 550 }}>
                           <Box
                             style={{
                               padding: 10,
@@ -100,7 +101,7 @@ function ClientRequest() {
                             <Typography>Город: {elem.location}</Typography>
                           </Box>
                             <Box style={{marginTop: 20}}>
-                              <Button variant="outlined" color="primary" style={{marginRight: 10}}>
+                              <Button variant="outlined" color="primary" style={{marginRight: 10, marginLeft: 70}}>
 
                                 Об оценщике
                               </Button>
