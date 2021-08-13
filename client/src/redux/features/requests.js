@@ -2,6 +2,7 @@ const initialState = {
   loading: false,
   items: [],
   editingRequest: null,
+  addition: false,
   itemsById: [],
 };
 
@@ -47,6 +48,22 @@ const requests = (state = initialState, action) => {
             return item;
           }
         }),
+      };
+    case "request/add/pending":
+      return {
+        ...state,
+        addition: true,
+      };
+    case "request/add/fulfilled":
+      return {
+        ...state,
+        addition: false,
+        items: [action.payload, ...state.items],
+      };
+    case "request/add/rejected":
+      return {
+        ...state,
+        addition: false,
       };
     default:
       return state;
@@ -109,6 +126,27 @@ export const searchRequest = (data) => {
   console.log(data);
   return (dispatch) => {
     dispatch({ type: "request/search", payload: data });
+  };
+};
+
+export const addRequest = (data, id) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    dispatch({ type: "request/add/pending" });
+    try {
+      const res = await fetch(`/client/${id}/request`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${state.login.token}`,
+        },
+      });
+      const json = await res.json();
+      dispatch({ type: "request/add/fulfilled", payload: json });
+    } catch (e) {
+      dispatch({ type: "request/add/rejected", error: e.toString() });
+    }
   };
 };
 
