@@ -422,6 +422,93 @@ img {
     );
 }
 
+.vc_custom_1558437112558 {
+    margin-top: 30px !important;
+}
+
+.vc_column_container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.vc_col-sm-9 {
+    width: 75%;
+}
+
+.vc_column_container>.vc_column-inner {
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.product-grid {
+    padding-right: 0px;
+    padding-left: 10px;
+}
+
+.pro-coloumn {
+    padding: 0px;
+    position: relative;
+    margin-top: 0px;
+    padding-bottom: 30px;
+    background-color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f5f5f5 #eee #d5d5d5 #eee;
+    /*box-shadow: 0 5px 0 rgb(200 200 200 / 20%);*/
+    margin-bottom: 40px;
+}
+
+.product-grid.klb-vehicle .col-main {
+    margin-top: 0;
+}
+.col-main {
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 30px;
+}
+
+.category-products {
+    overflow: hidden;
+    padding: 25px 13px 0px 13px;
+}
+
+ul.products-grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+ul.products-grid {
+    padding: 0;
+    margin: 0 -15px;
+}
+
+.category-products ul.products-grid li.item {
+    padding-top: 0;
+}
+.category-products ul.products-grid li.item {
+    text-align: center;
+    margin-bottom: 55px;
+    border-right: 1px #eaeaea solid;
+}
+ul.products-grid li {
+    display: flex;
+    flex-direction: column;
+}
+.scale {
+    transition: 0.4s; /* Время эффекта */
+    height: 140px;
+}
+.scale:hover {
+    transform: scale(1.2); /* Увеличиваем масштаб */
+}
+
+
+
+
 /*background:*/
 /*        url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5BdtaKbTI-eCahqBstBMKWU67MUWK2bNcgg&usqp=CAU) repeat-x 0 100% fixed,*/
 /*        url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiOr0zYz49G_Jeug6S-F5fn3UVI9aw9jU3ZQ&usqp=CAU) no-repeat fixed,*/
