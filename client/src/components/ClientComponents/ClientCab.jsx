@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { selectCandidate } from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ClientAddRequest from "./ClientAddRequest";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,6 +75,7 @@ const StyledBadge = withStyles((theme) => ({
 
 function ClientCab() {
   const classes = useStyles();
+
   const [spacing, setSpacing] = React.useState(2);
 
   const candidate = useSelector(selectCandidate);
@@ -122,40 +124,7 @@ function ClientCab() {
                 <Grid container justifyContent="center" spacing={spacing}>
                   <Grid item>
                     <Paper className={classes.paper}>
-                      <Accordion style={{ width: 900 }}>
-                        <AccordionSummary
-                          //expandIcon={<ExpandMoreIcon />}
-                          aria-controls="panel1a-content"
-                          id="panel1a-header"
-                        >
-                          <Typography
-                            style={{ margin: "auto" }}
-                            className={classes.heading}
-                          >
-                            Добавить запись
-                          </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          <Box>
-                            <Typography>Добавить заголовок</Typography>
-                            <TextField
-                              style={{
-                                width: 860,
-                                height: 100,
-                              }}
-                              label="Ввести заголовок"
-                            />
-                            <Typography>Добавить описание</Typography>
-                            <TextareaAutosize
-                              style={{
-                                width: 860,
-                                height: 100,
-                              }}
-                              aria-label="Заполнить описание"
-                            />
-                          </Box>
-                        </AccordionDetails>
-                      </Accordion>
+                      <ClientAddRequest candidateId={candidate._id} />
                       <Accordion style={{ width: 900 }}>
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
