@@ -5,7 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Box, CardMedia, Container } from "@material-ui/core";
+import { Box, CardActionArea, CardMedia, Container } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadAllRequests,
@@ -28,6 +28,7 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+
 });
 
 function ContainerBox(props) {
@@ -67,14 +68,70 @@ function ContainerBox(props) {
                     </Box>
                   </Box>
                 </Box>
-                <Box className="page-title"><h2>Vehicle Grid</h2></Box>
+                <Box className="page-title">
+                  <h2>Vehicle Grid</h2>
+                </Box>
               </Box>
             </Box>
           </Box>
         </Box>
       </Box>
 
-
+      <Box className="container">
+        <Box className="vc_row wpb_row vc_row-fluid vc_custom_1558437112558">
+          <Box className="wpb_column vc_column_container vc_col-sm-9">
+            <Box className="vc_column-inner">
+              <Box className="wpb_wrapper">
+                <Box className="product-grid klb-vehicle">
+                  <Box className="pro-coloumn">
+                    <article className="col-main">
+                      <Box className="category-products">
+                        <ul className="products-grid">
+                          <li className="item col-md-4 col-sm-4 col-xs-6">
+                            <Box className="item-inner" style={{display: 'flex'}}>
+                              {requests.map((request) => {
+                                return (
+                                  <Card style={{width: 305}}>
+                                    <CardActionArea>
+                                      <CardMedia
+                                        image="https://klbtheme.com/harrier/wp-content/uploads/2018/09/p1.jpg"
+                                        title="Contemplative Reptile"
+                                        className="scale"
+                                      />
+                                      <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                          <h3>{request.title}</h3>
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                                          across all continents except Antarctica
+                                        </Typography>
+                                      </CardContent>
+                                    </CardActionArea>
+                                    <CardActions>
+                                      <Button
+                                        onClick={() => (request._id)}
+                                        size="small"
+                                        className={classes.pos}
+                                      >
+                                        <NavLink to={`request/${request._id}`}>Подробнее</NavLink>
+                                      </Button>
+                                    </CardActions>
+                                  </Card>
+                                )
+                              })}
+                            </Box>
+                          </li>
+                        </ul>
+                      </Box>
+                    </article>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
     </>
   );
