@@ -10,9 +10,9 @@ import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
+import { selectCandidate } from '../../redux/features/login';
+import { addClientsToAgent } from '../../redux/features/agent';
 
 const useStyles = makeStyles({
   root: {
@@ -38,7 +38,13 @@ function ClientRequest() {
   const { id } = useParams();
   const request = useSelector(selectRequestById);
 
+  const candidate = useSelector(selectCandidate);
+
   useEffect(() => dispatch(loadRequestById(id)), [dispatch]);
+
+  const handleApply = (client, agent) => {
+    dispatch(addClientsToAgent(client, agent))
+  }
 
   const classes = useStyles();
   return (
@@ -66,54 +72,58 @@ function ClientRequest() {
               </Typography>
               <Typography>{item.location}</Typography>
               </Box>
-
               <Box>
-                <Box
-                  style={{ textAlign: "center", fontSize: 25, color: "red" }}
-                >
-                  Откликнувшиеся оценщики:
-                </Box>
-                <Box
-                  style={{
-                    borderRadius: 5,
-                    padding: 10,
-                    marginTop: 20,
-                  }}
-                >
-
+                {candidate.login === item.author?.login?
+                  <>
+                  <Box
+                    style={{ textAlign: "center", fontSize: 25, color: "red" }}
+                  >
+                    Откликнувшиеся оценщики:
+                  </Box>
                   <Box
                     style={{
-                      justifyContent: "flex-start",
+                      borderRadius: 5,
+                      padding: 10,
+                      marginTop: 20,
                     }}
                   >
-                    {item.appraisers.map((elem) => {
-                      return (
-                        <Box style={{display: 'flex', border: '1px solid white', borderRadius: 5, marginBottom: 10, width: 600, marginLeft: 550 }}>
-                          <Box
-                            style={{
-                              padding: 10,
-                              margin: 5,
-                              borderRadius: 5,
-                              textAlign: "center",
-                            }}
-                          >
-                            <Typography>{elem.firstName} {elem.lastName}</Typography>
-                            <Typography>Город: {elem.location}</Typography>
-                          </Box>
+
+                    <Box
+                      style={{
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      {item.appraisers.map((elem) => {
+                        return (
+                          <Box style={{display: 'flex', border: '1px solid white', borderRadius: 5, marginBottom: 10, width: 600, marginLeft: 550 }}>
+                            <Box
+                              style={{
+                                padding: 10,
+                                margin: 5,
+                                borderRadius: 5,
+                                textAlign: "center",
+                              }}
+                            >
+                              <Typography>{elem.firstName} {elem.lastName}</Typography>
+                              <Typography>Город: {elem.location}</Typography>
+                            </Box>
                             <Box style={{marginTop: 20}}>
                               <Button variant="outlined" color="primary" style={{marginRight: 10, marginLeft: 70}}>
 
                                 Об оценщике
                               </Button>
-                              <Button variant="outlined" color="primary">
+                              <Button variant="outlined" color="primary" onClick={() => handleApply(candidate._id, elem._id)}>
                                 Подтвердить
                               </Button>
                             </Box>
-                        </Box>
-                      );
-                    })}
+                          </Box>
+                        );
+                      })}
+                    </Box>
                   </Box>
-                </Box>
+                  </>: null
+                }
+
               </Box>
               <Typography>Дата создания записи: {item.createdAt}</Typography>
             </CardContent>
