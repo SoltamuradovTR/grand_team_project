@@ -110,28 +110,50 @@ function ClientRequest() {
                       >
                         {item.appraisers.map((elem) => {
                           return (
-                            <Box
-                              style={{
-                                display: "flex",
-                                border: "1px solid white",
-                                borderRadius: 5,
-                                marginBottom: 10,
-                                width: 600,
-                                marginLeft: 550,
-                              }}
-                            >
+                            <Box>
                               <Box
                                 style={{
-                                  padding: 10,
-                                  margin: 5,
+                                  display: "flex",
+                                  border: "1px solid white",
                                   borderRadius: 5,
-                                  textAlign: "center",
+                                  marginBottom: 10,
+                                  width: 600,
+                                  marginLeft: 550,
                                 }}
                               >
-                                <Typography>
-                                  {elem.firstName} {elem.lastName}
-                                </Typography>
-                                <Typography>Город: {elem.location}</Typography>
+                                <Box
+                                  style={{
+                                    padding: 10,
+                                    margin: 5,
+                                    borderRadius: 5,
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  <Typography>
+                                    {elem.firstName} {elem.lastName}
+                                  </Typography>
+                                  <Typography>
+                                    Город: {elem.location}
+                                  </Typography>
+                                </Box>
+                                <Box style={{ marginTop: 20 }}>
+                                  <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    style={{ marginRight: 10, marginLeft: 70 }}
+                                  >
+                                    Об оценщике
+                                  </Button>
+                                  <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() =>
+                                      handleApply(candidate._id, elem._id)
+                                    }
+                                  >
+                                    Подтвердить
+                                  </Button>
+                                </Box>
                               </Box>
                               <Box style={{ marginTop: 20 }}>
                                 <Button
@@ -139,7 +161,9 @@ function ClientRequest() {
                                   color="primary"
                                   style={{ marginRight: 10, marginLeft: 70 }}
                                 >
-                                  Об оценщике
+                                  <NavLink to={`/agent/${elem._id}`}>
+                                    Об оценщике
+                                  </NavLink>
                                 </Button>
                                 <Button
                                   variant="outlined"
@@ -152,17 +176,9 @@ function ClientRequest() {
                                 </Button>
                               </Box>
                             </Box>
-                            <Box style={{marginTop: 20}}>
-                              <Button variant="outlined" color="primary" style={{marginRight: 10, marginLeft: 70}}>
-                                <NavLink to={`/agent/${elem._id}`}>Об оценщике</NavLink>
-                              </Button>
-                              <Button variant="outlined" color="primary" onClick={() => handleApply(candidate._id, elem._id)}>
-                                Подтвердить
-                              </Button>
-                            </Box>
-                          </Box>
-                        );
-                      })}
+                          );
+                        })}
+                      </Box>
                     </Box>
                   </>
                 ) : null}
