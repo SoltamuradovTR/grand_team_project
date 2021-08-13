@@ -81,10 +81,8 @@ function ContainerBox(props) {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button
-                        className={classes.pos}
-                      >
-                        Подробнее
+                      <Button>
+                        <NavLink to={`request/${request._id}`}>Подробнее</NavLink>
                       </Button>
                     </CardActions>
                   </Box>
