@@ -81,18 +81,20 @@ const login = (state = initialState, action) => {
         editingAgent: null,
       };
     case "set/field":
-      const e = action.payload;
+      const { target } = action.payload;
       return {
         ...state,
         editingAgent: {
           ...state.editingAgent,
-          [e.target.name]: e.target.value,
+          [target.name]: target.value,
         },
       };
     case "agent/set-editing-agent":
       return {
         ...state,
-        editingAgent: action.payload,
+        editingAgent: {
+          ...state.candidate,
+        },
       };
     case "agent/edit/pending":
       return {
@@ -103,9 +105,11 @@ const login = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        editingAgent: null,
+        candidate: {
+          ...state.editingAgent,
+        },
 
-        candidate: action.payload
+        editingAgent: null,
       };
     case "agent/edit/rejected":
       return {
@@ -194,10 +198,9 @@ export const setFormFields = (e) => {
   };
 };
 
-export const setEditingAgent = (agent) => {
+export const setEditingAgent = () => {
   return {
     type: "agent/set-editing-agent",
-    payload: agent,
   };
 };
 
@@ -217,8 +220,7 @@ export const editAgent = () => {
         },
       });
 
-      const json = resp.json()
-      dispatch({ type: "agent/edit/fulfilled", payload: JSON.stringify(json) });
+      dispatch({ type: "agent/edit/fulfilled" });
     } catch (e) {
       dispatch({ type: "agent/edit/rejected", error: e.toString() });
     }

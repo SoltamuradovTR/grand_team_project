@@ -4,6 +4,7 @@ const initialState = {
   editingRequest: null,
   addition: false,
   itemsById: [],
+  filterText: "",
 };
 
 const requests = (state = initialState, action) => {
@@ -43,11 +44,7 @@ const requests = (state = initialState, action) => {
     case "request/search":
       return {
         ...state,
-        items: state.items.filter((item) => {
-          if (item.title.toLowerCase().indexOf(action.payload) > -1) {
-            return item;
-          }
-        }),
+        filterText: action.payload,
       };
     case "request/add/pending":
       return {
@@ -123,10 +120,7 @@ export const addAppraiser = (request, agent) => {
 };
 
 export const searchRequest = (data) => {
-  console.log(data);
-  return (dispatch) => {
-    dispatch({ type: "request/search", payload: data });
-  };
+  return { type: "request/search", payload: data };
 };
 
 export const addRequest = (data, id) => {
@@ -150,6 +144,13 @@ export const addRequest = (data, id) => {
   };
 };
 
-export const selectAllRequests = (state) => state.requests.items;
+export const selectAllRequests = (state) => {
+  const { requests } = state;
+  return requests.items.filter((item) => {
+    // if (state.requests.filterText === "") return true;
+
+    return item.title.toLowerCase().indexOf(requests.filterText) > -1;
+  });
+};
 
 export const selectRequestById = (state) => state.requests.itemsById;

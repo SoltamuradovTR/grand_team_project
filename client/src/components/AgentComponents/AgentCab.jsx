@@ -73,14 +73,13 @@ function AgentCab() {
   const dispatch = useDispatch();
 
   const classes = useStyles();
-  const [spacing, setSpacing] = React.useState(2);
 
   const [agentOpen, setAgentOpen] = useState(false);
 
   const candidate = useSelector(selectCandidate);
 
-  const handleClickOpenAgent = (agent) => {
-    dispatch(setEditingAgent(agent));
+  const handleClickOpenAgent = () => {
+    dispatch(setEditingAgent());
   };
 
   return (
@@ -88,7 +87,7 @@ function AgentCab() {
       <Container style={{ display: "flex" }}>
         <Grid container className={classes.root} spacing={2}>
           <Grid item xs={12}>
-            <Grid container justifyContent="center" spacing={spacing}>
+            <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Paper className={classes.paper}>
                   <div className={classes.root}>
@@ -116,16 +115,14 @@ function AgentCab() {
                       <Typography variant="h6">
                         Город: {candidate.location}
                       </Typography>
-                      <Button onClick={() => handleClickOpenAgent(candidate)}>
-                        Изменить
-                      </Button>
+                      <Button onClick={handleClickOpenAgent}>Изменить</Button>
                     </Box>
                   </div>
                 </Paper>
               </Grid>
               <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
-                  <Grid container justifyContent="center" spacing={spacing}>
+                  <Grid container justifyContent="center" spacing={2}>
                     <Grid item>
                       <Paper className={classes.paper}>
                         <Typography variant="h6">Отзывы</Typography>
@@ -146,7 +143,7 @@ function AgentCab() {
         </Grid>
         <Grid container className={classes.root} spacing={2}>
           <Grid item xs={12}>
-            <Grid container justifyContent="center" spacing={spacing}>
+            <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Paper className={classes.paper1}>
                   <Typography variant="h6">Личные данные</Typography>

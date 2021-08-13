@@ -29,9 +29,9 @@ function EditingAgentDialog({ setAgentOpen, agentOpen }) {
     dispatch(setFormFields(e));
   };
 
-  const handleSave = () => {
-    dispatch(editAgent());
-    handleClose()
+  const handleSave = async () => {
+    await dispatch(editAgent());
+    handleClose();
   };
 
   if (!editingAgent) {
