@@ -69,22 +69,25 @@ function HeaderBoxAgent() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [search, setSearch] = useState("");
-
-  const handleSearch = () => {
-    console.log(search);
-    dispatch(searchRequest(search));
+  const handleSearch = (e) => {
+    dispatch(searchRequest(e.target.value));
   };
-
-  handleSearch();
 
   return (
     <>
-      <Box component='header' style={{ backgroundColor: "rgba(0, 0, 0, .7)", backdropFilter: "blur(15px)", marginBottom: 20, color: 'white'}} >
+      <Box
+        component="header"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, .7)",
+          backdropFilter: "blur(15px)",
+          marginBottom: 20,
+          color: "white",
+        }}
+      >
         <Box className={classes.root}>
           <Toolbar>
             <IconButton
-              edge='start'
+              edge="start"
               className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
@@ -92,10 +95,7 @@ function HeaderBoxAgent() {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-
-              <NavLink to="/">
-                LOGO
-              </NavLink>
+              <NavLink to="/">LOGO</NavLink>
             </Typography>
             <Box className={classes.search}>
               <Box className={classes.searchIcon}>
@@ -103,7 +103,7 @@ function HeaderBoxAgent() {
               </Box>
               <InputBase
                 placeholder="Search…"
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={handleSearch}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,

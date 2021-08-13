@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
-import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import {
+  createTheme,
+  withStyles,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Container, } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import {
@@ -15,16 +20,16 @@ import {
 } from "../../redux/features/requests";
 import { NavLink } from "react-router-dom";
 import { selectCandidate } from "../../redux/features/login";
-import Box from '@material-ui/core/Box';
+import Box from "@material-ui/core/Box";
 
-const useStyles = makeStyles( {
+const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
   bullet: {
     display: "inline-block",
-      margin: "0 2px",
-      transform: "scale(0.8)",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -33,13 +38,13 @@ const useStyles = makeStyles( {
     marginBottom: 12,
   },
   respond: {
-    backgroundColor: "white", color: 'black',
-      marginBottom: 12,
+    backgroundColor: "white",
+    color: "black",
+    marginBottom: 12,
   },
 });
 
-
-function ContainerBox(props) {
+function ContainerBox() {
   const dispatch = useDispatch();
 
   const requests = useSelector(selectAllRequests);
@@ -65,12 +70,20 @@ function ContainerBox(props) {
           backgroundColor: "rgba(0, 0, 0, .6)",
           backdropFilter: "blur(10px)",
           height: 800,
-          marginTop: 60
+          marginTop: 60,
         }}
       >
         {requests.map((request) => {
           return (
-            <Box className="container" style={{minWidth: 275, width: 600, borderRadius: 15,  height: 415}}>
+            <Box
+              className="container"
+              style={{
+                minWidth: 275,
+                width: 600,
+                borderRadius: 15,
+                height: 415,
+              }}
+            >
               <Box className="card">
                 <Box className="face face1">
                   <Box className="content">
@@ -84,7 +97,7 @@ function ContainerBox(props) {
                         className={classes.title}
                         color="textSecondary"
                         gutterBottom
-                        style={{marginTop: 25, display: 'flex'}}
+                        style={{ marginTop: 25, display: "flex" }}
                       >
                         Город: {request.location}
                       </Typography>
@@ -97,12 +110,16 @@ function ContainerBox(props) {
                     </CardContent>
                     <CardActions>
                       <Button>
-                        <NavLink to={`request/${request._id}`}>Подробнее</NavLink>
+                        <NavLink to={`request/${request._id}`}>
+                          Подробнее
+                        </NavLink>
                       </Button>
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => handleAddAppraiser(request._id, candidate._id)}
+                        onClick={() =>
+                          handleAddAppraiser(request._id, candidate._id)
+                        }
                         size="small"
                       >
                         Откликнуться
@@ -121,6 +138,3 @@ function ContainerBox(props) {
 }
 
 export default ContainerBox;
-
-
-
