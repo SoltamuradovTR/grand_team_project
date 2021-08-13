@@ -42,17 +42,17 @@ function ContainerBox(props) {
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <>
-      <div data-vc-full-width="true" data-vc-full-width-init="true" data-vc-stretch-content="true"
+      <Box data-vc-full-width="true" data-vc-full-width-init="true" data-vc-stretch-content="true"
            className="vc_row wpb_row vc_row-fluid vc_row-no-padding"
            style={{position: 'relative', left: 15, boxSizing: 'border-box', width: 1903}}>
-        <div className="wpb_column vc_column_container vc_col-sm-12">
-          <div className="vc_column-inner">
-            <div className="wpb_wrapper">
-              <div className="page-heading">
-                <div className="breadcrumbs">
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-xs-12">
+        <Box className="wpb_column vc_column_container vc_col-sm-12">
+          <Box className="vc_column-inner">
+            <Box className="wpb_wrapper">
+              <Box className="page-heading">
+                <Box className="breadcrumbs">
+                  <Box className="container">
+                    <Box className="row">
+                      <Box className="col-xs-12">
                         <ul>
                           <li>
                             <NavLink to={'/'} title="Home"
@@ -63,16 +63,16 @@ function ContainerBox(props) {
                           </li>
                           <li><a className="text-white">Vehicle Grid</a></li>
                         </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="page-title"><h2>Vehicle Grid</h2></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box className="page-title"><h2>Vehicle Grid</h2></Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
 
 

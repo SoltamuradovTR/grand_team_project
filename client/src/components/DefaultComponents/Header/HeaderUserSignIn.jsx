@@ -78,10 +78,10 @@ function HeaderUserSignIn(props) {
       </div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" className={classes.dialog}>
 
-      <div className="item cons">
+      <Box className="item cons">
         <h6>Войти</h6>
-        <div className="form_block form">
-            <div className="wrapper">
+        <Box className="form_block form">
+            <Box className="wrapper">
 
               <input type="hidden" name="value" value="Консультация" />
 
@@ -107,10 +107,10 @@ function HeaderUserSignIn(props) {
                 <span>как Агент</span>
               </Button>
 
-            </div>
-          <div className="info hide center"></div>
-        </div>
-      </div>
+            </Box>
+          <Box className="info hide center"></Box>
+        </Box>
+      </Box>
       </Dialog>
       <DialogLoginAgent open={openAgent} setOpen={setOpenAgent}/>
       <DialogLoginClient open={openClient} setOpen={setOpenClient}/>
