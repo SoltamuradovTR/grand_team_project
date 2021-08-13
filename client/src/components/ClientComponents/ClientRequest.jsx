@@ -6,7 +6,7 @@ import {
   selectAllRequests,
   selectRequestById,
 } from "../../redux/features/requests";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -109,8 +109,7 @@ function ClientRequest() {
                             </Box>
                             <Box style={{marginTop: 20}}>
                               <Button variant="outlined" color="primary" style={{marginRight: 10, marginLeft: 70}}>
-
-                                Об оценщике
+                                <NavLink to={`/agent/${elem._id}`}>Об оценщике</NavLink>
                               </Button>
                               <Button variant="outlined" color="primary" onClick={() => handleApply(candidate._id, elem._id)}>
                                 Подтвердить
