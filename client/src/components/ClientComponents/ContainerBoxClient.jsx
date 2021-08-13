@@ -14,7 +14,6 @@ import {
 } from "../../redux/features/requests";
 import { NavLink } from "react-router-dom";
 import Box from '@material-ui/core/Box';
-import './style.css'
 
 const useStyles = makeStyles({
   root: {

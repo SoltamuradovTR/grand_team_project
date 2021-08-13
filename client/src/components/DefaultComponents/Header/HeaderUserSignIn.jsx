@@ -37,6 +37,12 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  // dialog: {
+  //   background: 'rgba(250,205,0,.9)',
+  //   clipPath: 'polygon(0 35px, 100% 0, 100% 100%, 0 100%)',
+  //   webkitClipPath: 'polygon(0 35px, 100% 0, 100% 100%, 0 100%)',
+  //   padding: '60px 25px 30px'
+  // }
 }))
 
 function HeaderUserSignIn(props) {
@@ -70,34 +76,41 @@ function HeaderUserSignIn(props) {
           <CircularProgress color="inherit" />
         </Backdrop>
       </div>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <Container>
-          <Box>
-                 <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={handleClickOpenAgent}
-                  >
-                    Войти как Агент
-                  </Button>
-          </Box>
-            <Box>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" className={classes.dialog}>
+
+      <Box className="item cons">
+        <h6>Войти</h6>
+        <Box className="form_block form">
+            <Box className="wrapper">
+
+              <input type="hidden" name="value" value="Консультация" />
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
                 onClick={handleClickOpenClient}
+                className={classes.submit}
               >
                 Войти как Клиент
               </Button>
-            </Box>
-        </Container>
 
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={handleClickOpenAgent}
+                className={classes.submit}
+              >
+                <span>как Агент</span>
+              </Button>
+
+            </Box>
+          <Box className="info hide center"></Box>
+        </Box>
+      </Box>
       </Dialog>
       <DialogLoginAgent open={openAgent} setOpen={setOpenAgent}/>
       <DialogLoginClient open={openClient} setOpen={setOpenClient}/>
@@ -108,3 +121,16 @@ function HeaderUserSignIn(props) {
 export default HeaderUserSignIn;
 
 
+
+
+
+
+//         <Container>
+//           <Box>
+
+//           </Box>
+//             <Box>
+
+//             </Box>
+//         </Container>
+//
