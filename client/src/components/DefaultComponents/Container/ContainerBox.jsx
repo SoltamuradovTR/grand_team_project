@@ -42,58 +42,40 @@ function ContainerBox(props) {
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <>
-      <Container
-        style={{
-          justifyContent: "space-around",
-          display: "flex",
-          flexWrap: "wrap",
-          backgroundColor: "rgba(0, 0, 0, .6)",
-          backdropFilter: "blur(10px)",
-          height: 800,
-          marginTop: 60
-        }}
-      >
-        {requests.map((request) => {
-          return (
-            <Box className="container" style={{minWidth: 275, width: 600, borderRadius: 15,  height: 415}}>
-              <Box className="card">
-                <Box className="face face1">
-                  <Box className="content">
-                    <h3>{request.title}</h3>
-                  </Box>
-                </Box>
-                <Box className="face face2">
-                  <Box className="content">
-                    <CardContent>
-                      <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                        style={{marginTop: 25, display: 'flex'}}
-                      >
-                        Город: {request.location}
-                      </Typography>
-                      <Typography color="textSecondary">
-                        {request.author.firstName} {request.author.lastName}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {request.description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        className={classes.pos}
-                      >
-                        Подробнее
-                      </Button>
-                    </CardActions>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          );
-        })}
-      </Container>
+      <div data-vc-full-width="true" data-vc-full-width-init="true" data-vc-stretch-content="true"
+           className="vc_row wpb_row vc_row-fluid vc_row-no-padding"
+           style={{position: 'relative', left: 15, boxSizing: 'border-box', width: 1903}}>
+        <div className="wpb_column vc_column_container vc_col-sm-12">
+          <div className="vc_column-inner">
+            <div className="wpb_wrapper">
+              <div className="page-heading">
+                <div className="breadcrumbs">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-xs-12">
+                        <ul>
+                          <li>
+                            <NavLink to={'/'} title="Home"
+                                 rel="bookmark">
+                              Home
+                            </NavLink>
+                            <span> › </span>
+                          </li>
+                          <li><a className="text-white">Vehicle Grid</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="page-title"><h2>Vehicle Grid</h2></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </>
   );
 }

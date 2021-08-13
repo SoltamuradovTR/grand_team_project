@@ -85,9 +85,9 @@ function HeaderUser(props) {
               <HeaderUserSignUp />
         </Popover>
       </div>
-      <FormControlLabel
-        control={toggleTheme}
-      />
+      {/*<FormControlLabel*/}
+      {/*  control={toggleTheme}*/}
+      {/*/>*/}
     </>
   );
 }
