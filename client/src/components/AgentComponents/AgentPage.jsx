@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Badge from '@material-ui/core/Badge';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCandidate, setEditingAgent } from '../../redux/features/login';
+import React, { useEffect, useState } from "react";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Badge from "@material-ui/core/Badge";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCandidate, setEditingAgent } from "../../redux/features/login";
 import {
-  Accordion, AccordionDetails,
+  Accordion,
+  AccordionDetails,
   AccordionSummary,
   Button,
   Container,
   Paper,
-  Typography
-} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
-import Box from '@material-ui/core/Box';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import EditingAgentDialog from './EditingAgentDialog';
-import { useParams } from 'react-router-dom';
-import { loadAgentById, selectAgentById } from '../../redux/features/agent';
+  Typography,
+} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import EditingAgentDialog from "./EditingAgentDialog";
+import { useParams } from "react-router-dom";
+import { loadAgentById, selectAgentById } from "../../redux/features/agent";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,16 +74,23 @@ const StyledBadge = withStyles((theme) => ({
 function AgentPage(props) {
   const dispatch = useDispatch();
 
-  const { id } = useParams()
+  const { id } = useParams();
 
   const classes = useStyles();
   const [spacing, setSpacing] = React.useState(2);
 
   const candidate = useSelector(selectCandidate);
 
-  const agent = useSelector(selectAgentById)
+  const agent = useSelector(selectAgentById);
 
-  useEffect(() => dispatch(loadAgentById(id)), [dispatch])
+  useEffect(() => dispatch(loadAgentById(id)), [dispatch]);
+
+  const client = agent.map((item) => {
+    return item.clients.find((elem) => {
+      return candidate._id === elem._id
+    })
+  })
+  console.log(client)
 
   return (
     <>
@@ -108,20 +116,36 @@ function AgentPage(props) {
                       />
                     </StyledBadge>
                     <Box>
-                      {agent.map((elem)=> {
-                        return(
+                      {agent.map((elem) => {
+                        return (
                           <>
-                          <Typography variant="h6">
-                            Имя: {elem.firstName}
-                          </Typography>
-                        <Typography variant="h6">
-                          Фамилия: {elem.lastName}
-                        </Typography>
-                        <Typography variant="h6">
-                          Город: {elem.location}
-                        </Typography>
+                            <Typography variant="h6">
+                              Имя: {elem.firstName}
+                            </Typography>
+                            <Typography variant="h6">
+                              Фамилия: {elem.lastName}
+                            </Typography>
+                            <Typography variant="h6">
+                              Город: {elem.location}
+                            </Typography>
+                            {client[0] === undefined? (
+                                <Typography variant="h6">
+                                  Чтобы увидеть контактную информацию, вам нужно быть киентом
+                                </Typography>
+                              ) :
+                              (
+                                <>
+                                  <Typography variant="h6">
+                                    Телефон: {elem.phone}
+                                  </Typography>
+                                  <Typography variant="h6">
+                                    Почта: {elem.email}
+                                  </Typography>
+                                </>
+                              )
+                             }
                           </>
-                        )
+                        );
                       })}
                     </Box>
                   </div>
@@ -153,7 +177,20 @@ function AgentPage(props) {
             <Grid container justifyContent="center" spacing={spacing}>
               <Grid item>
                 <Paper className={classes.paper1}>
-                  <Typography variant="h6">Личные данные</Typography>
+                  <Typography variant="h6">Клиенты</Typography>
+                  {agent.map((elem) => {
+                    return (
+                      <>
+                        {elem.clients.map((client) => {
+                          return (
+                            <Typography>
+                              {client.firstName} {client.lastName}
+                            </Typography>
+                          );
+                        })}
+                      </>
+                    );
+                  })}
                 </Paper>
               </Grid>
             </Grid>
