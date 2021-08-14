@@ -508,6 +508,7 @@ ul.products-grid li {
 .scale {
     transition: 0.4s; /* Время эффекта */
     height: 140px;
+    background: #333;
 }
 .scale:hover {
     transform: scale(1.2); /* Увеличиваем масштаб */
@@ -539,29 +540,50 @@ ul.products-grid li {
     vertical-align: top;
 }
 
-.item .item-inner .item-box-hover .product-detail-bnt a {
-    font-weight: normal;
-    margin: 0;
-    padding: 0px 0px;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s linear;
-    -moz-transition: all 0.3s linear;
-    -webkit-transition: all 0.3s linear;
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-    background: #000;
-    transform: rotate(
-            40deg
-    );
-    border: 2px #fff solid;
-    color: #121212;
+#diamond {
+    width: 30px;
+    height: 30px;
+    /* Rotate */
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    /* Rotate Origin */
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    margin: 60px 0 10px 110px;
+}
+.box-1:hover{
+    position:relative;
+    color: #ed6663;
+}
+#diamond{
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    top:0;
+    background: rgb(255, 255, 255);
+    padding:5px;
+    display:none;
+}
+.box-1:hover #diamond {
+    display:block;
 }
 
-.products-grid .item .item-inner .actions {
-    display: inline-block;
-    vertical-align: top;
+.klb-seperator {
+    height: 3px;
+    background: #ed6663;
+    left: 0;
+    right: 0;
+    bottom: -12px;
+    width: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*background:*/
