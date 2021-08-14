@@ -83,7 +83,7 @@ function ContainerBox(props) {
 <Box className="item-inner" style={{display: 'flex', justifyContent: 'space-between'}}>
   {requests.map((request) => {
     return (
-      <Card className="box-1" style={{width: 380}}>
+      <Card className="box-1" style={{width: '100%'}}>
         <CardActionArea>
           <CardMedia
             image="https://klbtheme.com/harrier/wp-content/uploads/2018/09/p1.jpg"
