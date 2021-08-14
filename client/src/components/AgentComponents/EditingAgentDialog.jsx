@@ -66,6 +66,15 @@ function EditingAgentDialog() {
         />
         <TextField
           margin="dense"
+          label="Описание"
+          type="text"
+          onChange={handleEdit}
+          value={editingAgent.description}
+          name="description"
+          fullWidth
+        />
+        <TextField
+          margin="dense"
           label="Город"
           type="text"
           onChange={handleEdit}

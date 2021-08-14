@@ -17,6 +17,7 @@ import { selectCandidate, setEditingAgent } from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import EditingAgentDialog from "./EditingAgentDialog";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper1: {
     height: 700,
-    width: 500,
+    width: 600,
   },
   root: {
     flexGrow: 1,
@@ -85,57 +86,74 @@ function AgentCab() {
     <>
       <Container style={{ display: "flex" }}>
         <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
+          <Grid container justifyContent="center" spacing={2}>
+            <Grid item>
+              <Paper className={classes.paper}>
+                <div className={classes.root}>
+                  <StyledBadge
+                    overlap="circular"
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    variant="dot"
+                  >
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://www.pngkey.com/png/full/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
+                      style={{ width: 150, height: 150 }}
+                    />
+                  </StyledBadge>
+                  <Box>
+                    <Typography variant="h6">
+                      {candidate.firstName} {candidate.lastName}
+                    </Typography>
+                    <Typography variant="h6">
+                      Город: {candidate.location}
+                    </Typography>
+                    <Typography variant="h6">
+                      О себе: {candidate.description}
+                    </Typography>
+                    <Button onClick={handleClickOpenAgent}>Изменить</Button>
+                  </Box>
+                </div>
+              </Paper>
+            </Grid>
             <Grid container justifyContent="center" spacing={2}>
               <Grid item>
-                <Paper className={classes.paper}>
-                  <div className={classes.root}>
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                      variant="dot"
+                <Paper style={{ height: 342 }} className={classes.paper1}>
+                  <Accordion style={{ width: 600 }}>
+                    <AccordionSummary
+                      //expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
                     >
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="https://www.pngkey.com/png/full/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
-                        style={{ width: 150, height: 150 }}
-                      />
-                    </StyledBadge>
-                    <Box>
-                      <Typography variant="h6">
-                        Имя: {candidate.firstName}
+                      <Typography className={classes.heading}>
+                        Отзывы
                       </Typography>
-                      <Typography variant="h6">
-                        Фамилия: {candidate.lastName}
-                      </Typography>
-                      <Typography variant="h6">
-                        Город: {candidate.location}
-                      </Typography>
-                      <Button onClick={handleClickOpenAgent}>Изменить</Button>
-                    </Box>
-                  </div>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box>
+                        {candidate.clients.map((client) => {
+                          return (
+                            <Box
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                width: 500,
+                                marginBottom: 10,
+                              }}
+                            >
+                              <Box>
+                                {client.firstName} {client.lastName}
+                              </Box>
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    </AccordionDetails>
+                  </Accordion>
                 </Paper>
-              </Grid>
-              <Grid container className={classes.root} spacing={2}>
-                <Grid item xs={12}>
-                  <Grid container justifyContent="center" spacing={2}>
-                    <Grid item>
-                      <Paper className={classes.paper}>
-                        <Typography variant="h6">Отзывы</Typography>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>
-                            description.description.description.description
-                          </Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
-                      </Paper>
-                    </Grid>
-                  </Grid>
-                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -144,61 +162,44 @@ function AgentCab() {
           <Grid item xs={12}>
             <Grid container justifyContent="center" spacing={2}>
               <Grid item>
-                <Paper className={classes.paper1}>
-                  <Typography variant="h6">Личные данные</Typography>
-                  {candidate.clients.map((client) => {
-                    return (
-                      <Typography>
-                        {client.firstName} {client.lastName}
+                <Paper style={{ height: 342 }} className={classes.paper1}>
+                  <Accordion style={{ width: 500 }}>
+                    <AccordionSummary
+                      //expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography className={classes.heading}>
+                        Клиенты
                       </Typography>
-                    );
-                  })}
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Box>
+                        {candidate.clients.map((client) => {
+                          return (
+                            <Box
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                width: 500,
+                                marginBottom: 10,
+                              }}
+                            >
+                              <Box>
+                                {client.firstName} {client.lastName}
+                              </Box>
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    </AccordionDetails>
+                  </Accordion>
                 </Paper>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Container>
-      <Accordion style={{ marginLeft: 32, width: 1143 }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <div
-            className="container"
-            style={{
-              width: "100%",
-              border: "2px solid #ccc",
-              backgroundColor: "#eee",
-              borderRadius: 5,
-              padding: 16,
-              margin: "16px auto",
-            }}
-          >
-            <img
-              src="https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg"
-              alt="avatar"
-              style={{
-                float: "left",
-                marginRight: 20,
-                borderRadius: "50%",
-                width: 90,
-              }}
-            />
-            <p>
-              <span style={{ fontSize: 18, marginRight: 15 }}>
-                Марина Белова
-              </span>{" "}
-              г. Москва
-            </p>
-            <p>Качество товара отличное, доставка быстрая.</p>
-          </div>
-        </AccordionDetails>
-      </Accordion>
       <EditingAgentDialog />
     </>
   );

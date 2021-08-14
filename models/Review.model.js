@@ -10,6 +10,10 @@ const reviewSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
     },
+    agent: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Agent",
+    },
   },
   { timestamps: true }
 );

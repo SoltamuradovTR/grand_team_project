@@ -84,7 +84,6 @@ function ClientCab() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [spacing, setSpacing] = useState(2);
   const [clientOpen, setClientOpen] = useState(false);
 
   useEffect(() => {
@@ -106,7 +105,7 @@ function ClientCab() {
     <>
       <Container>
         <Grid container className={classes.root} spacing={2}>
-          <Grid container justifyContent="center" spacing={spacing}>
+          <Grid container justifyContent="center" spacing={2}>
             <Paper className={classes.paper}>
               <div className={classes.root}>
                 <StyledBadge
@@ -148,7 +147,7 @@ function ClientCab() {
             </Paper>
             <Grid container className={classes.root} spacing={2}>
               <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={spacing}>
+                <Grid container justifyContent="center" spacing={2}>
                   <Grid item>
                     <Paper className={classes.paper}>
                       <ClientAddRequest candidateId={candidate._id} />
