@@ -150,7 +150,7 @@ module.exports.agentsController = {
   loginAgent: async (req, res) => {
     const { login, password } = req.body;
 
-    const candidate = await Agent.findOne({  login });
+    const candidate = await Agent.findOne({  login }).populate('clients');
 
     if (!candidate) {
       return res.status(401).json("Неверный логин");
@@ -161,7 +161,6 @@ module.exports.agentsController = {
     if (!valid) {
       return res.status(401).json("Неверный пароль");
     }
-
     const payload = {
       id: candidate._id,
       login: candidate.login,
