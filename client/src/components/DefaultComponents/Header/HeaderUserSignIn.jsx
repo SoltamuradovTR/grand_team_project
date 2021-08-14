@@ -38,6 +38,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   // dialog: {
+  //   background: "rgba(250,205,0,.9)",
+  //   clipPath: "polygon(0 35px, 100% 0, 100% 310px, 0 100%)",
+  //   padding: "60px 25px 30px",
+  //   height: 265,
+  //   width: 450
+  // }
+  // dialog: {
   //   background: 'rgba(250,205,0,.9)',
   //   clipPath: 'polygon(0 35px, 100% 0, 100% 100%, 0 100%)',
   //   webkitClipPath: 'polygon(0 35px, 100% 0, 100% 100%, 0 100%)',
@@ -106,9 +113,7 @@ function HeaderUserSignIn(props) {
               >
                 <span>как Агент</span>
               </Button>
-
             </Box>
-          <Box className="info hide center"></Box>
         </Box>
       </Box>
       </Dialog>
