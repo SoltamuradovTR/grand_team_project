@@ -7,6 +7,7 @@ const initialState = {
   candidate: null,
   loading: false,
   editingAgent: null,
+  editingClient: null,
 };
 
 const login = (state = initialState, action) => {
@@ -32,6 +33,7 @@ const login = (state = initialState, action) => {
         signingIn: false,
         error: action.error,
       };
+
     case "client/signIn/pending":
       return {
         ...state,
@@ -47,13 +49,13 @@ const login = (state = initialState, action) => {
         role: action.payload.role,
         candidate: action.payload.candidate,
       };
-
     case "client/signIn/rejected":
       return {
         ...state,
         signingIn: false,
         error: action.error,
       };
+
     case "user/logout/pending":
       return {
         ...state,
@@ -75,11 +77,18 @@ const login = (state = initialState, action) => {
         signingIn: false,
         error: action.error,
       };
+
     case "close/dialog":
       return {
         ...state,
         editingAgent: null,
       };
+    case "close/dialog-client":
+      return {
+        ...state,
+        editingClient: null,
+      };
+
     case "set/field":
       const { target } = action.payload;
       return {
@@ -89,6 +98,16 @@ const login = (state = initialState, action) => {
           [target.name]: target.value,
         },
       };
+    case "set/field-client":
+      const targ = action.payload.target;
+      return {
+        ...state,
+        editingClient: {
+          ...state.editingClient,
+          [targ.name]: targ.value,
+        },
+      };
+
     case "agent/set-editing-agent":
       return {
         ...state,
@@ -96,6 +115,14 @@ const login = (state = initialState, action) => {
           ...state.candidate,
         },
       };
+    case "client/set-editing-client":
+      return {
+        ...state,
+        editingClient: {
+          ...state.candidate,
+        },
+      };
+
     case "agent/edit/pending":
       return {
         ...state,
@@ -117,11 +144,32 @@ const login = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+
+    case "client/edit/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "client/edit/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        candidate: {
+          ...state.editingClient,
+        },
+
+        editingClient: null,
+      };
+    case "client/edit/rejected":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     default:
       return state;
   }
 };
-
 export default login;
 
 export const loginAgent = (login, password) => {
@@ -146,7 +194,6 @@ export const loginAgent = (login, password) => {
     }
   };
 };
-
 export const loginClient = (login, password) => {
   return async (dispatch) => {
     dispatch({ type: "client/signIn/pending" });
@@ -190,10 +237,21 @@ export const closeEditingDialog = () => {
     type: "close/dialog",
   };
 };
+export const closeEditingDialogClient = () => {
+  return {
+    type: "close/dialog-client",
+  };
+};
 
 export const setFormFields = (e) => {
   return {
     type: "set/field",
+    payload: e,
+  };
+};
+export const setFormFieldsClient = (e) => {
+  return {
+    type: "set/field-client",
     payload: e,
   };
 };
@@ -203,14 +261,16 @@ export const setEditingAgent = () => {
     type: "agent/set-editing-agent",
   };
 };
+export const setEditingClient = () => {
+  return {
+    type: "client/set-editing-client",
+  };
+};
 
 export const editAgent = () => {
   return async (dispatch, getState) => {
     dispatch({ type: "agent/edit/pending" });
-
     const { login } = getState();
-
-    console.log(login);
     try {
       const resp = await fetch(`/agent/${login.editingAgent._id}`, {
         method: "PATCH",
@@ -219,18 +279,35 @@ export const editAgent = () => {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
-
       dispatch({ type: "agent/edit/fulfilled" });
     } catch (e) {
       dispatch({ type: "agent/edit/rejected", error: e.toString() });
     }
   };
 };
+export const editClient = () => {
+  return async (dispatch, getState) => {
+    dispatch({ type: "client/edit/pending" });
+    const { login } = getState();
+    console.log(login.editingClient);
+    try {
+      await fetch(`/client/${login.editingClient._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(login.editingClient),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      dispatch({ type: "client/edit/fulfilled" });
+    } catch (e) {
+      dispatch({ type: "client/edit/rejected", error: e.toString() });
+    }
+  };
+};
 
 export const selectEditingAgent = (state) => state.login.editingAgent;
-
+export const selectEditingClient = (state) => state.login.editingClient;
 export const selectToken = (state) => state.login.token;
-
 export const selectRole = (state) => state.login.role;
-
 export const selectCandidate = (state) => state.login.candidate;

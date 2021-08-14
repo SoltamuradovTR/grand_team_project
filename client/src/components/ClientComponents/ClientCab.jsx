@@ -15,7 +15,7 @@ import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCandidate } from "../../redux/features/login";
+import { selectCandidate, setEditingClient } from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClientAddRequest from "./ClientAddRequest";
@@ -23,6 +23,7 @@ import requests, {
   loadAllRequests,
   selectAllRequests,
 } from "../../redux/features/requests";
+import EditingClientDialog from "./EditingClientDialog";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -79,17 +80,22 @@ const StyledBadge = withStyles((theme) => ({
 
 function ClientCab() {
   const classes = useStyles();
-
   const dispatch = useDispatch();
+
+  const [spacing, setSpacing] = useState(2);
+  const [clientOpen, setClientOpen] = useState(false);
+
   useEffect(() => {
     dispatch(loadAllRequests());
   }, [dispatch]);
+
   const requests = useSelector((state) => state.requests.items);
-  const [spacing, setSpacing] = useState(2);
-
-  console.log(requests);
-
   const candidate = useSelector(selectCandidate);
+
+  const handleClickOpenClient = () => {
+    dispatch(setEditingClient());
+  };
+
   return (
     <>
       <Container>
@@ -124,7 +130,11 @@ function ClientCab() {
                     ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem
                     ipsum
                   </Typography>
-                  <Button color="primary" variant="outlined">
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    onClick={handleClickOpenClient}
+                  >
                     Изменить
                   </Button>
                 </Box>
@@ -149,7 +159,6 @@ function ClientCab() {
                         <AccordionDetails>
                           <Box>
                             {requests.map((request) => {
-                              console.log(request);
                               if (candidate._id === request.author._id) {
                                 return (
                                   <Box
@@ -198,6 +207,11 @@ function ClientCab() {
           </Grid>
         </Grid>
       </Container>
+
+      <EditingClientDialog
+        setClientOpen={setClientOpen}
+        clientOpen={clientOpen}
+      />
     </>
   );
 }

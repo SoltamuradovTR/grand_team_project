@@ -70,9 +70,8 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 function AgentCab() {
-  const dispatch = useDispatch();
-
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [agentOpen, setAgentOpen] = useState(false);
 
@@ -149,8 +148,10 @@ function AgentCab() {
                   <Typography variant="h6">Личные данные</Typography>
                   {candidate.clients.map((client) => {
                     return (
-                      <Typography>{client.firstName} {client.lastName}</Typography>
-                    )
+                      <Typography>
+                        {client.firstName} {client.lastName}
+                      </Typography>
+                    );
                   })}
                 </Paper>
               </Grid>
