@@ -45,7 +45,7 @@ function ContainerBox(props) {
     <>
       <Box data-vc-full-width="true" data-vc-full-width-init="true" data-vc-stretch-content="true"
            className="vc_row wpb_row vc_row-fluid vc_row-no-padding"
-           style={{position: 'relative', left: 15, boxSizing: 'border-box', width: 1903}}>
+           style={{position: 'relative', left: 15, boxSizing: 'border-box', width: '100%'}}>
         <Box className="wpb_column vc_column_container vc_col-sm-12">
           <Box className="vc_column-inner">
             <Box className="wpb_wrapper">
@@ -98,6 +98,17 @@ function ContainerBox(props) {
                                         title="Contemplative Reptile"
                                         className="scale"
                                       />
+                                      <div className="item-box-hover">
+                                        <div className="box-inner">
+                                          <div className="product-detail-bnt"><a
+                                            href="https://klbtheme.com/harrier/vehicle/mercedes-benz-m-class/"
+                                            className="button detail-bnt link-detail"><span></span></a>
+                                          </div>
+                                          <div className="product-detail-bnt"><a
+                                            className="button detail-bnt ajax" id="785"><span></span></a>
+                                          </div>
+                                        </div>
+                                      </div>
                                       <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
                                           <h3>{request.title}</h3>

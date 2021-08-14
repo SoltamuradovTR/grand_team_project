@@ -9,6 +9,8 @@ body {
     min-height: 100vh;
     /*background: url("https://images7.alphacoders.com/588/thumb-1920-588644.jpg");*/
     /*background: black;*/
+    box-sizing: revert;
+
 
 }
 
@@ -148,6 +150,7 @@ body {
     background-color: inherit;
     content: '';
     width: 1000px;
+    box-sizing: revert;
     height: 100%;
     transform: skew(
             -35deg
@@ -156,6 +159,7 @@ body {
     top: 0;
     right: -275px;
     height: 107px;
+    box-sizing: revert;
 }
 
 header {
@@ -171,7 +175,7 @@ header {
 }
 
 .container {
-    width: 1320px;
+    width: 69.3%;
 }
 
 .container {
@@ -212,6 +216,7 @@ img {
     content: '';
     background-color: #23292e;
     z-index: -1;
+    box-sizing: revert;
 }
 
 .header-container .fl-header-right {
@@ -266,6 +271,7 @@ img {
     text-align: center;
     background-repeat: no-repeat;
     background-image: url(//klbtheme.com/harrier/wp-content/themes/harrier/images/category-bg.jpg);
+    box-sizing: revert;
     background-position: bottom;
 }
 
@@ -366,6 +372,7 @@ img {
     padding: 60px 25px 30px;
     height: 265px;
     width: 450px;
+    box-sizing: revert;
 }
 
 .item.cons h6 {
@@ -506,8 +513,56 @@ ul.products-grid li {
     transform: scale(1.2); /* Увеличиваем масштаб */
 }
 
+::selection {
+    background: #fbe122; /* Safari */
+    color: black;
+}
 
 
+.products-grid .item .item-inner .item-img .item-box-hover {
+    z-index: 2;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    position: absolute;
+    width: 100%;
+    top: 44%;
+    opacity: 0;
+}
+
+.products-grid .item .item-inner .item-box-hover .product-detail-bnt {
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 15px;
+    vertical-align: top;
+}
+
+.item .item-inner .item-box-hover .product-detail-bnt a {
+    font-weight: normal;
+    margin: 0;
+    padding: 0px 0px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    background: #000;
+    transform: rotate(
+            40deg
+    );
+    border: 2px #fff solid;
+    color: #121212;
+}
+
+.products-grid .item .item-inner .actions {
+    display: inline-block;
+    vertical-align: top;
+}
 
 /*background:*/
 /*        url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5BdtaKbTI-eCahqBstBMKWU67MUWK2bNcgg&usqp=CAU) repeat-x 0 100% fixed,*/
