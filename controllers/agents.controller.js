@@ -35,8 +35,16 @@ module.exports.agentsController = {
   },
 
   createAgent: async (req, res) => {
-    const { firstName, lastName, login, password, phone, email, location } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      description,
+      login,
+      password,
+      phone,
+      email,
+      location,
+    } = req.body;
     const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
 
     if (!firstName) {
@@ -84,6 +92,7 @@ module.exports.agentsController = {
       const agent = await Agent.create({
         firstName,
         lastName,
+        description,
         login,
         password: hash,
         phone,
@@ -123,8 +132,16 @@ module.exports.agentsController = {
 
   editAgent: async (req, res) => {
     const { id } = req.params;
-    const { firstName, lastName, login, password, phone, email, location } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      description,
+      login,
+      password,
+      phone,
+      email,
+      location,
+    } = req.body;
 
     try {
       const edited = await Agent.findByIdAndUpdate(
@@ -132,6 +149,7 @@ module.exports.agentsController = {
         {
           firstName,
           lastName,
+          description,
           login,
           password,
           phone,
