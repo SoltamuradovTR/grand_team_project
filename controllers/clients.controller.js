@@ -118,17 +118,7 @@ module.exports.clientsController = {
     const { id } = req.params;
     const { firstName, lastName, login, password, phone, email } = req.body;
 
-    const { authorization } = req.headers;
-
-    const [type, token] = authorization.split(" ");
-
-    if (type !== "Bearer") {
-      return res.status(401).json("неверный тип токена");
-    }
-
     try {
-      const payload = jwt.verify(token, process.env.SECRET_JWT_KEY);
-
       const edited = await Client.findByIdAndUpdate(
         id,
         {
