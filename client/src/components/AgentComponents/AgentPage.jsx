@@ -108,15 +108,21 @@ function AgentPage(props) {
                       />
                     </StyledBadge>
                     <Box>
-                      <Typography variant="h6">
-                        Имя: {agent.firstName}
-                      </Typography>
-                      <Typography variant="h6">
-                        Фамилия: {agent.lastName}
-                      </Typography>
-                      <Typography variant="h6">
-                        Город: {agent.location}
-                      </Typography>
+                      {agent.map((elem)=> {
+                        return(
+                          <>
+                          <Typography variant="h6">
+                            Имя: {elem.firstName}
+                          </Typography>
+                        <Typography variant="h6">
+                          Фамилия: {elem.lastName}
+                        </Typography>
+                        <Typography variant="h6">
+                          Город: {elem.location}
+                        </Typography>
+                          </>
+                        )
+                      })}
                     </Box>
                   </div>
                 </Paper>

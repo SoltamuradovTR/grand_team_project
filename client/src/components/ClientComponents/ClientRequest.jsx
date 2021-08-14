@@ -141,8 +141,9 @@ function ClientRequest() {
                                     variant="outlined"
                                     color="primary"
                                     style={{ marginRight: 10, marginLeft: 70 }}
-                                  >
+                                  ><NavLink to={`/agent/${elem._id}`}>
                                     Об оценщике
+                                  </NavLink>
                                   </Button>
                                   <Button
                                     variant="outlined"
@@ -154,26 +155,6 @@ function ClientRequest() {
                                     Подтвердить
                                   </Button>
                                 </Box>
-                              </Box>
-                              <Box style={{ marginTop: 20 }}>
-                                <Button
-                                  variant="outlined"
-                                  color="primary"
-                                  style={{ marginRight: 10, marginLeft: 70 }}
-                                >
-                                  <NavLink to={`/agent/${elem._id}`}>
-                                    Об оценщике
-                                  </NavLink>
-                                </Button>
-                                <Button
-                                  variant="outlined"
-                                  color="primary"
-                                  onClick={() =>
-                                    handleApply(candidate._id, elem._id)
-                                  }
-                                >
-                                  Подтвердить
-                                </Button>
                               </Box>
                             </Box>
                           );
