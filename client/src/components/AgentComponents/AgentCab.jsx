@@ -198,7 +198,7 @@ function AgentCab() {
           </div>
         </AccordionDetails>
       </Accordion>
-      <EditingAgentDialog setAgentOpen={setAgentOpen} agentOpen={agentOpen} />
+      <EditingAgentDialog />
     </>
   );
 }
