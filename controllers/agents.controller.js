@@ -18,7 +18,7 @@ module.exports.agentsController = {
   getAgentById: async (req, res) => {
     const { id } = req.params;
     try {
-      const agent = await Agent.findById(id);
+      const agent = await Agent.findById(id).populate('clients');
 
       if (!agent) {
         return res.status(404).json({
