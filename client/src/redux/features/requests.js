@@ -3,6 +3,7 @@ const initialState = {
   items: [],
   editingRequest: null,
   addition: false,
+  deleting: false,
   itemsById: [],
   filterText: "",
 };
@@ -61,6 +62,25 @@ const requests = (state = initialState, action) => {
       return {
         ...state,
         addition: false,
+      };
+    case "request/delete/pending": {
+      return {
+        ...state,
+        deleting: true,
+      };
+    }
+    case "request/delete/fulfilled":
+      return {
+        ...state,
+        items: state.items.filter((request) => {
+          return request._id !== action.payload;
+        }),
+        deleting: false,
+      };
+    case "request/delete/rejected":
+      return {
+        ...state,
+        deleting: false,
       };
     default:
       return state;
@@ -140,6 +160,21 @@ export const addRequest = (data, id) => {
       dispatch({ type: "request/add/fulfilled", payload: json });
     } catch (e) {
       dispatch({ type: "request/add/rejected", error: e.toString() });
+    }
+  };
+};
+
+export const removeRequest = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: "request/delete/pending" });
+    try {
+      await fetch(`/request/${id}`, {
+        method: "DELETE",
+      });
+
+      dispatch({ type: "request/delete/fulfilled", payload: id });
+    } catch (e) {
+      dispatch({ type: "request/delete/rejected", error: e.toString() });
     }
   };
 };

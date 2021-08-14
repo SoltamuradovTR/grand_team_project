@@ -1,6 +1,6 @@
-const Client = require("../models/Client.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Client = require("../models/Client.model");
 
 module.exports.clientsController = {
   getAllClients: async (req, res) => {
@@ -162,7 +162,7 @@ module.exports.clientsController = {
       expiresIn: "24h",
     });
 
-    res.json({
+    return res.json({
       text: "Авторизация прошла успешно",
       token,
       role: "Client",
