@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -14,11 +14,15 @@ import Grid from "@material-ui/core/Grid";
 import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCandidate } from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClientAddRequest from "./ClientAddRequest";
+import requests, {
+  loadAllRequests,
+  selectAllRequests,
+} from "../../redux/features/requests";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -76,7 +80,14 @@ const StyledBadge = withStyles((theme) => ({
 function ClientCab() {
   const classes = useStyles();
 
-  const [spacing, setSpacing] = React.useState(2);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadAllRequests());
+  }, [dispatch]);
+  const requests = useSelector((state) => state.requests.items);
+  const [spacing, setSpacing] = useState(2);
+
+  console.log(requests);
 
   const candidate = useSelector(selectCandidate);
   return (
@@ -106,7 +117,7 @@ function ClientCab() {
                 </StyledBadge>
                 <Box>
                   <Typography variant="h3">
-                    ФИО: {candidate.firstName} {candidate.lastName}
+                    {candidate.firstName} {candidate.lastName}
                   </Typography>
                   <Typography variant="h6">
                     О себе: Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem
@@ -137,9 +148,45 @@ function ClientCab() {
                         </AccordionSummary>
                         <AccordionDetails>
                           <Box>
-                            <Box>Запись 1</Box>
-                            <Box>Запись 2</Box>
-                            <Box>Запись 3</Box>
+                            {requests.map((request) => {
+                              console.log(request);
+                              if (candidate._id === request.author._id) {
+                                return (
+                                  <Box
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                      width: 860,
+                                      marginBottom: 10,
+                                    }}
+                                  >
+                                    <Box>
+                                      <Typography
+                                        variant="h6"
+                                        style={{ width: 400 }}
+                                      >
+                                        {request.title}
+                                      </Typography>
+                                    </Box>
+                                    <Box>
+                                      <Typography variant="h6">
+                                        {request.active === false
+                                          ? "Завершено"
+                                          : "В работе"}
+                                      </Typography>
+                                    </Box>
+                                    <Box>
+                                      <Button
+                                        variant="contained"
+                                        color="primary"
+                                      >
+                                        Удалить
+                                      </Button>
+                                    </Box>
+                                  </Box>
+                                );
+                              }
+                            })}
                           </Box>
                         </AccordionDetails>
                       </Accordion>
