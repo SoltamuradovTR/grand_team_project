@@ -21,9 +21,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClientAddRequest from "./ClientAddRequest";
 import requests, {
   loadAllRequests,
+  removeRequest,
   selectAllRequests,
 } from "../../redux/features/requests";
 import EditingClientDialog from "./EditingClientDialog";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -94,6 +96,10 @@ function ClientCab() {
 
   const handleClickOpenClient = () => {
     dispatch(setEditingClient());
+  };
+
+  const handleClickDeleteRequest = (id) => {
+    dispatch(removeRequest(id));
   };
 
   return (
@@ -170,12 +176,14 @@ function ClientCab() {
                                     }}
                                   >
                                     <Box>
-                                      <Typography
-                                        variant="h6"
-                                        style={{ width: 400 }}
-                                      >
-                                        {request.title}
-                                      </Typography>
+                                      <NavLink to={`/request/${request._id}`}>
+                                        <Typography
+                                          variant="h6"
+                                          style={{ width: 400 }}
+                                        >
+                                          {request.title}
+                                        </Typography>
+                                      </NavLink>
                                     </Box>
                                     <Box>
                                       <Typography variant="h6">
@@ -188,6 +196,9 @@ function ClientCab() {
                                       <Button
                                         variant="contained"
                                         color="primary"
+                                        onClick={() =>
+                                          handleClickDeleteRequest(request._id)
+                                        }
                                       >
                                         Удалить
                                       </Button>

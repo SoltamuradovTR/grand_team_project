@@ -1,6 +1,6 @@
-const Request = require("../models/Request");
-const jwt = require("jsonwebtoken");
 const path = require("path");
+const jwt = require("jsonwebtoken");
+const Request = require("../models/Request");
 
 module.exports.requestsController = {
   getRequests: async (req, res) => {
@@ -78,23 +78,16 @@ module.exports.requestsController = {
 
   deleteRequest: async (req, res) => {
     const { id } = req.params;
-
-    const { authorization } = req.headers;
-
-    const [type, token] = authorization.split(" ");
-
     try {
-      const request = await Request.findById(id);
-
-      const payload = jwt.verify(token, process.env.SECRET_JWT_KEY);
-
-      if (payload.id === request.author.toString()) {
-        await request.remove();
-        return res.json("Удалено");
+      const request = await Request.findByIdAndRemove(id);
+      if (!request) {
+        return res.status(400).json({
+          error: "Не удалось удалить запись",
+        });
       }
 
-      return res.status(401).json({
-        error: "Ошибка, нет доступа",
+      return res.json({
+        message: "запись успешно удалена",
       });
     } catch (e) {
       return res.status(400).json({

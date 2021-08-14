@@ -1,6 +1,6 @@
-const Agent = require("../models/Agent.model");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const Agent = require("../models/Agent.model");
 
 module.exports.agentsController = {
   getAllAgents: async (req, res) => {
@@ -35,7 +35,8 @@ module.exports.agentsController = {
   },
 
   createAgent: async (req, res) => {
-    const { firstName, lastName, login, password, phone, email, location } = req.body;
+    const { firstName, lastName, login, password, phone, email, location } =
+      req.body;
     const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
 
     if (!firstName) {
@@ -122,7 +123,8 @@ module.exports.agentsController = {
 
   editAgent: async (req, res) => {
     const { id } = req.params;
-    const { firstName, lastName, login, password, phone, email, location } = req.body;
+    const { firstName, lastName, login, password, phone, email, location } =
+      req.body;
 
     try {
       const edited = await Agent.findByIdAndUpdate(
@@ -150,7 +152,7 @@ module.exports.agentsController = {
   loginAgent: async (req, res) => {
     const { login, password } = req.body;
 
-    const candidate = await Agent.findOne({  login }).populate('clients');
+    const candidate = await Agent.findOne({ login }).populate("clients");
 
     if (!candidate) {
       return res.status(401).json("Неверный логин");
@@ -170,12 +172,12 @@ module.exports.agentsController = {
       expiresIn: "24h",
     });
 
-    console.log(candidate)
+    console.log(candidate);
     return res.json({
       text: "Авторизация прошла успешно",
       token,
       role: "Agent",
-      candidate
+      candidate,
     });
   },
 
@@ -186,13 +188,13 @@ module.exports.agentsController = {
     try {
       const agent = await Agent.updateOne(
         { _id: id },
-        { $addToSet: { clients: data.client }}
+        { $addToSet: { clients: data.client } }
       );
       return res.json(agent);
     } catch (e) {
       return res.status(400).json({
-        error: e.toString()
-      })
+        error: e.toString(),
+      });
     }
-  }
+  },
 };
