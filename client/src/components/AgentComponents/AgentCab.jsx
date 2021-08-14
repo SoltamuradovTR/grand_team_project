@@ -147,6 +147,11 @@ function AgentCab() {
               <Grid item>
                 <Paper className={classes.paper1}>
                   <Typography variant="h6">Личные данные</Typography>
+                  {candidate.clients.map((client) => {
+                    return (
+                      <Typography>{client.firstName} {client.lastName}</Typography>
+                    )
+                  })}
                 </Paper>
               </Grid>
             </Grid>
