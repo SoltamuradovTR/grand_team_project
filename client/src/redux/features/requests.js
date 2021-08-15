@@ -179,11 +179,29 @@ export const removeRequest = (id) => {
   };
 };
 
+export const editActiveRequest = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: "requestActive/edit/pending" });
+
+    try {
+      const res = await fetch(`/request/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ active: true }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const json = res.json();
+      dispatch({ type: "requestActive/edit/fulfilled", payload: json });
+    } catch (e) {
+      dispatch({ type: "requestActive/edit/rejected", error: e.toString() });
+    }
+  };
+};
+
 export const selectAllRequests = (state) => {
   const { requests } = state;
   return requests.items.filter((item) => {
-    // if (state.requests.filterText === "") return true;
-
     return item.title.toLowerCase().indexOf(requests.filterText) > -1;
   });
 };

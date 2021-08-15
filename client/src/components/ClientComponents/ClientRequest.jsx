@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Container, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  editActiveRequest,
   loadRequestById,
   selectAllRequests,
   selectRequestById,
@@ -42,8 +43,10 @@ function ClientRequest() {
 
   useEffect(() => dispatch(loadRequestById(id)), [dispatch]);
 
-  const handleApply = (client, agent) => {
+  const handleApply = (client, agent, request) => {
     dispatch(addClientsToAgent(client, agent));
+
+    dispatch(editActiveRequest(request));
   };
 
   const classes = useStyles();
@@ -141,15 +144,20 @@ function ClientRequest() {
                                     variant="outlined"
                                     color="primary"
                                     style={{ marginRight: 10, marginLeft: 70 }}
-                                  ><NavLink to={`/agent/${elem._id}`}>
-                                    Об оценщике
-                                  </NavLink>
+                                  >
+                                    <NavLink to={`/agent/${elem._id}`}>
+                                      Об оценщике
+                                    </NavLink>
                                   </Button>
                                   <Button
                                     variant="outlined"
                                     color="primary"
                                     onClick={() =>
-                                      handleApply(candidate._id, elem._id)
+                                      handleApply(
+                                        candidate._id,
+                                        elem._id,
+                                        item._id
+                                      )
                                     }
                                   >
                                     Подтвердить
