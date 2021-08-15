@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCandidate, setEditingAgent } from "../../redux/features/login";
+import { selectCandidate, } from "../../redux/features/login";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Container,
   Paper,
   Typography,
@@ -16,7 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import EditingAgentDialog from "./EditingAgentDialog";
+import ClientAddReviewToAgent from '../ClientComponents/ClientAddReviewToAgent';
 import { useParams } from "react-router-dom";
 import { loadAgentById, selectAgentById } from "../../redux/features/agent";
 import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
@@ -162,6 +161,12 @@ function AgentPage() {
                   <Grid container justifyContent="center" spacing={2}>
                     <Grid item>
                       <Paper className={classes.paper}>
+                        {client[0] === undefined ? (
+                            <Typography variant="h6">
+                              Чтобы добавить отзыв вам нужно быть клиентом
+                            </Typography>
+                          ) :
+                        <ClientAddReviewToAgent agentId={id}/> }
                         <Accordion style={{ width: 600 }}>
                           <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
