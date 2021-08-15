@@ -10,6 +10,6 @@ router.post("/login/agent", agentsController.loginAgent);
 router.delete("/agent/:id", agentsController.removeAgent);
 router.patch("/agent/:id", agentsController.editAgent);
 router.post("/add/client/to/:id", agentsController.addClientToAgent);
-router.post("/avatar", authMiddleware, agentsController.addAvatar);
+router.post("/avatar/agent", authMiddleware, agentsController.addAvatar);
 
 module.exports = router;

@@ -6,8 +6,6 @@ import {
   Button,
   Container,
   Paper,
-  TextareaAutosize,
-  TextField,
   Typography,
 } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
@@ -15,19 +13,45 @@ import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCandidate, setEditingClient } from "../../redux/features/login";
+import {
+  selectCandidate,
+  setEditingClient,
+  uploadAvatarClient,
+} from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClientAddRequest from "./ClientAddRequest";
-import requests, {
-  loadAllRequests,
-  removeRequest,
-  selectAllRequests,
-} from "../../redux/features/requests";
+import { loadAllRequests, removeRequest } from "../../redux/features/requests";
 import EditingClientDialog from "./EditingClientDialog";
 import { NavLink } from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton";
+import { PhotoCamera } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
+  avatarButton: {
+    opacity: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "150px",
+    height: "150px",
+    position: "absolute",
+    transition: "300ms",
+    borderRadius: "50%",
+    backgroundColor: "rgba(0,0,0,0.45)",
+    "&:hover": {
+      opacity: 1,
+    },
+  },
+  button: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+    width: "120px",
+    height: "120px",
+    color: "whitesmoke",
+  },
   paper: {
     height: 342,
     width: 900,
@@ -37,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
   paper1: {
     height: 700,
     width: 500,
+  },
+  input: {
+    display: "none",
   },
   root: {
     flexGrow: 1,
@@ -101,6 +128,11 @@ function ClientCab() {
     dispatch(removeRequest(id));
   };
 
+  function handleChangeAvatar(e) {
+    const file = e.target.files[0];
+    dispatch(uploadAvatarClient(file));
+  }
+
   return (
     <>
       <Container>
@@ -108,6 +140,13 @@ function ClientCab() {
           <Grid container justifyContent="center" spacing={2}>
             <Paper className={classes.paper}>
               <div className={classes.root}>
+                <input
+                  accept="image/*"
+                  className={classes.input}
+                  id="icon-button-file"
+                  type="file"
+                  onChange={handleChangeAvatar}
+                />
                 <StyledBadge
                   overlap="circular"
                   anchorOrigin={{
@@ -118,22 +157,25 @@ function ClientCab() {
                 >
                   <Avatar
                     alt="Remy Sharp"
-                    src="https://www.pngkey.com/png/full/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
-                    style={{
-                      width: 200,
-                      height: 200,
-                      backgroundColor: "white",
-                    }}
+                    src={candidate.avatar}
+                    style={{ width: 150, height: 150 }}
                   />
+                  <Box className={classes.avatarButton}>
+                    <label htmlFor="icon-button-file">
+                      <IconButton
+                        color="default"
+                        aria-label="upload picture"
+                        component="span"
+                        className={classes.button}
+                      >
+                        <PhotoCamera />
+                      </IconButton>
+                    </label>
+                  </Box>
                 </StyledBadge>
                 <Box>
                   <Typography variant="h3">
                     {candidate.firstName} {candidate.lastName}
-                  </Typography>
-                  <Typography variant="h6">
-                    О себе: Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem
-                    ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem
-                    ipsum
                   </Typography>
                   <Button
                     color="primary"
