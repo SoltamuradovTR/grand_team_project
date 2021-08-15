@@ -34,10 +34,9 @@ export const loadAllReviews = () => {
     dispatch({ type: "reviews/fetch/pending" });
 
     try {
-      const res = await fetch(`/reviews/agent/${}`);
-      const json = await res.json();
-
-      dispatch({ type: "reviews/fetch/fulfilled", payload: json });
+      // const res = await fetch(`/reviews/agent/${}`);
+      // const json = await res.json();
+      // dispatch({ type: "reviews/fetch/fulfilled", payload: json });
     } catch (e) {
       dispatch({ type: "reviews/fetch/rejected", error: e.toString() });
     }

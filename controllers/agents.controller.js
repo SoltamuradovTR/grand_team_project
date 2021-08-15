@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Agent = require("../models/Agent.model");
+const path = require("path");
 
 module.exports.agentsController = {
   getAllAgents: async (req, res) => {
@@ -18,7 +19,7 @@ module.exports.agentsController = {
   getAgentById: async (req, res) => {
     const { id } = req.params;
     try {
-      const agent = await Agent.findById(id).populate('clients');
+      const agent = await Agent.findById(id).populate("clients");
 
       if (!agent) {
         return res.status(404).json({
@@ -36,6 +37,7 @@ module.exports.agentsController = {
 
   createAgent: async (req, res) => {
     const {
+      avatar,
       firstName,
       lastName,
       description,
@@ -90,6 +92,7 @@ module.exports.agentsController = {
 
     try {
       const agent = await Agent.create({
+        avatar,
         firstName,
         lastName,
         description,
@@ -105,6 +108,33 @@ module.exports.agentsController = {
       return res.status(400).json({
         error: e.toString(),
       });
+    }
+  },
+
+  addAvatar: async (req, res) => {
+    const file = req.files.image;
+    const fileName = file.name;
+    const url = path.resolve(__dirname, "../public/uploads/img/" + fileName);
+    const urlForDB = "/uploads/img/" + fileName;
+
+    try {
+      file.mv(url, async (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const agent = await Agent.findById(req.user.id);
+
+          agent.avatar = urlForDB;
+          await agent.save();
+
+          res.json({
+            success: "Картинка загружена",
+            avatar: urlForDB,
+          });
+        }
+      });
+    } catch (e) {
+      console.log(e.message);
     }
   },
 

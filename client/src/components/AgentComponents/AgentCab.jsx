@@ -100,7 +100,7 @@ function AgentCab() {
                   >
                     <Avatar
                       alt="Remy Sharp"
-                      src="https://www.pngkey.com/png/full/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
+                      src={candidate.avatar}
                       style={{ width: 150, height: 150 }}
                     />
                   </StyledBadge>
