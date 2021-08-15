@@ -166,6 +166,26 @@ const login = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case "avatar/add/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "avatar/add/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        candidate: {
+          ...state.candidate,
+          avatar: action.payload,
+        },
+      };
+    case "avatar/add/rejected":
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     default:
       return state;
   }
@@ -302,6 +322,28 @@ export const editClient = () => {
       dispatch({ type: "client/edit/fulfilled" });
     } catch (e) {
       dispatch({ type: "client/edit/rejected", error: e.toString() });
+    }
+  };
+};
+
+export const uploadAvatar = (file) => {
+  return async (dispatch, getState) => {
+    const { login } = getState();
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/avatar", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${login.token}`,
+        },
+        body: formData,
+      });
+      const json = await res.json();
+      dispatch({ type: "avatar/add/fulfilled", payload: json.avatar });
+    } catch (e) {
+      console.log(e.message);
     }
   };
 };

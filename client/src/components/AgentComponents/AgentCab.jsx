@@ -18,7 +18,7 @@ import Box from "@material-ui/core/Box";
 import EditingAgentDialog from "./EditingAgentDialog";
 import IconButton from "@material-ui/core/IconButton";
 import { PhotoCamera } from "@material-ui/icons";
-import { uploadAvatar } from "../../redux/features/agent";
+import { uploadAvatar } from "../../redux/features/login";
 
 const useStyles = makeStyles((theme) => ({
   avatarButton: {
