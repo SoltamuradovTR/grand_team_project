@@ -1,6 +1,6 @@
 const path = require("path");
 const jwt = require("jsonwebtoken");
-const Request = require("../models/Request");
+const Request = require("../models/Request.model");
 
 module.exports.requestsController = {
   getRequests: async (req, res) => {
