@@ -84,26 +84,4 @@ export const loadAgentById = (agentId) => {
 
 export default agent;
 
-export const uploadAvatar = (file) => {
-  return async (dispatch, getState) => {
-    const state = getState();
-
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/avatar", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${state.login.token}`,
-        },
-        body: formData,
-      });
-      const json = await res.json();
-      dispatch({ type: "avatar/add/fulfilled", payload: json.avatar });
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-};
-
 export const selectAgentById = (state) => state.agent.itemsById;
