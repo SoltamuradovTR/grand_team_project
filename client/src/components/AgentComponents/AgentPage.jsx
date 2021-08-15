@@ -78,14 +78,17 @@ function AgentPage() {
   const { id } = useParams();
 
   const classes = useStyles();
-  const [spacing, setSpacing] = React.useState(2);
 
   const candidate = useSelector(selectCandidate);
 
   const agent = useSelector(selectAgentById);
-  useEffect(() => dispatch(loadAgentById(id)), [dispatch]);
-  useEffect(() => {
-    dispatch(loadAllReviews(agent[0]._id));
+
+  useEffect(async () => {
+    await dispatch(loadAgentById(id));
+  }, [dispatch]);
+
+  useEffect(async () => {
+    await dispatch(loadAllReviews(id));
   }, [dispatch]);
 
   const reviews = useSelector(selectAllReviews);
@@ -95,14 +98,13 @@ function AgentPage() {
       return candidate._id === elem._id;
     });
   });
-  console.log(client);
 
   return (
     <>
       <Container style={{ display: "flex" }}>
         <Grid container className={classes.root} spacing={2}>
           <Grid item xs={12}>
-            <Grid container justifyContent="center" spacing={spacing}>
+            <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Paper className={classes.paper}>
                   <div className={classes.root}>
@@ -157,7 +159,7 @@ function AgentPage() {
               </Grid>
               <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
-                  <Grid container justifyContent="center" spacing={spacing}>
+                  <Grid container justifyContent="center" spacing={2}>
                     <Grid item>
                       <Paper className={classes.paper}>
                         <Accordion style={{ width: 600 }}>
@@ -209,7 +211,7 @@ function AgentPage() {
         </Grid>
         <Grid container className={classes.root} spacing={2}>
           <Grid item xs={12}>
-            <Grid container justifyContent="center" spacing={spacing}>
+            <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Paper className={classes.paper1}>
                   <Typography variant="h6">Клиенты</Typography>
