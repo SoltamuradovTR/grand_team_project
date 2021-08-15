@@ -6,6 +6,7 @@ import agent from "./features/agent";
 import login from "./features/login";
 import { composeWithDevTools } from "redux-devtools-extension";
 import registration from "./features/registration";
+import review from './features/review';
 
 const logger = createLogger({
   diff: true,
@@ -15,7 +16,7 @@ const logger = createLogger({
 export const lsLogin = localStorage.getItem("login-reducer");
 
 export const store = createStore(
-  combineReducers({ requests, agent, login, registration }),
+  combineReducers({ requests, agent, login, registration, review }),
   {
     login: lsLogin ? JSON.parse(lsLogin) : undefined,
   },

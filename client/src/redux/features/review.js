@@ -29,18 +29,18 @@ const review = (state = initialState, action) => {
 
 export default review;
 
-export const loadAllReviews = () => {
+export const loadAllReviews = (id) => {
   return async (dispatch) => {
     dispatch({ type: "reviews/fetch/pending" });
 
     try {
-      // const res = await fetch(`/reviews/agent/${}`);
-      // const json = await res.json();
-      // dispatch({ type: "reviews/fetch/fulfilled", payload: json });
+      const res = await fetch(`/reviews/agent/${id}`);
+      const json = await res.json();
+      dispatch({ type: "reviews/fetch/fulfilled", payload: json });
     } catch (e) {
       dispatch({ type: "reviews/fetch/rejected", error: e.toString() });
     }
   };
 };
 
-export const selectAllReviews = (state) => state.review.items;
+export const selectAllReviews = (state) => state.review.items

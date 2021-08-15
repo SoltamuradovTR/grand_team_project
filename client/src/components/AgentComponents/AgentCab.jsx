@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionDetails,
@@ -19,6 +19,7 @@ import EditingAgentDialog from "./EditingAgentDialog";
 import IconButton from "@material-ui/core/IconButton";
 import { PhotoCamera } from "@material-ui/icons";
 import { uploadAvatar } from "../../redux/features/login";
+import { loadAllReviews, selectAllReviews } from '../../redux/features/review';
 
 const useStyles = makeStyles((theme) => ({
   avatarButton: {
@@ -115,6 +116,13 @@ function AgentCab() {
     dispatch(setEditingAgent());
   };
 
+  const reviews = useSelector(selectAllReviews)
+
+  useEffect(() => {
+    dispatch(loadAllReviews(candidate._id))
+  }, [dispatch])
+
+  console.log(reviews)
   return (
     <>
       <Container style={{ display: "flex" }}>
@@ -186,7 +194,7 @@ function AgentCab() {
                     </AccordionSummary>
                     <AccordionDetails>
                       <Box>
-                        {candidate.clients.map((client) => {
+                        {reviews.map((review) => {
                           return (
                             <Box
                               style={{
@@ -197,7 +205,10 @@ function AgentCab() {
                               }}
                             >
                               <Box>
-                                {client.firstName} {client.lastName}
+                                {review.author.firstName}
+                              </Box>
+                              <Box>
+                                {review.text}
                               </Box>
                             </Box>
                           );
