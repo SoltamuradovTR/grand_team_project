@@ -166,12 +166,12 @@ const login = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
-    case "avatar/add/pending":
+    case "avatarAgent/add/pending":
       return {
         ...state,
         loading: true,
       };
-    case "avatar/add/fulfilled":
+    case "avatarAgent/add/fulfilled":
       return {
         ...state,
         loading: false,
@@ -180,7 +180,16 @@ const login = (state = initialState, action) => {
           avatar: action.payload,
         },
       };
-    case "avatar/add/rejected":
+    case "avatarClient/add/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        candidate: {
+          ...state.candidate,
+          avatar: action.payload,
+        },
+      };
+    case "avatarAgent/add/rejected":
       return {
         ...state,
         loading: false,
@@ -326,14 +335,14 @@ export const editClient = () => {
   };
 };
 
-export const uploadAvatar = (file) => {
+export const uploadAvatarAgent = (file) => {
   return async (dispatch, getState) => {
     const { login } = getState();
 
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("/avatar", {
+      const res = await fetch("/avatar/agent", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${login.token}`,
@@ -341,13 +350,34 @@ export const uploadAvatar = (file) => {
         body: formData,
       });
       const json = await res.json();
-      dispatch({ type: "avatar/add/fulfilled", payload: json.avatar });
+      dispatch({ type: "avatarAgent/add/fulfilled", payload: json.avatar });
     } catch (e) {
       console.log(e.message);
     }
   };
 };
 
+export const uploadAvatarClient = (file) => {
+  return async (dispatch, getState) => {
+    const { login } = getState();
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/avatar/client", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${login.token}`,
+        },
+        body: formData,
+      });
+      const json = await res.json();
+      dispatch({ type: "avatarClient/add/fulfilled", payload: json.avatar });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
 export const selectEditingAgent = (state) => state.login.editingAgent;
 export const selectEditingClient = (state) => state.login.editingClient;
 export const selectToken = (state) => state.login.token;

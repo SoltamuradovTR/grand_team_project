@@ -59,37 +59,31 @@ module.exports.agentsController = {
         error: "Необходимо указать имя агента!",
       });
     }
-
     if (!login) {
       return res.status(400).json({
         error: "Необходимо указать логин агента!",
       });
     }
-
     if (!password) {
       return res.status(400).json({
         error: "Необходимо указать пароль агента!",
       });
     }
-
     if (!phone) {
       return res.status(400).json({
         error: "Необходимо указать номер телефона агента!",
       });
     }
-
     if (!email) {
       return res.status(400).json({
         error: "Необходимо указать электронную почту агента!",
       });
     }
-
     if (!location) {
       return res.status(400).json({
         error: "Необходимо указать город агента!",
       });
     }
-
     try {
       const agent = await Agent.create({
         avatar,

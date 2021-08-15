@@ -19,6 +19,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import EditingAgentDialog from "./EditingAgentDialog";
 import { useParams } from "react-router-dom";
 import { loadAgentById, selectAgentById } from "../../redux/features/agent";
+import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,7 +72,7 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-function AgentPage(props) {
+function AgentPage() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
@@ -82,15 +83,19 @@ function AgentPage(props) {
   const candidate = useSelector(selectCandidate);
 
   const agent = useSelector(selectAgentById);
-
   useEffect(() => dispatch(loadAgentById(id)), [dispatch]);
+  useEffect(() => {
+    dispatch(loadAllReviews(agent[0]._id));
+  }, [dispatch]);
+
+  const reviews = useSelector(selectAllReviews);
 
   const client = agent.map((item) => {
     return item.clients.find((elem) => {
-      return candidate._id === elem._id
-    })
-  })
-  console.log(client)
+      return candidate._id === elem._id;
+    });
+  });
+  console.log(client);
 
   return (
     <>
@@ -128,22 +133,21 @@ function AgentPage(props) {
                             <Typography variant="h6">
                               Город: {elem.location}
                             </Typography>
-                            {client[0] === undefined? (
+                            {client[0] === undefined ? (
+                              <Typography variant="h6">
+                                Чтобы увидеть контактную информацию, вам нужно
+                                быть киентом
+                              </Typography>
+                            ) : (
+                              <>
                                 <Typography variant="h6">
-                                  Чтобы увидеть контактную информацию, вам нужно быть киентом
+                                  Телефон: {elem.phone}
                                 </Typography>
-                              ) :
-                              (
-                                <>
-                                  <Typography variant="h6">
-                                    Телефон: {elem.phone}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    Почта: {elem.email}
-                                  </Typography>
-                                </>
-                              )
-                             }
+                                <Typography variant="h6">
+                                  Почта: {elem.email}
+                                </Typography>
+                              </>
+                            )}
                           </>
                         );
                       })}
@@ -156,14 +160,45 @@ function AgentPage(props) {
                   <Grid container justifyContent="center" spacing={spacing}>
                     <Grid item>
                       <Paper className={classes.paper}>
-                        <Typography variant="h6">Отзывы</Typography>
-                        <Box>
-                          <Typography variant="h6">Name</Typography>
-                          <Typography>
-                            description.description.description.description
-                          </Typography>
-                          <Typography>12.07.2021 10:10</Typography>
-                        </Box>
+                        <Accordion style={{ width: 600 }}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                          >
+                            <Typography className={classes.heading}>
+                              Отзывы
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            {reviews.map((review) => {
+                              return (
+                                <div
+                                  className="container"
+                                  style={{
+                                    width: "100%",
+                                    border: "2px solid #ccc",
+                                    backgroundColor: "#eee",
+                                    borderRadius: 5,
+                                    padding: 16,
+                                    margin: "16px auto",
+                                  }}
+                                >
+                                  <p>
+                                    <span
+                                      style={{ fontSize: 18, marginRight: 15 }}
+                                    >
+                                      {review.author.firstName}{" "}
+                                      {review.author.lastName}
+                                    </span>{" "}
+                                    {review.author.location}
+                                  </p>
+                                  <p>{review.text}</p>
+                                </div>
+                              );
+                            })}
+                          </AccordionDetails>
+                        </Accordion>
                       </Paper>
                     </Grid>
                   </Grid>
@@ -197,46 +232,6 @@ function AgentPage(props) {
           </Grid>
         </Grid>
       </Container>
-      <Accordion style={{ marginLeft: 32, width: 1143 }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <div
-            className="container"
-            style={{
-              width: "100%",
-              border: "2px solid #ccc",
-              backgroundColor: "#eee",
-              borderRadius: 5,
-              padding: 16,
-              margin: "16px auto",
-            }}
-          >
-            <img
-              src="https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg"
-              alt="avatar"
-              style={{
-                float: "left",
-                marginRight: 20,
-                borderRadius: "50%",
-                width: 90,
-              }}
-            />
-            <p>
-              <span style={{ fontSize: 18, marginRight: 15 }}>
-                Марина Белова
-              </span>{" "}
-              г. Москва
-            </p>
-            <p>Качество товара отличное, доставка быстрая.</p>
-          </div>
-        </AccordionDetails>
-      </Accordion>
     </>
   );
 }

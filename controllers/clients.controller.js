@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Client = require("../models/Client.model");
+const path = require("path");
+const Agent = require("../models/Agent.model");
 
 module.exports.clientsController = {
   getAllClients: async (req, res) => {
@@ -168,5 +170,32 @@ module.exports.clientsController = {
       role: "Client",
       candidate,
     });
+  },
+
+  addAvatar: async (req, res) => {
+    const file = req.files.file;
+    const fileName = file.name;
+    const url = path.resolve(__dirname, "../public/uploads/img/" + fileName);
+    const urlForDB = "/uploads/img/" + fileName;
+
+    try {
+      file.mv(url, async (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const client = await Client.findById(req.user.id);
+
+          client.avatar = urlForDB;
+          await client.save();
+
+          res.json({
+            success: "Картинка загружена",
+            avatar: urlForDB,
+          });
+        }
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
   },
 };

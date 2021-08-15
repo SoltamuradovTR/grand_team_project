@@ -13,13 +13,16 @@ import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCandidate, setEditingAgent } from "../../redux/features/login";
+import {
+  selectCandidate,
+  setEditingAgent,
+  uploadAvatarAgent,
+} from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
 import EditingAgentDialog from "./EditingAgentDialog";
 import IconButton from "@material-ui/core/IconButton";
 import { PhotoCamera } from "@material-ui/icons";
-import { uploadAvatar } from "../../redux/features/login";
-import { loadAllReviews, selectAllReviews } from '../../redux/features/review';
+import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
 
 const useStyles = makeStyles((theme) => ({
   avatarButton: {
@@ -109,20 +112,20 @@ function AgentCab() {
 
   function handleChangeAvatar(e) {
     const file = e.target.files[0];
-    dispatch(uploadAvatar(file));
+    dispatch(uploadAvatarAgent(file));
   }
 
   const handleClickOpenAgent = () => {
     dispatch(setEditingAgent());
   };
 
-  const reviews = useSelector(selectAllReviews)
+  const reviews = useSelector(selectAllReviews);
 
   useEffect(() => {
-    dispatch(loadAllReviews(candidate._id))
-  }, [dispatch])
+    dispatch(loadAllReviews(candidate._id));
+  }, [dispatch]);
 
-  console.log(reviews)
+  console.log(reviews);
   return (
     <>
       <Container style={{ display: "flex" }}>
@@ -204,12 +207,8 @@ function AgentCab() {
                                 marginBottom: 10,
                               }}
                             >
-                              <Box>
-                                {review.author.firstName}
-                              </Box>
-                              <Box>
-                                {review.text}
-                              </Box>
+                              <Box>{review.author.firstName}</Box>
+                              <Box>{review.text}</Box>
                             </Box>
                           );
                         })}
