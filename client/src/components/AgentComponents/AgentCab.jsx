@@ -15,14 +15,42 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCandidate, setEditingAgent } from "../../redux/features/login";
 import Box from "@material-ui/core/Box";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import EditingAgentDialog from "./EditingAgentDialog";
-import { NavLink } from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton";
+import { PhotoCamera } from "@material-ui/icons";
+import { uploadAvatar } from "../../redux/features/agent";
 
 const useStyles = makeStyles((theme) => ({
+  avatarButton: {
+    opacity: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "150px",
+    height: "150px",
+    position: "absolute",
+    transition: "300ms",
+    borderRadius: "50%",
+    backgroundColor: "rgba(0,0,0,0.45)",
+    "&:hover": {
+      opacity: 1,
+    },
+  },
+  button: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+    width: "120px",
+    height: "120px",
+    color: "whitesmoke",
+  },
   paper: {
     height: 342,
     width: 600,
+  },
+  input: {
+    display: "none",
   },
   paper1: {
     height: 700,
@@ -78,6 +106,11 @@ function AgentCab() {
 
   const candidate = useSelector(selectCandidate);
 
+  function handleChangeAvatar(e) {
+    const file = e.target.files[0];
+    dispatch(uploadAvatar(file));
+  }
+
   const handleClickOpenAgent = () => {
     dispatch(setEditingAgent());
   };
@@ -90,6 +123,13 @@ function AgentCab() {
             <Grid item>
               <Paper className={classes.paper}>
                 <div className={classes.root}>
+                  <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="icon-button-file"
+                    type="file"
+                    onChange={handleChangeAvatar}
+                  />
                   <StyledBadge
                     overlap="circular"
                     anchorOrigin={{
@@ -103,6 +143,18 @@ function AgentCab() {
                       src={candidate.avatar}
                       style={{ width: 150, height: 150 }}
                     />
+                    <Box className={classes.avatarButton}>
+                      <label htmlFor="icon-button-file">
+                        <IconButton
+                          color="default"
+                          aria-label="upload picture"
+                          component="span"
+                          className={classes.button}
+                        >
+                          <PhotoCamera />
+                        </IconButton>
+                      </label>
+                    </Box>
                   </StyledBadge>
                   <Box>
                     <Typography variant="h6">

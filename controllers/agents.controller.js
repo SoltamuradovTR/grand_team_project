@@ -112,7 +112,7 @@ module.exports.agentsController = {
   },
 
   addAvatar: async (req, res) => {
-    const file = req.files.image;
+    const file = req.files.file;
     const fileName = file.name;
     const url = path.resolve(__dirname, "../public/uploads/img/" + fileName);
     const urlForDB = "/uploads/img/" + fileName;
