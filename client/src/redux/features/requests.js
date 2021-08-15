@@ -82,6 +82,21 @@ const requests = (state = initialState, action) => {
         ...state,
         deleting: false,
       };
+    case "requestActive/edit/pending":
+      return {
+        ...state,
+        loading: true
+      };
+    case "requestActive/edit/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        // items: state.items.map((item)=> {
+        //   if (item._id === action.payload) {
+        //     return item.active = false
+        //   }
+        // })
+      }
     default:
       return state;
   }
@@ -186,13 +201,13 @@ export const editActiveRequest = (id) => {
     try {
       const res = await fetch(`/request/${id}`, {
         method: "PATCH",
-        body: JSON.stringify({ active: true }),
+        body: JSON.stringify({ active: false }),
         headers: {
           "Content-type": "application/json",
         },
       });
       const json = res.json();
-      dispatch({ type: "requestActive/edit/fulfilled", payload: json });
+      dispatch({ type: "requestActive/edit/fulfilled", payload: id });
     } catch (e) {
       dispatch({ type: "requestActive/edit/rejected", error: e.toString() });
     }
