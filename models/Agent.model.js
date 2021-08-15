@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const agentSchema = new mongoose.Schema({
+  avatar: {
+    type: String,
+    default: "",
+  },
+
   firstName: {
     type: String,
     required: true,
