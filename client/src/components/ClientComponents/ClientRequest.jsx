@@ -43,8 +43,8 @@ function ClientRequest() {
 
   useEffect(() => dispatch(loadRequestById(id)), [dispatch]);
 
-  const handleApply = (client, agent, request) => {
-    dispatch(addClientsToAgent(client, agent));
+  const handleApply = async (client, agent, request) => {
+    await dispatch(addClientsToAgent(client, agent));
 
     dispatch(editActiveRequest(request));
   };
