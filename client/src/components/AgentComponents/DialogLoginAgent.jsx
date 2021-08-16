@@ -79,7 +79,7 @@ function DialogLoginAgent({open, setOpen}) {
   const [password, setPassword] = useState("");
 
 
-  const handleClose = (e) => {
+  const handleClose = () => {
     setOpen(false);
   };
 

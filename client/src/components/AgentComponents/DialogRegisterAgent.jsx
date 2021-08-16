@@ -21,14 +21,14 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: 'auto',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: 'black',
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -36,20 +36,34 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: "black",
+    color: "white",
+    transform: "skewX(-20deg)",
   },
   typography: {
     padding: theme.spacing(2),
     display: "flex",
     margin: "auto",
   },
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
-  },
   buttonClose: {
     marginLeft: 300,
     marginTop: -50,
   },
+  dialog: {
+    background: "rgba(250,205,0,.9)",
+    clipPath: "polygon(0 35px, 100% 0, 100% 810px, 0 100%)",
+    /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
+    padding: "60px 25px 30px",
+    height: 'auto',
+    width: 'auto',
+    boxSizing: "revert",
+  },
+  button: {
+    background: 'rgba(255,255,255,0.91)'
+  },
+  text: {
+    color: 'rgb(0 0 0)'
+  }
 }));
 
 export default function DialogRegisterAgent({ open, setOpen }) {
@@ -112,7 +126,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
 
   function Copyright() {
     return (
-      <Typography variant="body2" color="textSecondary" align="center">
+      <Typography variant="body2" className={classes.text} color="textSecondary" align="center">
         {"Copyright © "}
         <Link color="inherit" href="https://material-ui.com/">
           Your Website
@@ -124,13 +138,10 @@ export default function DialogRegisterAgent({ open, setOpen }) {
   }
 
   return (
-    <Dialog open={open}>
-      <Container component="main" maxWidth="xs">
+    <Dialog open={open} onClose={handleClose}>
+      <Container className={classes.dialog} component="main" maxWidth="xs">
         <CssBaseline />
         <Box className={classes.paper}>
-          <Button className={classes.buttonClose} onClick={handleClose}>
-            Закрыть
-          </Button>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -141,6 +152,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  className={classes.button}
                   autoComplete="fname"
                   name="имя"
                   variant="outlined"
@@ -155,6 +167,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  className={classes.button}
                   variant="outlined"
                   required
                   fullWidth
@@ -168,6 +181,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.button}
                   variant="outlined"
                   required
                   fullWidth
@@ -181,6 +195,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.button}
                   variant="outlined"
                   required
                   fullWidth
@@ -194,6 +209,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.button}
                   variant="outlined"
                   required
                   fullWidth
@@ -207,6 +223,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.button}
                   variant="outlined"
                   required
                   fullWidth
@@ -220,6 +237,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.button}
                   variant="outlined"
                   required
                   fullWidth
@@ -234,6 +252,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  className={classes.button}
                   variant="outlined"
                   required
                   fullWidth
@@ -258,7 +277,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <Link style={{color: 'black'}} href="/" variant="body2">
                   У вас уже есть аккаунт? Войти
                 </Link>
               </Grid>
