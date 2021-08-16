@@ -151,7 +151,7 @@ function DialogLoginAgent({open, setOpen}) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link style={{color: 'black'}} href="#" variant="body2">
+                <Link  style={{color: 'black'}} href="https://cs12.pikabu.ru/post_img/big/2020/05/27/4/1590555860163316761.jpg" variant="body2">
                   Забыли пароль?
                 </Link>
               </Grid>
