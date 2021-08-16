@@ -5,15 +5,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Container } from "@material-ui/core";
+import { CardActionArea, CardMedia, Container } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadAllRequests,
-  loadRequestById,
   selectAllRequests,
 } from "../../redux/features/requests";
 import { NavLink } from "react-router-dom";
-import Box from '@material-ui/core/Box';
+import Box from "@material-ui/core/Box";
+import TimeToLeaveIcon from "@material-ui/icons/TimeToLeave";
 
 const useStyles = makeStyles({
   root: {
@@ -28,12 +28,22 @@ const useStyles = makeStyles({
     fontSize: 14,
   },
   pos: {
-    marginBottom: -10,
-    marginLeft: 40
+    marginBottom: 12,
+  },
+  imageCar: {
+    padding: "168px 0 70px 0",
+    backgroundSize: "cover",
+    borderBottom: "none",
+    textAlign: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundImage:
+      "url(//klbtheme.com/harrier/wp-content/themes/harrier/images/category-bg.jpg)",
+    boxSizing: "revert",
+    backgroundPosition: "bottom",
   },
 });
 
-function ContainerBox(props) {
+function ContainerBoxClient() {
   const dispatch = useDispatch();
 
   const requests = useSelector(selectAllRequests);
@@ -42,75 +52,98 @@ function ContainerBox(props) {
     dispatch(loadAllRequests());
   }, [dispatch]);
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
-
-  const handleFetchRequest = (id) => {
-    dispatch(loadRequestById(id));
-  };
 
   return (
     <>
-      <Container
+      <Box
         style={{
-          justifyContent: "space-around",
-          display: "flex",
-          flexWrap: "wrap",
-          backgroundColor: "rgba(0, 0, 0, .6)",
-          backdropFilter: "blur(10px)",
-          height: 800,
-          marginTop: 60
+          left: 15,
+          boxSizing: "border-box",
+          width: "100%",
+          overflow: "hidden",
         }}
       >
-        {requests.map((request) => {
-          return (
-            <Box className="container" style={{minWidth: 275, width: 600, borderRadius: 15,  height: 415}}>
-              <Box className="card">
-                <Box className="face face1">
-                  <Box className="content">
-                    <h3>{request.title}</h3>
-                  </Box>
-                </Box>
-                <Box className="face face2">
-                  <Box className="content">
-                    <CardContent>
+        <Box className={classes.imageCar}>
+          <Box style={{ marginTop: -90 }}>
+            <NavLink
+              to="/"
+              style={{ color: "#fff", fontSize: 12, textDecoration: "none" }}
+            >
+              Home › Vehicle Grid
+            </NavLink>
+          </Box>
+          <Box>
+            <h2
+              style={{
+                fontFamily: "Saira Condensed', sans-serif",
+                fontSize: 46,
+                textTransform: "uppercase",
+                margin: 5,
+                color: "#fff",
+              }}
+            >
+              Vehicle Grid
+            </h2>
+          </Box>
+        </Box>
+      </Box>
+
+      <Container>
+        <Box
+          className="item-inner"
+          style={{
+            justifyContent: "space-around",
+            display: "flex",
+            marginTop: 40,
+          }}
+        >
+          {requests.map((request) => {
+            return (
+              <Card className="box-1" style={{ width: "33%" }}>
+                <CardActionArea>
+                  <NavLink
+                    style={{ textDecoration: "none" }}
+                    to={`request/${request._id}`}
+                  >
+                    <CardMedia className="scale">
                       <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                        style={{marginTop: 25, display: 'flex'}}
+                        style={{
+                          textAlign: "center",
+                          width: 250,
+                          margin: "auto",
+                          paddingTop: 40,
+                          color: "white",
+                          fontSize: 21,
+                        }}
                       >
-                        Город: {request.location}
+                        {request.title}
                       </Typography>
-                      <Typography color="textSecondary">
-                        {request.author.firstName} {request.author.lastName}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {request.description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        onClick={() => handleFetchRequest(request._id)}
-                        size="small"
-                        className={classes.pos}
-                      >
-                        <NavLink to={`request/${request._id}`}>Подробнее</NavLink>
-                      </Button>
-                    </CardActions>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          );
-        })}
+                    </CardMedia>
+                  </NavLink>
+                  <CardContent>
+                    <Typography gutterBottom component="h2">
+                      <h3 style={{ textAlign: "center" }}>
+                        Автор: {request.author.firstName}{" "}
+                        {request.author.lastName}
+                      </h3>
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Typography style={{ margin: "auto" }}>
+                    {request.location}
+                  </Typography>
+                </CardActions>
+              </Card>
+            );
+          })}
+        </Box>
       </Container>
     </>
   );
 }
 
-export default ContainerBox;
-
-
+export default ContainerBoxClient;
 
 // <Card
 //   id="card"
@@ -145,6 +178,5 @@ export default ContainerBox;
 //     </Button>
 //   </CardActions>
 // </Card>
-
 
 //  border: '2px solid black',

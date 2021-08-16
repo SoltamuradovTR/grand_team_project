@@ -92,7 +92,7 @@ function HeaderUserClient(props) {
           </Button>
         </Popover>
       </div>
-      <FormControlLabel control={toggleTheme} />
+      {/*<FormControlLabel control={toggleTheme} />*/}
     </>
   );
 }
