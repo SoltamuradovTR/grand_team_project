@@ -222,3 +222,5 @@ export const selectAllRequests = (state) => {
 };
 
 export const selectRequestById = (state) => state.requests.itemsById;
+
+export const selectLoadingRequests = (state) => state.requests.loading
