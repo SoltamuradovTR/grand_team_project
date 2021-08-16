@@ -119,12 +119,12 @@ function HeaderBox(props) {
         <NavLink to="/">
           <Box className={classes.logo}>
             <img
-              src="https://klbtheme.com/harrier/wp-content/uploads/2019/05/logo.png"
+              src="https://i.imgur.com/Wri1MIh.png"
               style={{
                 position: "absolute",
                 transform: "skew(35deg)",
-                margin: "6% 0% 0% 50%",
-                width: "30%",
+                margin: "0% 0% 0% 50%",
+                width: "50%",
               }}
             />
           </Box>

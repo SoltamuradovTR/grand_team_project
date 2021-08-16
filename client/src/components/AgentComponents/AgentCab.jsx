@@ -3,7 +3,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
+  Button, CircularProgress,
   Container,
   Paper,
   Typography,
@@ -22,7 +22,12 @@ import Box from "@material-ui/core/Box";
 import EditingAgentDialog from "./EditingAgentDialog";
 import IconButton from "@material-ui/core/IconButton";
 import { PhotoCamera } from "@material-ui/icons";
-import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
+import {
+  loadAllReviews,
+  selectAllReviews,
+  selectLoadingReviews
+} from "../../redux/features/review";
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   avatarButton: {
@@ -120,12 +125,54 @@ function AgentCab() {
   };
 
   const reviews = useSelector(selectAllReviews);
+  const loading = useSelector(selectLoadingReviews)
 
   useEffect(() => {
     dispatch(loadAllReviews(candidate._id));
   }, [dispatch]);
 
-  console.log(reviews);
+  if (loading) {
+    return (
+      <>
+        <Box
+          style={{
+            left: 15,
+            boxSizing: "border-box",
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
+          <Box className={classes.imageCar}>
+            <Box style={{ marginTop: -90 }}>
+              <NavLink
+                to="/"
+                style={{ color: "#fff", fontSize: 12, textDecoration: "none" }}
+              >
+                Home › Vehicle Grid
+              </NavLink>
+            </Box>
+            <Box>
+              <h2
+                style={{
+                  fontFamily: "Saira Condensed', sans-serif",
+                  fontSize: 46,
+                  textTransform: "uppercase",
+                  margin: 5,
+                  color: "#fff",
+                }}
+              >
+                Vehicle Grid
+              </h2>
+            </Box>
+          </Box>
+        </Box>
+        <Box style={{ textAlign: "center", marginTop: "10%" }}>
+          <CircularProgress />
+        </Box>
+      </>
+    );
+  }
+
   return (
     <>
       <Container style={{ display: "flex" }}>

@@ -14,7 +14,7 @@ const review = (state = initialState, action) => {
     case "reviews/fetch/fulfilled":
       return {
         ...state,
-        loading: true,
+        loading: false,
         items: action.payload,
       };
     case "reviews/fetch/rejected":
@@ -32,6 +32,11 @@ const review = (state = initialState, action) => {
         ...state,
         loading: false,
         items: [action.payload, ...state.items]
+      }
+    case 'review/add/rejected':
+      return {
+        ...state,
+        loading: false
       }
     default:
       return state;
@@ -75,3 +80,4 @@ return async (dispatch, getState) => {
 }
 
 export const selectAllReviews = (state) => state.review.items
+export const selectLoadingReviews = (state) => state.review.loading
