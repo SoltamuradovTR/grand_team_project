@@ -5,11 +5,11 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Box, CardActionArea, CardMedia, Container } from "@material-ui/core";
+import { Box, CardActionArea, CardMedia, CircularProgress, Container } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadAllRequests,
-  selectAllRequests,
+  selectAllRequests, selectLoadingRequests,
 } from "../../../redux/features/requests";
 import { NavLink } from "react-router-dom";
 import TimeToLeaveIcon from "@material-ui/icons/TimeToLeave";
@@ -47,10 +47,55 @@ function ContainerBox() {
 
   const requests = useSelector(selectAllRequests);
 
-  useEffect(() => {
-    dispatch(loadAllRequests());
-  }, [dispatch]);
+  const loading = useSelector(selectLoadingRequests)
+
   const classes = useStyles();
+
+  useEffect(async () => {
+    await dispatch(loadAllRequests());
+  }, [dispatch]);
+
+  if (loading) {
+    return (
+      <>
+        <Box
+          style={{
+            left: 15,
+            boxSizing: "border-box",
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
+          <Box className={classes.imageCar}>
+            <Box style={{ marginTop: -90 }}>
+              <NavLink
+                to="/"
+                style={{ color: "#fff", fontSize: 12, textDecoration: "none" }}
+              >
+                Home › Vehicle Grid
+              </NavLink>
+            </Box>
+            <Box>
+              <h2
+                style={{
+                  fontFamily: "Saira Condensed', sans-serif",
+                  fontSize: 46,
+                  textTransform: "uppercase",
+                  margin: 5,
+                  color: "#fff",
+                }}
+              >
+                Vehicle Grid
+              </h2>
+            </Box>
+          </Box>
+        </Box>
+      <Box style={{textAlign: 'center', marginTop: '10%'}}>
+        <CircularProgress/>
+      </Box>
+      </>
+    )
+  }
 
   return (
     <>
@@ -86,7 +131,6 @@ function ContainerBox() {
           </Box>
         </Box>
       </Box>
-
       <Container>
         <Box
           className="item-inner"
