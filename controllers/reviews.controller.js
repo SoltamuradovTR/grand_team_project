@@ -34,7 +34,9 @@ module.exports.reviewsController = {
         author,
         agent: id
       });
-      return res.json(review);
+
+      const result = await Review.findById(review._id).populate('author')
+      return res.json(result);
     } catch (e) {
       return res.status(400).json({
         error: e.toString(),
