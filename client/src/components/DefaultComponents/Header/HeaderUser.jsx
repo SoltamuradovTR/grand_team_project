@@ -1,34 +1,27 @@
-import React, { useState } from 'react';
-import CardMedia from '@material-ui/core/CardMedia';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Button, FormControlLabel,
-  Popover
-} from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
+import React, { useState } from "react";
+import CardMedia from "@material-ui/core/CardMedia";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, FormControlLabel, Popover } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
 import Switch from "@material-ui/core/Switch";
-import HeaderUserSignIn from './HeaderUserSignIn';
-import HeaderUserRegister from './HeaderUserSignUp';
-import HeaderUserSignUp from './HeaderUserSignUp';
-
-
-
+import HeaderUserSignIn from "./HeaderUserSignIn";
+import HeaderUserRegister from "./HeaderUserSignUp";
+import HeaderUserSignUp from "./HeaderUserSignUp";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
-    display: 'flex',
-    margin: 'auto'
+    display: "flex",
+    margin: "auto",
   },
-}))
-
+}));
 
 function HeaderUser(props) {
   const [theme, setTheme] = useState({
-    light: true
+    light: true,
   });
 
-  const handleChangeTheme = event => {
+  const handleChangeTheme = (event) => {
     setTheme({ ...theme, [event.target.name]: event.target.checked });
   };
 
@@ -56,14 +49,19 @@ function HeaderUser(props) {
   };
 
   const opens = Boolean(anchorEl);
-  const id = opens ? 'simple-popover' : undefined;
+  const id = opens ? "simple-popover" : undefined;
 
   return (
     <>
       <div>
-        <CardMedia style={{marginRight: 200}}>
-          <a  aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-              <PersonIcon style={{fontSize: 40, cursor: 'pointer'}} />
+        <CardMedia style={{ marginRight: 200 }}>
+          <a
+            aria-describedby={id}
+            variant="contained"
+            color="primary"
+            onClick={handleClick}
+          >
+            <PersonIcon style={{ fontSize: 40, cursor: "pointer" }} />
           </a>
         </CardMedia>
         <Popover
@@ -72,17 +70,17 @@ function HeaderUser(props) {
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
+            vertical: "bottom",
+            horizontal: "center",
           }}
           transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
+            vertical: "top",
+            horizontal: "center",
           }}
         >
-            <Button className={classes.typography}>Админ</Button>
-              <HeaderUserSignIn />
-              <HeaderUserSignUp />
+          <Button className={classes.typography}>Админ</Button>
+          <HeaderUserSignIn />
+          <HeaderUserSignUp />
         </Popover>
       </div>
       {/*<FormControlLabel*/}

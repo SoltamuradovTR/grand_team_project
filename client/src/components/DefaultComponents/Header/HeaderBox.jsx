@@ -1,10 +1,7 @@
 import React from "react";
-import { Box, Toolbar, Typography } from "@material-ui/core";
+import { Box, Container, Checkbox, InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import { alpha, makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import HeaderUser from "./HeaderUser";
 import { NavLink } from "react-router-dom";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -12,11 +9,40 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { searchRequest } from "../../../redux/features/requests";
 import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
+  logo: {
+    top: -8,
+    marginBottom: -8,
+    right: 45,
+    height: "107px",
+    width: "33%",
+    background: "#fbe122",
+    verticalAlign: "middle",
+    cursor: "pointer",
+    textAlign: "left",
+    display: "block",
+    float: "left",
+    lineHeight: 100,
+    position: "relative",
+    transform: "skew(-35deg)",
+  },
+  topBlock: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    height: 40,
+    width: "100%",
+    backgroundColor: "#23292e",
+    zIndex: -1,
+    boxSizing: "revert",
+  },
+  threeIcons: {
+    padding: "0px 0px 0px 28px",
+    marginTop: 51,
+  },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -88,79 +114,68 @@ function HeaderBox(props) {
   };
   return (
     <>
-      <Box component="header" style={{ background: "white", height: 107 }}>
-        <Box className="container">
-          <Box className="row">
-            <Box id="header">
-              <Box className="header-container">
-                {/*Логотип*/}
-                <Box className="header-logo">
-                  <NavLink
-                    to="/"
-                    className="logo"
-                    title="Harrier – Car Dealer WordPress Theme"
-                  >
-                    <Box>
-                      <img src="https://klbtheme.com/harrier/wp-content/uploads/2019/05/logo.png" />
-                    </Box>
-                  </NavLink>
-                </Box>
+      <Box component="header">
+        {/*Жёлтый блок*/}
+        <NavLink to="/">
+          <Box className={classes.logo}>
+            <img
+              src="https://klbtheme.com/harrier/wp-content/uploads/2019/05/logo.png"
+              style={{
+                position: "absolute",
+                transform: "skew(35deg)",
+                margin: "6% 0% 0% 50%",
+                width: "30%",
+              }}
+            />
+          </Box>
+        </NavLink>
 
-                <Box className="header__nav">
-                  <Box className="header-banner"></Box>
+        {/*Серая полоска*/}
+        <Box className={classes.topBlock}></Box>
 
-                  {/*User*/}
-                  <Box className="fl-header-right">
-                    <Box className="fl-links">
-                      <Box className="no-js">
-                        <Box className="clicker">
-                          <HeaderUser />
-                        </Box>
-                      </Box>
-                    </Box>
-                  </Box>
-
-                  {/*Переключатель*/}
-                  <Box className="fl-switch-contain">
-                    <Box className="mini-switch">
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={state.checkedB}
-                            onChange={handleChange}
-                            name="checkedB"
-                            color="primary"
-                            icon={
-                              <Brightness4Icon style={{ color: "#000000" }} />
-                            }
-                            checkedIcon={
-                              <Brightness7Icon style={{ color: "#000000" }} />
-                            }
-                          />
-                        }
-                      />
-                    </Box>
-                  </Box>
-
-                  {/*Поиск*/}
-                  <Box className="collapse navbar-collapse">
-                    <Box className={classes.search}>
-                      <Box className={classes.searchIcon}>
-                        <SearchIcon />
-                      </Box>
-                      <InputBase
-                        placeholder="Search…"
-                        onChange={handleSearch}
-                        classes={{
-                          root: classes.inputRoot,
-                          input: classes.inputInput,
-                        }}
-                        inputProps={{ "aria-label": "search" }}
-                      />
-                    </Box>
-                  </Box>
-                </Box>
+        <Box>
+          {/*Иконки*/}
+          <Box
+            className={classes.threeIcons}
+            style={{ float: "right", display: "flex" }}
+          >
+            {/*Поиск*/}
+            <Box className={classes.search}>
+              <Box className={classes.searchIcon}>
+                <SearchIcon />
               </Box>
+              <InputBase
+                placeholder="Search…"
+                onChange={handleSearch}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Box>
+
+            {/*Переключатель*/}
+            <Box>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedB}
+                    onChange={handleChange}
+                    name="checkedB"
+                    color="primary"
+                    icon={<Brightness4Icon style={{ color: "#000000" }} />}
+                    checkedIcon={
+                      <Brightness7Icon style={{ color: "#000000" }} />
+                    }
+                  />
+                }
+              />
+            </Box>
+
+            {/*User*/}
+            <Box>
+              <HeaderUser />
             </Box>
           </Box>
         </Box>
@@ -192,3 +207,30 @@ export default HeaderBox;
 //           </Toolbar>
 //         </Box>
 //       </Box>
+
+// <>
+//   <Box component='header'>
+//
+//     {/*Жёлтый блок*/}
+//     <Link href="/">
+//       <Box className={classes.logo}>
+//         <img src="https://klbtheme.com/harrier/wp-content/uploads/2019/05/logo.png" style={{position: 'absolute', transform: 'skew(35deg)', margin: '6% 0 0 50%'}} />
+//       </Box>
+//     </Link>
+//
+//     {/*Серая полоска*/}
+//     <Box className={classes.topBlock}></Box>
+//
+//     <Container>
+//
+//       {/*Иконки*/}
+//       <Box>
+//         <Box className={classes.threeIcons} style={{float: 'right'}}>
+//           <TimeToLeaveIcon />
+//         </Box>
+//       </Box>
+//
+//
+//     </Container>
+//   </Box>
+// </>
