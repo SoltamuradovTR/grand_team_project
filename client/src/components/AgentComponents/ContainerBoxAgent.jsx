@@ -10,7 +10,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Container } from "@material-ui/core";
+import { CardActionArea, CardMedia, Container } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import {
@@ -37,6 +37,17 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  imageCar: {
+    padding: "168px 0 70px 0",
+    backgroundSize: "cover",
+    borderBottom: "none",
+    textAlign: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundImage:
+      "url(//klbtheme.com/harrier/wp-content/themes/harrier/images/category-bg.jpg)",
+    boxSizing: "revert",
+    backgroundPosition: "bottom",
+  },
   respond: {
     backgroundColor: "white",
     color: "black",
@@ -46,7 +57,6 @@ const useStyles = makeStyles({
 
 function ContainerBox() {
   const dispatch = useDispatch();
-
   const requests = useSelector(selectAllRequests);
   const candidate = useSelector(selectCandidate);
 
@@ -54,7 +64,6 @@ function ContainerBox() {
     dispatch(loadAllRequests());
   }, [dispatch]);
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   const handleAddAppraiser = (request, agent) => {
     dispatch(addAppraiser(request, agent));
@@ -62,74 +71,149 @@ function ContainerBox() {
 
   return (
     <>
+      <Box
+        style={{
+          left: 15,
+          boxSizing: "border-box",
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
+        <Box className={classes.imageCar}>
+          <Box style={{ marginTop: -150 }}>
+            <h2
+              style={{
+                fontFamily: "Saira Condensed', sans-serif",
+                fontSize: 46,
+                textTransform: "uppercase",
+                color: "#fff",
+              }}
+            >
+              ВАША УВЕРЕННОСТЬ В НАШИХ РУКАХ
+            </h2>
+          </Box>
+        </Box>
+      </Box>
+
       <Container
+        className="item-inner"
         style={{
           justifyContent: "space-around",
-          display: "flex",
           flexWrap: "wrap",
-          backgroundColor: "rgba(0, 0, 0, .6)",
-          backdropFilter: "blur(10px)",
-          height: 800,
-          marginTop: 60,
+          display: "flex",
+          marginTop: 40,
+          marginBottom: 40,
         }}
       >
         {requests.map((request) => {
           return (
-            <Box
-              className="container"
-              style={{
-                minWidth: 275,
-                width: 600,
-                borderRadius: 15,
-                height: 415,
-              }}
-            >
-              <Box className="card">
-                <Box className="face face1">
-                  <Box className="content">
-                    <h3>{request.title}</h3>
-                  </Box>
-                </Box>
-                <Box className="face face2">
-                  <Box className="content">
-                    <CardContent>
-                      <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                        style={{ marginTop: 25, display: "flex" }}
-                      >
-                        Город: {request.location}
-                      </Typography>
-                      <Typography color="textSecondary">
-                        {request.author.firstName} {request.author.lastName}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        {request.description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button>
-                        <NavLink to={`request/${request._id}`}>
-                          Подробнее
-                        </NavLink>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() =>
-                          handleAddAppraiser(request._id, candidate._id)
-                        }
-                        size="small"
-                      >
-                        Откликнуться
-                        <PersonAddIcon fontSize="small" />
-                      </Button>
-                    </CardActions>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
+            <Card className="box-1" style={{ width: "33%", marginBottom: 40 }}>
+              <CardActionArea>
+                <NavLink
+                  style={{ textDecoration: "none" }}
+                  to={`request/${request._id}`}
+                >
+                  <CardMedia className="scale">
+                    <Typography
+                      style={{
+                        textAlign: "center",
+                        width: 250,
+                        margin: "auto",
+                        paddingTop: 40,
+                        color: "white",
+                        fontSize: 21,
+                      }}
+                    >
+                      {request.title}
+                    </Typography>
+                  </CardMedia>
+                </NavLink>
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    component="h2"
+                    style={{ height: 30 }}
+                  >
+                    <h3 style={{ textAlign: "center" }}>
+                      Автор: {request.author.firstName}{" "}
+                      {request.author.lastName}
+                    </h3>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Typography style={{ margin: "auto" }}>
+                  {request.location}
+                </Typography>
+              </CardActions>
+              <CardActions>
+                <Button
+                  variant="contained"
+                  style={{ background: "#fbe122", width: "100%" }}
+                  onClick={() => handleAddAppraiser(request._id, candidate._id)}
+                  size="small"
+                >
+                  Откликнуться
+                  <PersonAddIcon fontSize="small" />
+                </Button>
+              </CardActions>
+            </Card>
+
+            // <Box
+            //   className="container"
+            //   style={{
+            //     minWidth: 275,
+            //     width: 600,
+            //     borderRadius: 15,
+            //     height: 415,
+            //   }}
+            // >
+            //   <Box className="card">
+            //     <Box className="face face1">
+            //       <Box className="content">
+            //         <h3>{request.title}</h3>
+            //       </Box>
+            //     </Box>
+            //     <Box className="face face2">
+            //       <Box className="content">
+            //         <CardContent>
+            //           <Typography
+            //             className={classes.title}
+            //             color="textSecondary"
+            //             gutterBottom
+            //             style={{ marginTop: 25, display: "flex" }}
+            //           >
+            //             Город: {request.location}
+            //           </Typography>
+            //           <Typography color="textSecondary">
+            //             {request.author.firstName} {request.author.lastName}
+            //           </Typography>
+            //           <Typography variant="body2" component="p">
+            //             {request.description}
+            //           </Typography>
+            //         </CardContent>
+            //         <CardActions>
+            //           <Button>
+            //             <NavLink to={`request/${request._id}`}>
+            //               Подробнее
+            //             </NavLink>
+            //           </Button>
+            //           <Button
+            //             variant="contained"
+            //             color="primary"
+            //             onClick={() =>
+            //               handleAddAppraiser(request._id, candidate._id)
+            //             }
+            //             size="small"
+            //           >
+            //             Откликнуться
+            //             <PersonAddIcon fontSize="small" />
+            //           </Button>
+            //         </CardActions>
+            //       </Box>
+            //     </Box>
+            //   </Box>
+            // </Box>
           );
         })}
       </Container>

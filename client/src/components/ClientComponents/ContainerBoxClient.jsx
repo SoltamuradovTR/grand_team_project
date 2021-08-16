@@ -45,13 +45,12 @@ const useStyles = makeStyles({
 
 function ContainerBoxClient() {
   const dispatch = useDispatch();
-
   const requests = useSelector(selectAllRequests);
+  const classes = useStyles();
 
   useEffect(() => {
     dispatch(loadAllRequests());
   }, [dispatch]);
-  const classes = useStyles();
 
   return (
     <>
@@ -64,25 +63,16 @@ function ContainerBoxClient() {
         }}
       >
         <Box className={classes.imageCar}>
-          <Box style={{ marginTop: -90 }}>
-            <NavLink
-              to="/"
-              style={{ color: "#fff", fontSize: 12, textDecoration: "none" }}
-            >
-              Home › Vehicle Grid
-            </NavLink>
-          </Box>
-          <Box>
+          <Box style={{ marginTop: -150 }}>
             <h2
               style={{
                 fontFamily: "Saira Condensed', sans-serif",
                 fontSize: 46,
                 textTransform: "uppercase",
-                margin: 5,
                 color: "#fff",
               }}
             >
-              Vehicle Grid
+              ВАША УВЕРЕННОСТЬ В НАШИХ РУКАХ
             </h2>
           </Box>
         </Box>
@@ -93,13 +83,18 @@ function ContainerBoxClient() {
           className="item-inner"
           style={{
             justifyContent: "space-around",
+            flexWrap: "wrap",
             display: "flex",
             marginTop: 40,
+            marginBottom: 40,
           }}
         >
           {requests.map((request) => {
             return (
-              <Card className="box-1" style={{ width: "33%" }}>
+              <Card
+                className="box-1"
+                style={{ width: "33%", marginBottom: 40 }}
+              >
                 <CardActionArea>
                   <NavLink
                     style={{ textDecoration: "none" }}
@@ -121,7 +116,11 @@ function ContainerBoxClient() {
                     </CardMedia>
                   </NavLink>
                   <CardContent>
-                    <Typography gutterBottom component="h2">
+                    <Typography
+                      gutterBottom
+                      component="h2"
+                      style={{ height: 30 }}
+                    >
                       <h3 style={{ textAlign: "center" }}>
                         Автор: {request.author.firstName}{" "}
                         {request.author.lastName}
@@ -144,39 +143,3 @@ function ContainerBoxClient() {
 }
 
 export default ContainerBoxClient;
-
-// <Card
-//   id="card"
-//   className={classes.root}
-//   style={{ marginBottom: 25, width: 600, border: '2px solid red', borderRadius: 10 }}
-// >
-//   <CardContent>
-//     <Typography
-//       className={classes.title}
-//       color="textSecondary"
-//       gutterBottom
-//     >
-//       {request.location}
-//     </Typography>
-//     <Typography variant="h5" component="h2" className={classes.pos}>
-//       {request.title}
-//     </Typography>
-//     <Typography className={classes.pos} color="textSecondary">
-//       {request.author.firstName} {request.author.lastName}
-//     </Typography>
-//     <Typography variant="body2" component="p">
-//       {request.description}
-//     </Typography>
-//   </CardContent>
-//   <CardActions>
-//     <Button
-//       onClick={() => handleFetchRequest(request._id)}
-//       size="small"
-//       className={classes.pos}
-//     >
-//       <NavLink to={`request/${request._id}`}>Подробнее</NavLink>
-//     </Button>
-//   </CardActions>
-// </Card>
-
-//  border: '2px solid black',
