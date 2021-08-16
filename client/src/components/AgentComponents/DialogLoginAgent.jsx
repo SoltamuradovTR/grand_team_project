@@ -80,7 +80,7 @@ function DialogLoginAgent({open, setOpen}) {
 
 
   const handleClose = (e) => {
-    setOpen(e.target.value);
+    setOpen(false);
   };
 
   const handleAddLogin = (e) => {
@@ -97,7 +97,7 @@ function DialogLoginAgent({open, setOpen}) {
 
   return (
     <>
-    <Dialog open={open} onClick={handleClose} aria-labelledby="form-dialog-title">
+    <Dialog open={open} onClose={handleClose}  aria-labelledby="form-dialog-title">
       <Container className={classes.dialog} component="main" maxWidth="xs">
         <CssBaseline />
         <Box className={classes.paper}>
