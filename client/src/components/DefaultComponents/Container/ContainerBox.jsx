@@ -12,7 +12,6 @@ import {
   selectAllRequests,
 } from "../../../redux/features/requests";
 import { NavLink } from "react-router-dom";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
 import TimeToLeaveIcon from "@material-ui/icons/TimeToLeave";
 
 const useStyles = makeStyles({
@@ -43,7 +42,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ContainerBox(props) {
+function ContainerBox() {
   const dispatch = useDispatch();
 
   const requests = useSelector(selectAllRequests);
@@ -52,7 +51,7 @@ function ContainerBox(props) {
     dispatch(loadAllRequests());
   }, [dispatch]);
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+
   return (
     <>
       <Box
