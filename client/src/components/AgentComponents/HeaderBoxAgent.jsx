@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Toolbar, Typography } from "@material-ui/core";
+import { Box, Checkbox, Toolbar, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import { alpha, makeStyles } from "@material-ui/core/styles";
@@ -9,20 +9,41 @@ import HeaderUserAgent from "./HeaderUserAgent";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchRequest } from "../../redux/features/requests";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import HeaderUser from '../DefaultComponents/Header/HeaderUser';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
+  logo: {
+    top: -8,
+    marginBottom: -8,
+    right: 45,
+    height: "107px",
+    width: "33%",
+    background: "#fbe122",
+    verticalAlign: "middle",
+    cursor: "pointer",
+    textAlign: "left",
+    display: "block",
+    float: "left",
+    lineHeight: 100,
+    position: "relative",
+    transform: "skew(-35deg)",
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
+  topBlock: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    height: 40,
+    width: "100%",
+    backgroundColor: "#23292e",
+    zIndex: -1,
+    boxSizing: "revert",
   },
-  title: {
-    flexGrow: 1,
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
+  threeIcons: {
+    padding: "0px 0px 0px 28px",
+    marginTop: 51,
   },
   search: {
     position: "relative",
@@ -73,30 +94,45 @@ function HeaderBoxAgent() {
     dispatch(searchRequest(e.target.value));
   };
 
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+    checkedF: true,
+    checkedG: true,
+  });
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
   return (
     <>
-      <Box
-        component="header"
-        style={{
-          backgroundColor: "rgba(0, 0, 0, .7)",
-          backdropFilter: "blur(15px)",
-          marginBottom: 20,
-          color: "white",
-        }}
-      >
-        <Box className={classes.root}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap>
-              <NavLink to="/">LOGO</NavLink>
-            </Typography>
+      <Box component="header">
+        {/*Жёлтый блок*/}
+        <NavLink to="/">
+          <Box className={classes.logo}>
+            <img
+              src="https://klbtheme.com/harrier/wp-content/uploads/2019/05/logo.png"
+              style={{
+                position: "absolute",
+                transform: "skew(35deg)",
+                margin: "6% 0% 0% 50%",
+                width: "30%",
+              }}
+            />
+          </Box>
+        </NavLink>
+
+        {/*Серая полоска*/}
+        <Box className={classes.topBlock}></Box>
+
+        <Box>
+          {/*Иконки*/}
+          <Box
+            className={classes.threeIcons}
+            style={{ float: "right", display: "flex" }}
+          >
+            {/*Поиск*/}
             <Box className={classes.search}>
               <Box className={classes.searchIcon}>
                 <SearchIcon />
@@ -111,8 +147,30 @@ function HeaderBoxAgent() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Box>
-            <HeaderUserAgent />
-          </Toolbar>
+
+            {/*Переключатель*/}
+            <Box>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedB}
+                    onChange={handleChange}
+                    name="checkedB"
+                    color="primary"
+                    icon={<Brightness4Icon style={{ color: "#000000" }} />}
+                    checkedIcon={
+                      <Brightness7Icon style={{ color: "#000000" }} />
+                    }
+                  />
+                }
+              />
+            </Box>
+
+            {/*User*/}
+            <Box>
+              <HeaderUserAgent />
+            </Box>
+          </Box>
         </Box>
       </Box>
     </>
@@ -120,3 +178,44 @@ function HeaderBoxAgent() {
 }
 
 export default HeaderBoxAgent;
+
+// <Box
+//   component="header"
+//   style={{
+//     backgroundColor: "rgba(0, 0, 0, .7)",
+//     backdropFilter: "blur(15px)",
+//     marginBottom: 20,
+//     color: "white",
+//   }}
+// >
+//   <Box className={classes.root}>
+//     <Toolbar>
+//       <IconButton
+//         edge="start"
+//         className={classes.menuButton}
+//         color="inherit"
+//         aria-label="open drawer"
+//       >
+//         <MenuIcon />
+//       </IconButton>
+//       <Typography className={classes.title} variant="h6" noWrap>
+//         <NavLink to="/">LOGO</NavLink>
+//       </Typography>
+//       <Box className={classes.search}>
+//         <Box className={classes.searchIcon}>
+//           <SearchIcon />
+//         </Box>
+//         <InputBase
+//           placeholder="Search…"
+//           onChange={handleSearch}
+//           classes={{
+//             root: classes.inputRoot,
+//             input: classes.inputInput,
+//           }}
+//           inputProps={{ "aria-label": "search" }}
+//         />
+//       </Box>
+//       <HeaderUserAgent />
+//     </Toolbar>
+//   </Box>
+// </Box>

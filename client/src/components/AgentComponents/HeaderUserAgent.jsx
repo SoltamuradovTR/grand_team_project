@@ -97,7 +97,7 @@ function HeaderUserAgent(props) {
             </Button>
         </Popover>
       </div>
-      <FormControlLabel control={toggleTheme} />
+      {/*<FormControlLabel control={toggleTheme} />*/}
     </>
   );
 }
