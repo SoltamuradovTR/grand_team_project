@@ -277,7 +277,7 @@ export default function DialogRegisterAgent({ open, setOpen }) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link style={{color: 'black'}} href="/" variant="body2">
+                <Link style={{color: 'black'}} href="http://risovach.ru/upload/2014/05/mem/muzhik_51187121_big_.jpg" variant="body2">
                   У вас уже есть аккаунт? Войти
                 </Link>
               </Grid>
