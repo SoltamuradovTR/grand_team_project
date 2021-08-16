@@ -17,6 +17,8 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { loginAgent } from "../../redux/features/login";
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -29,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: 'auto',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: 'black',
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -44,22 +46,41 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: "black",
+    color: "white",
+    transform: "skewX(-20deg)",
   },
   buttonClose: {
     marginLeft: 300,
     marginTop: -50,
   },
+  dialog: {
+    background: "rgba(250,205,0,.9)",
+    clipPath: "polygon(0 35px, 100% 0, 100% 505px, 0 100%)",
+    /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
+    padding: "60px 25px 30px",
+    height: 455,
+    width: 'auto',
+    boxSizing: "revert",
+  },
+  login: {
+    background: 'rgba(255,255,255,0.91)'
+  },
+  password: {
+    background: 'rgba(255,255,255,0.91)'
+  }
 }));
 
-function DialogLoginAgent({ open, setOpen }) {
+function DialogLoginAgent({open, setOpen}) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleClose = () => {
-    setOpen(false);
+
+  const handleClose = (e) => {
+    setOpen(e.target.value);
   };
 
   const handleAddLogin = (e) => {
@@ -75,13 +96,11 @@ function DialogLoginAgent({ open, setOpen }) {
   };
 
   return (
-    <Dialog open={open}>
-      <Container component="main" maxWidth="xs">
+    <>
+    <Dialog open={open} onClick={handleClose} aria-labelledby="form-dialog-title">
+      <Container className={classes.dialog} component="main" maxWidth="xs">
         <CssBaseline />
         <Box className={classes.paper}>
-          <Button className={classes.buttonClose} onClick={handleClose}>
-            Закрыть
-          </Button>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -101,6 +120,7 @@ function DialogLoginAgent({ open, setOpen }) {
               onChange={handleAddLogin}
               autoComplete="login"
               autoFocus
+              className={classes.login}
             />
             <TextField
               variant="outlined"
@@ -114,9 +134,10 @@ function DialogLoginAgent({ open, setOpen }) {
               value={password}
               onChange={handleAddPassword}
               autoComplete="current-password"
+              className={classes.password}
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox value="remember" color="primary"  />}
               label="Запомнить меня"
             />
             <Button
@@ -130,12 +151,12 @@ function DialogLoginAgent({ open, setOpen }) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link style={{color: 'black'}} href="#" variant="body2">
                   Забыли пароль?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link style={{color: 'black'}} href="#" variant="body2">
                   {"Зарегистрироваться"}
                 </Link>
               </Grid>
@@ -145,6 +166,7 @@ function DialogLoginAgent({ open, setOpen }) {
         <Box mt={8}></Box>
       </Container>
     </Dialog>
+    </>
   );
 }
 
