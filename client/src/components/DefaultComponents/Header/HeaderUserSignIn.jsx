@@ -103,7 +103,7 @@ function HeaderUserSignIn(props) {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={handleClickOpenClient}
+              onClick={handleClickOpenAgent}
               className={classes.submit}
             >
               как Агент
@@ -114,7 +114,7 @@ function HeaderUserSignIn(props) {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={handleClickOpenAgent}
+              onClick={handleClickOpenClient}
               className={classes.submit}
             >
               как Клиент
