@@ -51,11 +51,8 @@ const useStyles = makeStyles({
 
 function ContainerBox() {
   const dispatch = useDispatch();
-
   const requests = useSelector(selectAllRequests);
-
   const loading = useSelector(selectLoadingRequests);
-
   const classes = useStyles();
 
   useEffect(async () => {
@@ -115,75 +112,75 @@ function ContainerBox() {
         }}
       >
         <Box className={classes.imageCar}>
-          <Box style={{ marginTop: -90 }}>
-            <NavLink
-              to="/"
-              style={{ color: "#fff", fontSize: 12, textDecoration: "none" }}
-            >
-              Home › Vehicle Grid
-            </NavLink>
-          </Box>
-          <Box>
+          <Box style={{ marginTop: -150 }}>
             <h2
               style={{
                 fontFamily: "Saira Condensed', sans-serif",
                 fontSize: 46,
                 textTransform: "uppercase",
-                margin: 5,
                 color: "#fff",
               }}
             >
-              Vehicle Grid
+              ВАША УВЕРЕННОСТЬ В НАШИХ РУКАХ
             </h2>
           </Box>
         </Box>
       </Box>
+
       <Container>
         <Box
           className="item-inner"
           style={{
-            display: "flex",
             justifyContent: "space-around",
+            flexWrap: "wrap",
+            display: "flex",
             marginTop: 40,
+            marginBottom: 40,
           }}
         >
           {requests.map((request) => {
             return (
-              <Card className="box-1" style={{ width: "33%" }}>
+              <Card
+                className="box-1"
+                style={{ width: "33%", marginBottom: 40 }}
+              >
                 <CardActionArea>
-                  <CardMedia
-                    image="https://klbtheme.com/harrier/wp-content/uploads/2018/09/p1.jpg"
-                    title="Contemplative Reptile"
-                    className="scale"
+                  <NavLink
+                    style={{ textDecoration: "none" }}
+                    to={`request/${request._id}`}
                   >
-                    <div id="diamond">
-                      <a href={request.source}>
-                        <TimeToLeaveIcon
-                          style={{
-                            transform: "rotate(46deg)",
-                            marginLeft: 3,
-                            marginTop: 3,
-                            color: "black",
-                          }}
-                        />
-                      </a>
-                    </div>
-                  </CardMedia>
+                    <CardMedia className="scale">
+                      <Typography
+                        style={{
+                          textAlign: "center",
+                          width: 250,
+                          margin: "auto",
+                          paddingTop: 40,
+                          color: "white",
+                          fontSize: 21,
+                        }}
+                      >
+                        {request.title}
+                      </Typography>
+                    </CardMedia>
+                  </NavLink>
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      <h3 style={{ textAlign: "center" }}>{request.title}</h3>
+                    <Typography
+                      gutterBottom
+                      component="h2"
+                      style={{ height: 30 }}
+                    >
+                      <h3 style={{ textAlign: "center" }}>
+                        Автор: {request.author.firstName}{" "}
+                        {request.author.lastName}
+                      </h3>
                     </Typography>
-                    <div className="klb-seperator"></div>
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button
-                    onClick={() => request._id}
-                    size="small"
-                    className={classes.pos}
-                  >
-                    <NavLink to={`request/${request._id}`}>Подробнее</NavLink>
-                  </Button>
+                  <Typography style={{ margin: "auto" }}>
+                    {request.location}
+                  </Typography>
                 </CardActions>
               </Card>
             );
@@ -195,133 +192,3 @@ function ContainerBox() {
 }
 
 export default ContainerBox;
-
-{
-  /*<Box*/
-}
-{
-  /*  data-vc-full-width="true"*/
-}
-{
-  /*  data-vc-full-width-init="true"*/
-}
-{
-  /*  data-vc-stretch-content="true"*/
-}
-{
-  /*  className="vc_row wpb_row vc_row-fluid vc_row-no-padding"*/
-}
-{
-  /*  style={{*/
-}
-{
-  /*    position: "relative",*/
-}
-{
-  /*    left: 15,*/
-}
-{
-  /*    boxSizing: "border-box",*/
-}
-{
-  /*    width: "100%",*/
-}
-{
-  /*  }}*/
-}
-{
-  /*>*/
-}
-{
-  /*  <Box className="wpb_column vc_column_container vc_col-sm-12">*/
-}
-{
-  /*    <Box className="vc_column-inner">*/
-}
-{
-  /*      <Box className="wpb_wrapper">*/
-}
-{
-  /*        <Box className="page-heading">*/
-}
-{
-  /*          <Box className="breadcrumbs">*/
-}
-{
-  /*            <Box className="container">*/
-}
-{
-  /*              <Box className="row">*/
-}
-{
-  /*                <Box className="col-xs-12">*/
-}
-{
-  /*                  <ul>*/
-}
-{
-  /*                    <li>*/
-}
-{
-  /*                      <NavLink to={"/"} title="Home" rel="bookmark">*/
-}
-{
-  /*                        Home*/
-}
-{
-  /*                      </NavLink>*/
-}
-{
-  /*                      <span> › </span>*/
-}
-{
-  /*                    </li>*/
-}
-{
-  /*                    <li>*/
-}
-{
-  /*                      <a className="text-white">Vehicle Grid</a>*/
-}
-{
-  /*                    </li>*/
-}
-{
-  /*                  </ul>*/
-}
-{
-  /*                </Box>*/
-}
-{
-  /*              </Box>*/
-}
-{
-  /*            </Box>*/
-}
-{
-  /*          </Box>*/
-}
-{
-  /*          <Box className="page-title">*/
-}
-{
-  /*            <h2>Vehicle Grid</h2>*/
-}
-{
-  /*          </Box>*/
-}
-{
-  /*        </Box>*/
-}
-{
-  /*      </Box>*/
-}
-{
-  /*    </Box>*/
-}
-{
-  /*  </Box>*/
-}
-{
-  /*</Box>*/
-}

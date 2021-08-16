@@ -59,7 +59,7 @@ function AgentRequest() {
                   Автор: {item.author.firstName} {item.author.lastName}
                 </Typography>
                 <Typography>
-                  <a href={item.source}>Местоположение</a>
+                  <a href={item.source}>Ссылка на объявление</a>
                 </Typography>
                 <Typography>{item.location}</Typography>
                 <Box

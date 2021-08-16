@@ -85,14 +85,23 @@ function HeaderUserClient(props) {
           }}
         >
           <Button className={classes.typography}>
-            <NavLink to="/cab">Личный кабинет</NavLink>
+            <NavLink
+              style={{ textDecoration: "none", color: "inherit" }}
+              to="/cab"
+            >
+              Личный кабинет
+            </NavLink>
           </Button>
           <Button className={classes.typography} onClick={handleLogout}>
-            <NavLink to="/">Выйти</NavLink>
+            <NavLink
+              style={{ textDecoration: "none", color: "inherit" }}
+              to="/"
+            >
+              Выйти
+            </NavLink>
           </Button>
         </Popover>
       </div>
-      {/*<FormControlLabel control={toggleTheme} />*/}
     </>
   );
 }

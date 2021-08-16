@@ -5,9 +5,9 @@ import { Button, Popover } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/features/login';
-import {NavLink} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/features/login";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeaderUserAgent(props) {
-
   const dispatch = useDispatch();
 
   const [theme, setTheme] = useState({
@@ -53,8 +52,8 @@ function HeaderUserAgent(props) {
   };
 
   const handleLogout = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -86,15 +85,21 @@ function HeaderUserAgent(props) {
           }}
         >
           <Button className={classes.typography}>
-            <NavLink to="/cab">
+            <NavLink
+              style={{ textDecoration: "none", color: "inherit" }}
+              to="/cab"
+            >
               Личный кабинет
             </NavLink>
-            </Button>
+          </Button>
           <Button className={classes.typography} onClick={handleLogout}>
-            <NavLink to="/">
+            <NavLink
+              style={{ textDecoration: "none", color: "inherit" }}
+              to="/"
+            >
               Выйти
             </NavLink>
-            </Button>
+          </Button>
         </Popover>
       </div>
       {/*<FormControlLabel control={toggleTheme} />*/}
