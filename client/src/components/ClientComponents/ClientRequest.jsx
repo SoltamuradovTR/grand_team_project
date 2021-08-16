@@ -149,7 +149,7 @@ function ClientRequest() {
                                       Об оценщике
                                     </NavLink>
                                   </Button>
-                                  <Button
+                                  {item.active? <Button
                                     variant="outlined"
                                     color="primary"
                                     onClick={() =>
@@ -161,7 +161,7 @@ function ClientRequest() {
                                     }
                                   >
                                     Подтвердить
-                                  </Button>
+                                  </Button> : null}
                                 </Box>
                               </Box>
                             </Box>

@@ -175,6 +175,12 @@ function AgentCab() {
                       Город: {candidate.location}
                     </Typography>
                     <Typography variant="h6">
+                      Телефон: {candidate.phone}
+                    </Typography>
+                    <Typography variant="h6">
+                      Почта: {candidate.email}
+                    </Typography>
+                    <Typography variant="h6">
                       О себе: {candidate.description}
                     </Typography>
                     <Button onClick={handleClickOpenAgent}>Изменить</Button>
