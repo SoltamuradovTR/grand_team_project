@@ -5,11 +5,18 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Box, CardActionArea, CardMedia, CircularProgress, Container } from "@material-ui/core";
+import {
+  Box,
+  CardActionArea,
+  CardMedia,
+  CircularProgress,
+  Container,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadAllRequests,
-  selectAllRequests, selectLoadingRequests,
+  selectAllRequests,
+  selectLoadingRequests,
 } from "../../../redux/features/requests";
 import { NavLink } from "react-router-dom";
 import TimeToLeaveIcon from "@material-ui/icons/TimeToLeave";
@@ -47,7 +54,7 @@ function ContainerBox() {
 
   const requests = useSelector(selectAllRequests);
 
-  const loading = useSelector(selectLoadingRequests)
+  const loading = useSelector(selectLoadingRequests);
 
   const classes = useStyles();
 
@@ -90,11 +97,11 @@ function ContainerBox() {
             </Box>
           </Box>
         </Box>
-      <Box style={{textAlign: 'center', marginTop: '10%'}}>
-        <CircularProgress/>
-      </Box>
+        <Box style={{ textAlign: "center", marginTop: "10%" }}>
+          <CircularProgress />
+        </Box>
       </>
-    )
+    );
   }
 
   return (
@@ -162,7 +169,6 @@ function ContainerBox() {
                       </a>
                     </div>
                   </CardMedia>
-
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       <h3 style={{ textAlign: "center" }}>{request.title}</h3>
