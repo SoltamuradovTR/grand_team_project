@@ -78,7 +78,6 @@ function HeaderUser(props) {
             horizontal: "center",
           }}
         >
-          <Button className={classes.typography}>Админ</Button>
           <HeaderUserSignIn />
           <HeaderUserSignUp />
         </Popover>
