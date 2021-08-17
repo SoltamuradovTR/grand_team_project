@@ -3,7 +3,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button, CircularProgress,
+  Button,
+  CircularProgress,
   Container,
   Paper,
   Typography,
@@ -25,9 +26,10 @@ import { PhotoCamera } from "@material-ui/icons";
 import {
   loadAllReviews,
   selectAllReviews,
-  selectLoadingReviews
+  selectLoadingReviews,
 } from "../../redux/features/review";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles((theme) => ({
   avatarButton: {
@@ -37,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "150px",
     height: "150px",
+    marginTop: 20,
     position: "absolute",
     transition: "300ms",
     borderRadius: "50%",
@@ -55,27 +58,47 @@ const useStyles = makeStyles((theme) => ({
     color: "whitesmoke",
   },
   paper: {
-    height: 342,
-    width: 600,
+    color: "black",
+    background: "rgb(251, 225, 34)",
+    clipPath: "polygon(0px 0px, 100% 35px, 100% 100%, 0px 100%)",
+    marginTop: -47,
+  },
+  paper1: {
+    height: 710,
+    width: 500,
+    marginLeft: 20,
   },
   input: {
     display: "none",
   },
-  paper1: {
-    height: 700,
-    width: 600,
-  },
   root: {
     flexGrow: 1,
     display: "flex",
+    marginTop: 40,
+    height: "288px",
     "& > *": {
       margin: theme.spacing(1),
     },
+  },
+  dialog: {
+    background: "rgba(250,205,0,.9)",
+    clipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+    /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
+    padding: "60px 25px 30px",
+    height: "auto",
+    width: "auto",
+    boxSizing: "revert",
+  },
+  h6: {
+    color: " #000",
+    fontSize: 22,
+    margin: "0 0 25px 120px",
   },
 }));
 const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: "#44b700",
+    marginBottom: 80,
     color: "#44b700",
     boxShadow: `0 0 0 2.5px #424242 `,
     borderRadius: 20,
@@ -125,7 +148,7 @@ function AgentCab() {
   };
 
   const reviews = useSelector(selectAllReviews);
-  const loading = useSelector(selectLoadingReviews)
+  const loading = useSelector(selectLoadingReviews);
 
   useEffect(() => {
     dispatch(loadAllReviews(candidate._id));
@@ -174,10 +197,21 @@ function AgentCab() {
   }
 
   return (
-    <>
-      <Container style={{ display: "flex" }}>
+    <Box
+      style={{
+        backgroundImage:
+          'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")',
+        height: 986,
+      }}
+    >
+      <Container>
         <Grid container className={classes.root} spacing={2}>
-          <Grid container justifyContent="center" spacing={2}>
+          <Grid
+            style={{ marginTop: 30 }}
+            container
+            justifyContent="center"
+            spacing={2}
+          >
             <Grid item>
               <Paper className={classes.paper}>
                 <div className={classes.root}>
@@ -199,7 +233,7 @@ function AgentCab() {
                     <Avatar
                       alt="Remy Sharp"
                       src={candidate.avatar}
-                      style={{ width: 150, height: 150 }}
+                      style={{ width: 150, height: 150, marginTop: 20 }}
                     />
                     <Box className={classes.avatarButton}>
                       <label htmlFor="icon-button-file">
@@ -214,110 +248,178 @@ function AgentCab() {
                       </label>
                     </Box>
                   </StyledBadge>
-                  <Box>
-                    <Typography variant="h6">
-                      {candidate.firstName} {candidate.lastName}
+
+                  <Box style={{  }}>
+                    <Typography style={{ marginTop: 45 }} variant="h3">
+                      <Box>
+                        <Typography variant="h6">
+                          {candidate.firstName} {candidate.lastName}
+                        </Typography>
+                        <Typography variant="h6">
+                          Город: {candidate.location}
+                        </Typography>
+                        <Typography variant="h6">
+                          Телефон: {candidate.phone}
+                        </Typography>
+                        <Typography variant="h6">
+                          Почта: {candidate.email}
+                        </Typography>
+                        <Typography variant="h6">
+                          О себе: {candidate.description}
+                        </Typography>
+                      </Box>
                     </Typography>
-                    <Typography variant="h6">
-                      Город: {candidate.location}
-                    </Typography>
-                    <Typography variant="h6">
-                      Телефон: {candidate.phone}
-                    </Typography>
-                    <Typography variant="h6">
-                      Почта: {candidate.email}
-                    </Typography>
-                    <Typography variant="h6">
-                      О себе: {candidate.description}
-                    </Typography>
-                    <Button onClick={handleClickOpenAgent}>Изменить</Button>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      onClick={handleClickOpenAgent}
+                      style={{
+                        textAlign: "center",
+                        marginTop: 10,
+                        backgroundColor: "white",
+                        color: "black",
+                      }}
+                    >
+                      Редактировать
+                    </Button>
                   </Box>
                 </div>
               </Paper>
-            </Grid>
-            <Grid container justifyContent="center" spacing={2}>
-              <Grid item>
-                <Paper style={{ height: 342 }} className={classes.paper1}>
-                  <Accordion style={{ width: 600 }}>
-                    <AccordionSummary
-                      //expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        Отзывы
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Box>
-                        {reviews.map((review) => {
-                          return (
-                            <Box
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                width: 500,
-                                marginBottom: 10,
-                              }}
-                            >
-                              <Box>{review.author.firstName}</Box>
-                              <Box>{review.text}</Box>
+
+              <Paper
+                style={{
+                  height: "55%",
+                  boxShadow: "none",
+                  background: "rgb(251, 225, 34)",
+                }}
+              >
+                <Grid container className={classes.root} spacing={2}>
+                  <Grid item xs={12}>
+                    <Grid container spacing={2}>
+                      <Grid item>
+                        <Accordion style={{ width: "590px", borderRadius: 10 }}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                            style={{
+                              background: "black",
+                              color: "white",
+                              borderRadius: 10,
+                            }}
+                          >
+                            <Typography className={classes.heading}>
+                              Отзывы
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <Box>
+                              {reviews.map((review) => {
+                                return (
+                                  <Box
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                      width: 500,
+                                      marginBottom: 10,
+                                    }}
+                                  >
+                                    <Box>{review.author.firstName}</Box>
+                                    <Box>{review.text}</Box>
+                                  </Box>
+                                );
+                              })}
                             </Box>
-                          );
-                        })}
-                      </Box>
-                    </AccordionDetails>
-                  </Accordion>
-                </Paper>
-              </Grid>
+                          </AccordionDetails>
+                        </Accordion>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
             </Grid>
-          </Grid>
-        </Grid>
-        <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
-            <Grid container justifyContent="center" spacing={2}>
-              <Grid item>
-                <Paper style={{ height: 342 }} className={classes.paper1}>
-                  <Accordion style={{ width: 500 }}>
-                    <AccordionSummary
-                      //expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        Клиенты
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Box>
-                        {candidate.clients.map((client) => {
-                          return (
-                            <Box
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                width: 500,
-                                marginBottom: 10,
-                              }}
-                            >
-                              <Box>
-                                {client.firstName} {client.lastName}
-                              </Box>
+
+            <Paper
+              className={classes.paper1}
+              style={{
+                webkitClipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+                background: "#fbe122",
+              }}
+            >
+              <Grid container className={classes.root} spacing={2}>
+                <Grid item xs={12}>
+                  <Grid container spacing={2}>
+                    <Grid item>
+                      <Accordion
+                        style={{
+                          width: "480px",
+                          background: "#fff",
+                          borderRadius: 10,
+                        }}
+                      >
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1a-content"
+                          id="panel1a-header"
+                          style={{
+                            background: "black",
+                            borderRadius: 10,
+                            color: "white",
+                          }}
+                        >
+                          <Typography style={{ margin: "auto", }}>
+                            Клиенты
+                          </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <AccordionDetails>
+                            <Box>
+                              {candidate.clients.map((client) => {
+                                return (
+                                  <Box
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                      width: "54%",
+                                      marginBottom: 10,
+                                    }}
+                                  >
+                                    <Box>
+                                      {client.firstName} {client.lastName}
+                                    </Box>
+                                  </Box>
+                                );
+                              })}
                             </Box>
-                          );
-                        })}
-                      </Box>
-                    </AccordionDetails>
-                  </Accordion>
-                </Paper>
+                          </AccordionDetails>
+                        </AccordionDetails>
+                      </Accordion>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
-            </Grid>
+            </Paper>
           </Grid>
         </Grid>
       </Container>
       <EditingAgentDialog />
-    </>
+    </Box>
   );
 }
 
 export default AgentCab;
+
+//                        {reviews.map((review) => {
+//                           return (
+//                             <Box
+//                               style={{
+//                                 display: "flex",
+//                                 justifyContent: "space-between",
+//                                 width: 500,
+//                                 marginBottom: 10,
+//                               }}
+//                             >
+//                               <Box>{review.author.firstName}</Box>
+//                               <Box>{review.text}</Box>
+//                             </Box>
+//                           );
