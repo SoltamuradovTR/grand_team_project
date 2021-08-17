@@ -138,7 +138,7 @@ function ClientCab() {
   const handleClickOpenClient = () => {
     dispatch(setEditingClient());
   };
-
+  //
   const handleClickDeleteRequest = (id) => {
     dispatch(removeRequest(id));
   };

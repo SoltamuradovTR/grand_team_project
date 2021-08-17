@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Box, Container, Checkbox, InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { alpha, makeStyles } from "@material-ui/core/styles";
@@ -11,6 +11,7 @@ import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { searchRequest } from "../../../redux/features/requests";
 import { useDispatch } from "react-redux";
+import SideBar from "./SideBar";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -94,7 +95,7 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-function HeaderBox(props) {
+function HeaderBox() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -102,7 +103,7 @@ function HeaderBox(props) {
     dispatch(searchRequest(e.target.value));
   };
 
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     checkedA: true,
     checkedB: true,
     checkedF: true,
@@ -115,6 +116,7 @@ function HeaderBox(props) {
   return (
     <>
       <Box component="header">
+        <SideBar />
         {/*Жёлтый блок*/}
         <NavLink to="/">
           <Box className={classes.logo}>

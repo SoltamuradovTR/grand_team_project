@@ -9,10 +9,10 @@ import HeaderUserAgent from "./HeaderUserAgent";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchRequest } from "../../redux/features/requests";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import HeaderUser from '../DefaultComponents/Header/HeaderUser';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import HeaderUser from "../DefaultComponents/Header/HeaderUser";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -116,7 +116,7 @@ function HeaderBoxAgent() {
               style={{
                 position: "absolute",
                 transform: "skew(35deg)",
-                margin: "0% 0% 0% 50%",
+                margin: "-2% 0% 0% 50%",
                 width: "50%",
               }}
             />
