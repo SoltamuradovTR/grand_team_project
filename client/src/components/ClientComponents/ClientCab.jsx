@@ -53,14 +53,14 @@ const useStyles = makeStyles((theme) => ({
     color: "whitesmoke",
   },
   paper: {
-    height: 342,
-    width: 900,
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    color: "white",
+    color: "black",
+    background: 'rgb(251, 225, 34)',
+    clipPath: 'polygon(0px 0px, 100% 35px, 100% 100%, 0px 100%)',
   },
   paper1: {
-    height: 700,
+    height: 710,
     width: 500,
+    marginLeft: 20
   },
   input: {
     display: "none",
@@ -68,9 +68,24 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     display: "flex",
+    marginTop: 40,
     "& > *": {
       margin: theme.spacing(1),
     },
+  },
+  dialog: {
+    background: "rgba(250,205,0,.9)",
+    clipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+    /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
+    padding: "60px 25px 30px",
+    height: 'auto',
+    width: 'auto',
+    boxSizing: "revert",
+  },
+  h6: {
+    color: " #000",
+    fontSize: 22,
+    margin: "0 0 25px 120px",
   },
 }));
 const StyledBadge = withStyles((theme) => ({
@@ -134,10 +149,10 @@ function ClientCab() {
   }
 
   return (
-    <>
+    <Box style={{backgroundImage: 'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")', height: 986}}>
       <Container>
-        <Grid container className={classes.root} spacing={2}>
-          <Grid container justifyContent="center" spacing={2}>
+        <Grid container className={classes.root} >
+          <Grid style={{marginTop: 30}} container  justifyContent="center" spacing={2}>
             <Paper className={classes.paper}>
               <div className={classes.root}>
                 <input
@@ -186,85 +201,99 @@ function ClientCab() {
                   </Button>
                 </Box>
               </div>
-            </Paper>
-            <Grid container className={classes.root} spacing={2}>
-              <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={2}>
-                  <Grid item>
-                    <Paper className={classes.paper}>
-                      <ClientAddRequest candidateId={candidate._id} />
-                      <Accordion style={{ width: 900 }}>
-                        <AccordionSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="panel1a-content"
-                          id="panel1a-header"
-                        >
-                          <Typography className={classes.heading}>
-                            Мои записи
-                          </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          <Box>
-                            {requests.map((request) => {
-                              if (candidate._id === request.author._id) {
-                                return (
-                                  <Box
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "space-between",
-                                      width: 860,
-                                      marginBottom: 10,
-                                    }}
-                                  >
-                                    <Box>
-                                      <NavLink to={`/request/${request._id}`}>
-                                        <Typography
-                                          variant="h6"
-                                          style={{ width: 400 }}
-                                        >
-                                          {request.title}
+              <Paper style={{height: '100%', background: 'rgb(251, 225, 34)'}}>
+                <Grid container className={classes.root} spacing={2}>
+                  <Grid item xs={12}>
+                    <Grid container  spacing={2}>
+                      <Grid item>
+
+                        <Accordion style={{ width: '100%' }}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                          >
+                            <Typography className={classes.heading}>
+                              Мои записи
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <Box>
+                              {requests.map((request) => {
+                                if (candidate._id === request.author._id) {
+                                  return (
+                                    <Box
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        width: '54%',
+                                        marginBottom: 10,
+                                      }}
+                                    >
+                                      <Box>
+                                        <NavLink to={`/request/${request._id}`}>
+                                          <Typography
+                                            variant="h6"
+                                            style={{ width: 400 }}
+                                          >
+                                            {request.title}
+                                          </Typography>
+                                        </NavLink>
+                                      </Box>
+                                      <Box>
+                                        <Typography variant="h6">
+                                          {request.active === false
+                                            ? "Завершено"
+                                            : "В работе"}
                                         </Typography>
-                                      </NavLink>
+                                      </Box>
+                                      <Box>
+                                        <Button
+                                          variant="contained"
+                                          color="primary"
+                                          onClick={() =>
+                                            handleClickDeleteRequest(request._id)
+                                          }
+                                        >
+                                          Удалить
+                                        </Button>
+                                      </Box>
                                     </Box>
-                                    <Box>
-                                      <Typography variant="h6">
-                                        {request.active === false
-                                          ? "Завершено"
-                                          : "В работе"}
-                                      </Typography>
-                                    </Box>
-                                    <Box>
-                                      <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={() =>
-                                          handleClickDeleteRequest(request._id)
-                                        }
-                                      >
-                                        Удалить
-                                      </Button>
-                                    </Box>
-                                  </Box>
-                                );
-                              }
-                            })}
-                          </Box>
-                        </AccordionDetails>
-                      </Accordion>
-                    </Paper>
+                                  );
+                                }
+                              })}
+                            </Box>
+                          </AccordionDetails>
+                        </Accordion>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Paper>
+
+            <Paper className={classes.paper1} style={{webkitClipPath: 'polygon(0 35px, 100% 0, 100% 100%, 0 100%)', background: '#fbe122' }}>
+              <Grid container className={classes.root} spacing={2}>
+                <Grid item xs={12}>
+                  <Grid container  spacing={2}>
+                    <Grid item>
+                        <ClientAddRequest candidateId={candidate._id} />
+                      {/*<img src="http://podarok.co.ua/land/048/design/megamotors/images/toyota.gif" style={{marginLeft: 40, marginTop: 140}}/>*/}
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </Paper>
           </Grid>
         </Grid>
       </Container>
+
 
       <EditingClientDialog
         setClientOpen={setClientOpen}
         clientOpen={clientOpen}
       />
-    </>
+    </Box>
   );
 }
 

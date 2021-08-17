@@ -8,11 +8,10 @@ body {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
     /*background: url("https://images7.alphacoders.com/588/thumb-1920-588644.jpg");*/
-    /*background: black;*/
+    /*background: #333;*/
     box-sizing: revert;
 
 }
-
 
 
 .scale {
