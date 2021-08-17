@@ -17,8 +17,8 @@ import HeaderUser from "../DefaultComponents/Header/HeaderUser";
 const useStyles = makeStyles((theme) => ({
   logo: {
     top: -8,
-    marginBottom: -8,
     right: 45,
+    marginBottom: -48,
     height: "107px",
     width: "33%",
     background: "#fbe122",
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     textAlign: "left",
     display: "block",
-    float: "left",
     lineHeight: 100,
     position: "relative",
     transform: "skew(-35deg)",
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   threeIcons: {
     padding: "0px 0px 0px 28px",
-    marginTop: 51,
+    marginTop: -7,
   },
   search: {
     position: "relative",
@@ -116,8 +115,10 @@ function HeaderBoxAgent() {
               style={{
                 position: "absolute",
                 transform: "skew(35deg)",
+
                 margin: "0% 0% 0% 50%",
                 width: "50%",
+
               }}
             />
           </Box>

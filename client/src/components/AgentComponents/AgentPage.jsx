@@ -21,20 +21,67 @@ import { loadAgentById, selectAgentById } from "../../redux/features/agent";
 import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
 
 const useStyles = makeStyles((theme) => ({
+  avatarButton: {
+    opacity: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "150px",
+    height: "150px",
+    marginTop: 20,
+    position: "absolute",
+    transition: "300ms",
+    borderRadius: "50%",
+    backgroundColor: "rgba(0,0,0,0.45)",
+    "&:hover": {
+      opacity: 1,
+    },
+  },
+  button: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+    width: "120px",
+    height: "120px",
+    color: "whitesmoke",
+  },
   paper: {
-    height: 342,
-    width: 600,
+    color: "black",
+    background: "rgb(251, 225, 34)",
+    clipPath: "polygon(0px 0px, 100% 35px, 100% 100%, 0px 100%)",
+    marginTop: -47,
   },
   paper1: {
-    height: 700,
+    height: 710,
     width: 500,
+    marginLeft: 20,
+  },
+  input: {
+    display: "none",
   },
   root: {
     flexGrow: 1,
     display: "flex",
+    marginTop: 40,
+    height: "288px",
     "& > *": {
       margin: theme.spacing(1),
     },
+  },
+  dialog: {
+    background: "rgba(250,205,0,.9)",
+    clipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+    /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
+    padding: "60px 25px 30px",
+    height: "auto",
+    width: "auto",
+    boxSizing: "revert",
+  },
+  h6: {
+    color: " #000",
+    fontSize: 22,
+    margin: "0 0 25px 120px",
   },
 }));
 const StyledBadge = withStyles((theme) => ({
@@ -107,24 +154,27 @@ function AgentPage() {
               <Grid item>
                 <Paper className={classes.paper}>
                   <div className={classes.root}>
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                      variant="dot"
-                    >
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="https://www.pngkey.com/png/full/202-2024792_user-profile-icon-png-download-fa-user-circle.png"
-                        style={{ width: 150, height: 150 }}
-                      />
-                    </StyledBadge>
+
                     <Box>
                       {agent.map((elem) => {
                         return (
-                          <>
+                          <div>
+                            <StyledBadge
+                              overlap="circular"
+                              anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "right",
+                              }}
+                              variant="dot"
+                            >
+                              <Avatar
+                                alt="Remy Sharp"
+                                src={elem.avatar}
+                                style={{ width: 150, height: 150 }}
+                              />
+                            </StyledBadge>
+
+                          <Typography style={{marginTop: 45}} variant="h3">
                             <Typography variant="h6">
                               Имя: {elem.firstName}
                             </Typography>
@@ -149,7 +199,8 @@ function AgentPage() {
                                 </Typography>
                               </>
                             )}
-                          </>
+                          </Typography>
+                          </div>
                         );
                       })}
                     </Box>
@@ -244,3 +295,64 @@ function AgentPage() {
 }
 
 export default AgentPage;
+
+
+
+
+
+
+//<Grid container className={classes.root} spacing={2}>
+//                 <Grid item xs={12}>
+//                   <Grid container justifyContent="center" spacing={2}>
+//                     <Grid item>
+//                       <Paper className={classes.paper}>
+//                         {client[0] === undefined ? (
+//                             <Typography variant="h6">
+//                               Чтобы добавить отзыв вам нужно быть клиентом
+//                             </Typography>
+//                           ) :
+//                         <ClientAddReviewToAgent agentId={id}/> }
+//                         <Accordion style={{ width: 600 }}>
+//                           <AccordionSummary
+//                             expandIcon={<ExpandMoreIcon />}
+//                             aria-controls="panel1a-content"
+//                             id="panel1a-header"
+//                           >
+//                             <Typography className={classes.heading}>
+//                               Отзывы
+//                             </Typography>
+//                           </AccordionSummary>
+//                           <AccordionDetails>
+//                             {reviews.map((review) => {
+//                               return (
+//                                 <div
+//                                   className="container"
+//                                   style={{
+//                                     width: "100%",
+//                                     border: "2px solid #ccc",
+//                                     backgroundColor: "#eee",
+//                                     borderRadius: 5,
+//                                     padding: 16,
+//                                     margin: "16px auto",
+//                                   }}
+//                                 >
+//                                   <p>
+//                                     <span
+//                                       style={{ fontSize: 18, marginRight: 15 }}
+//                                     >
+//                                       {review.author.firstName}{" "}
+//                                       {review.author.lastName}
+//                                     </span>{" "}
+//                                     {review.author.location}
+//                                   </p>
+//                                   <p>{review.text}</p>
+//                                 </div>
+//                               );
+//                             })}
+//                           </AccordionDetails>
+//                         </Accordion>
+//                       </Paper>
+//                     </Grid>
+//                   </Grid>
+//                 </Grid>
+//               </Grid>

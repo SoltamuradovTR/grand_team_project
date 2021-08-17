@@ -205,6 +205,7 @@ function ClientCab() {
                       </label>
                     </Box>
                   </StyledBadge>
+
                   <Box style={{ textAlign: "center" }}>
                     <Typography style={{ marginTop: 45 }} variant="h3">
                       {candidate.firstName} {candidate.lastName}
@@ -225,6 +226,7 @@ function ClientCab() {
                   </Box>
                 </div>
               </Paper>
+
               <Paper
                 style={{ height: "63%", boxShadow: 'none', background: "rgb(251, 225, 34)" }}
               >
