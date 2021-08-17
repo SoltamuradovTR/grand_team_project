@@ -116,7 +116,7 @@ function HeaderBoxAgent() {
               style={{
                 position: "absolute",
                 transform: "skew(35deg)",
-                margin: "-2% 0% 0% 50%",
+                margin: "0% 0% 0% 50%",
                 width: "50%",
               }}
             />
