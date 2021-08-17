@@ -158,7 +158,7 @@ function ContainerBox() {
                   <PersonAddIcon fontSize="small" />
                 </Button> : <Button
                     variant="contained"
-                    style={{ background: "#ff2424", width: "100%" }}
+                    style={{ background: "#45db45", width: "100%" }}
                     size="small"
                   >
                     Завершено
