@@ -51,11 +51,19 @@ function ClientRequest() {
 
   const classes = useStyles();
   return (
-    <Container
+    <Box style={{
+      backgroundImage:
+        'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")',
+      height: 986,
+    }}>
+
+
+    <Box
       style={{
         display: "flex",
         backgroundColor: "rgba(0, 0, 0, .8)",
         backdropFilter: "blur(15px)",
+        marginTop: 40
       }}
     >
       {request.map((item) => {
@@ -73,16 +81,19 @@ function ClientRequest() {
               <Typography variant="h5" component="h2" className={classes.title}>
                 {item.title}
               </Typography>
+              { item.active ? null : <Typography variant="h5" component="h2" className={classes.title} style={{ color: 'green'}}>
+                ЗАВЕРШЕНО
+              </Typography>}
               <Box>
                 <Typography variant="body2" component="p">
                   {item.description}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
+                <Typography className={classes.pos} color="textPrimary">
                   Автор: {item.author.firstName} {item.author.lastName}
                 </Typography>
                 <Typography>
                   <a href={item.source} target="_blank">
-                    Ссылка на объявление
+                    Объявление
                   </a>
                 </Typography>
                 <Typography>{item.location}</Typography>
@@ -177,7 +188,8 @@ function ClientRequest() {
           </Card>
         );
       })}
-    </Container>
+    </Box>
+    </Box>
   );
 }
 

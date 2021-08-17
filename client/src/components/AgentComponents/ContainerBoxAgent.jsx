@@ -10,13 +10,13 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { CardActionArea, CardMedia, Container } from "@material-ui/core";
+import { CardActionArea, CardMedia, CircularProgress, Container } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import {
   addAppraiser,
   loadAllRequests,
-  selectAllRequests,
+  selectAllRequests, selectLoadingRequests,
 } from "../../redux/features/requests";
 import { NavLink } from "react-router-dom";
 import { selectCandidate } from "../../redux/features/login";
@@ -59,6 +59,7 @@ function ContainerBox() {
   const dispatch = useDispatch();
   const requests = useSelector(selectAllRequests);
   const candidate = useSelector(selectCandidate);
+  const loading = useSelector(selectLoadingRequests);
 
   useEffect(() => {
     dispatch(loadAllRequests());
@@ -68,6 +69,40 @@ function ContainerBox() {
   const handleAddAppraiser = (request, agent) => {
     dispatch(addAppraiser(request, agent));
   };
+
+  if (loading) {
+    return (
+      <>
+        <Box
+          style={{
+            left: 15,
+            boxSizing: "border-box",
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
+          <Box className={classes.imageCar}>
+            <Box>
+              <h2
+                style={{
+                  fontFamily: "Saira Condensed', sans-serif",
+                  fontSize: 46,
+                  textTransform: "uppercase",
+                  margin: 5,
+                  color: "#fff",
+                }}
+              >
+                ВАША УВЕРЕННОСТЬ В НАШИХ РУКАХ
+              </h2>
+            </Box>
+          </Box>
+        </Box>
+        <Box style={{ textAlign: "center", marginTop: "10%" }}>
+          <CircularProgress />
+        </Box>
+      </>
+    );
+  }
 
   return (
     <>
