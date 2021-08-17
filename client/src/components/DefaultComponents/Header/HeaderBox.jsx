@@ -11,7 +11,7 @@ import { green } from "@material-ui/core/colors";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { searchRequest } from "../../../redux/features/requests";
 import { useDispatch } from "react-redux";
-import SideBar from "./SideBar";
+import SideBar from "../../ClientComponents/SideBar";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -116,7 +116,6 @@ function HeaderBox() {
   return (
     <>
       <Box component="header">
-        <SideBar />
         {/*Жёлтый блок*/}
         <NavLink to="/">
           <Box className={classes.logo}>

@@ -13,6 +13,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import HeaderUser from "../DefaultComponents/Header/HeaderUser";
+import SideBar from "./SideBar";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -165,8 +166,8 @@ function HeaderBoxClient(props) {
               style={{
                 position: "absolute",
                 transform: "skew(35deg)",
-                margin: "0% 0% 0% 50%",
-                width: "50%",
+                margin: "-4% 0% 0% 50%",
+                width: "45%",
               }}
             />
           </Box>
@@ -218,6 +219,9 @@ function HeaderBoxClient(props) {
             {/*User*/}
             <Box>
               <HeaderUserClient />
+            </Box>
+            <Box>
+              <SideBar />
             </Box>
           </Box>
         </Box>
