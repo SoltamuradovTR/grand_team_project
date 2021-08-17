@@ -49,8 +49,8 @@ function ClientAddRequest({ candidateId }) {
   };
   return (
     <>
-      <Accordion style={{ width: '480px', background: "#fff", }}>
-        <AccordionSummary style={{background: 'black', color: 'white', transform: 'skewX(-15deg)' }} aria-controls="panel1a-content" id="panel1a-header">
+      <Box style={{ width: '100%',  background: "#fff", borderRadius: 10 }}>
+        <AccordionSummary style={{background: 'black', borderRadius: 10, color: 'white', }}>
           <Typography style={{ margin: "auto", }}>Добавить запись</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -109,7 +109,8 @@ function ClientAddRequest({ candidateId }) {
               style={{
                 width: '100%',
                 marginTop: 25,
-                color: "green",
+                background: 'yellow',
+                color: "black",
               }}
               onClick={handleClickAddRequest}
             >
@@ -117,7 +118,7 @@ function ClientAddRequest({ candidateId }) {
             </Button>
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </Box>
     </>
   );
 }

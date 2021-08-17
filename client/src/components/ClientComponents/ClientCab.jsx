@@ -26,6 +26,7 @@ import EditingClientDialog from "./EditingClientDialog";
 import { NavLink } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import { PhotoCamera } from "@material-ui/icons";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
   avatarButton: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "150px",
     height: "150px",
+    marginTop: 20,
     position: "absolute",
     transition: "300ms",
     borderRadius: "50%",
@@ -54,13 +56,14 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     color: "black",
-    background: 'rgb(251, 225, 34)',
-    clipPath: 'polygon(0px 0px, 100% 35px, 100% 100%, 0px 100%)',
+    background: "rgb(251, 225, 34)",
+    clipPath: "polygon(0px 0px, 100% 35px, 100% 100%, 0px 100%)",
+    marginTop: -47,
   },
   paper1: {
     height: 710,
     width: 500,
-    marginLeft: 20
+    marginLeft: 20,
   },
   input: {
     display: "none",
@@ -69,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
     marginTop: 40,
+    height: "230px",
     "& > *": {
       margin: theme.spacing(1),
     },
@@ -78,8 +82,8 @@ const useStyles = makeStyles((theme) => ({
     clipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
     /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
     padding: "60px 25px 30px",
-    height: 'auto',
-    width: 'auto',
+    height: "auto",
+    width: "auto",
     boxSizing: "revert",
   },
   h6: {
@@ -91,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
 const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: "#44b700",
+    marginBottom: 35,
     color: "#44b700",
     boxShadow: `0 0 0 2.5px #424242 `,
     borderRadius: 20,
@@ -149,69 +154,94 @@ function ClientCab() {
   }
 
   return (
-    <Box style={{backgroundImage: 'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")', height: 986}}>
+    <Box
+      style={{
+        backgroundImage:
+          'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")',
+        height: 986,
+      }}
+    >
       <Container>
-        <Grid container className={classes.root} >
-          <Grid style={{marginTop: 30}} container  justifyContent="center" spacing={2}>
-            <Paper className={classes.paper}>
-              <div className={classes.root}>
-                <input
-                  accept="image/*"
-                  className={classes.input}
-                  id="icon-button-file"
-                  type="file"
-                  onChange={handleChangeAvatar}
-                />
-                <StyledBadge
-                  overlap="circular"
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right",
-                  }}
-                  variant="dot"
-                >
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={candidate.avatar}
-                    style={{ width: 150, height: 150 }}
+        <Grid container className={classes.root} spacing={2}>
+          <Grid
+            style={{ marginTop: 30 }}
+            container
+            justifyContent="center"
+            spacing={2}
+          >
+            <Grid item>
+              <Paper className={classes.paper}>
+                <div className={classes.root}>
+                  <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="icon-button-file"
+                    type="file"
+                    onChange={handleChangeAvatar}
                   />
-                  <Box className={classes.avatarButton}>
-                    <label htmlFor="icon-button-file">
-                      <IconButton
-                        color="default"
-                        aria-label="upload picture"
-                        component="span"
-                        className={classes.button}
-                      >
-                        <PhotoCamera />
-                      </IconButton>
-                    </label>
-                  </Box>
-                </StyledBadge>
-                <Box>
-                  <Typography variant="h3">
-                    {candidate.firstName} {candidate.lastName}
-                  </Typography>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    onClick={handleClickOpenClient}
+                  <StyledBadge
+                    overlap="circular"
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    variant="dot"
                   >
-                    Изменить
-                  </Button>
-                </Box>
-              </div>
-              <Paper style={{height: '100%', background: 'rgb(251, 225, 34)'}}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={candidate.avatar}
+                      style={{ width: 150, height: 150, marginTop: 20 }}
+                    />
+                    <Box className={classes.avatarButton}>
+                      <label htmlFor="icon-button-file">
+                        <IconButton
+                          color="default"
+                          aria-label="upload picture"
+                          component="span"
+                          className={classes.button}
+                        >
+                          <PhotoCamera />
+                        </IconButton>
+                      </label>
+                    </Box>
+                  </StyledBadge>
+                  <Box style={{ textAlign: "center" }}>
+                    <Typography style={{ marginTop: 45 }} variant="h3">
+                      {candidate.firstName} {candidate.lastName}
+                    </Typography>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      onClick={handleClickOpenClient}
+                      style={{
+                        textAlign: "center",
+                        marginTop: 10,
+                        backgroundColor: "white",
+                        color: "black",
+                      }}
+                    >
+                      Редактировать
+                    </Button>
+                  </Box>
+                </div>
+              </Paper>
+              <Paper
+                style={{ height: "63%", boxShadow: 'none', background: "rgb(251, 225, 34)" }}
+              >
                 <Grid container className={classes.root} spacing={2}>
                   <Grid item xs={12}>
-                    <Grid container  spacing={2}>
+                    <Grid container spacing={2}>
                       <Grid item>
-
-                        <Accordion style={{ width: '100%' }}>
+                        <Accordion style={{ width: "100%", borderRadius: 10 }}>
                           <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
+                            style={{
+                              background: "black",
+                              color: "white",
+                              borderRadius: 10,
+                            }}
                           >
                             <Typography className={classes.heading}>
                               Мои записи
@@ -226,22 +256,28 @@ function ClientCab() {
                                       style={{
                                         display: "flex",
                                         justifyContent: "space-between",
-                                        width: '54%',
+                                        width: "54%",
                                         marginBottom: 10,
                                       }}
                                     >
                                       <Box>
-                                        <NavLink to={`/request/${request._id}`}>
+                                        <NavLink
+                                          style={{ textDecoration: "none" }}
+                                          to={`/request/${request._id}`}
+                                        >
                                           <Typography
                                             variant="h6"
-                                            style={{ width: 400 }}
+                                            style={{
+                                              width: 400,
+                                              color: "black",
+                                            }}
                                           >
                                             {request.title}
                                           </Typography>
                                         </NavLink>
                                       </Box>
                                       <Box>
-                                        <Typography variant="h6">
+                                        <Typography variant="h6" style={{}}>
                                           {request.active === false
                                             ? "Завершено"
                                             : "В работе"}
@@ -250,12 +286,15 @@ function ClientCab() {
                                       <Box>
                                         <Button
                                           variant="contained"
-                                          color="primary"
+                                          color="default"
                                           onClick={() =>
-                                            handleClickDeleteRequest(request._id)
+                                            handleClickDeleteRequest(
+                                              request._id
+                                            )
                                           }
+                                          style={{ background: "yellow" }}
                                         >
-                                          Удалить
+                                          <DeleteIcon style={{}} />
                                         </Button>
                                       </Box>
                                     </Box>
@@ -270,14 +309,20 @@ function ClientCab() {
                   </Grid>
                 </Grid>
               </Paper>
-            </Paper>
+            </Grid>
 
-            <Paper className={classes.paper1} style={{webkitClipPath: 'polygon(0 35px, 100% 0, 100% 100%, 0 100%)', background: '#fbe122' }}>
+            <Paper
+              className={classes.paper1}
+              style={{
+                webkitClipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+                background: "#fbe122",
+              }}
+            >
               <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
-                  <Grid container  spacing={2}>
+                  <Grid container spacing={2}>
                     <Grid item>
-                        <ClientAddRequest candidateId={candidate._id} />
+                      <ClientAddRequest candidateId={candidate._id} />
                       {/*<img src="http://podarok.co.ua/land/048/design/megamotors/images/toyota.gif" style={{marginLeft: 40, marginTop: 140}}/>*/}
                     </Grid>
                   </Grid>
@@ -287,7 +332,6 @@ function ClientCab() {
           </Grid>
         </Grid>
       </Container>
-
 
       <EditingClientDialog
         setClientOpen={setClientOpen}
