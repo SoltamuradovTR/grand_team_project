@@ -45,17 +45,17 @@ function ClientAddRequest({ candidateId }) {
   };
   return (
     <>
-      <Accordion style={{ width: 900 }}>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-          <Typography style={{ margin: "auto" }}>Добавить запись</Typography>
+      <Accordion style={{ width: '480px', background: "#fff", }}>
+        <AccordionSummary style={{background: 'black', color: 'white', transform: 'skewX(-15deg)' }} aria-controls="panel1a-content" id="panel1a-header">
+          <Typography style={{ margin: "auto", }}>Добавить запись</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Box>
             <Typography>Добавить заголовок</Typography>
             <TextField
               style={{
-                width: 860,
-                height: 100,
+                width: 450,
+                height: 'auto',
               }}
               value={title}
               onChange={handleAddTitle}
@@ -63,38 +63,39 @@ function ClientAddRequest({ candidateId }) {
             <Typography
               style={{
                 height: 55,
+                marginTop: 25
               }}
             >
               Добавить описание
             </Typography>
             <TextareaAutosize
               style={{
-                width: 860,
-                height: 100,
+                width: 450,
+                height: 50,
               }}
               value={description}
               onChange={handleAddDescription}
             />
             <Typography
               style={{
-                marginTop: 55,
+                marginTop: 20,
               }}
             >
               Оставить ссылку
             </Typography>
             <TextField
               style={{
-                width: 860,
-                height: 100,
+                width: 450,
+                height: 'auto',
               }}
               value={source}
               onChange={handleAddSource}
             />
-            <Typography>Местонахождение</Typography>
+            <Typography style={{marginTop: 25}}>Местонахождение</Typography>
             <TextField
               style={{
-                width: 860,
-                height: 100,
+                width: 450,
+                height: 'auto',
               }}
               value={location}
               onChange={handleAddLocation}
@@ -102,7 +103,8 @@ function ClientAddRequest({ candidateId }) {
             <Button
               variant="contained"
               style={{
-                width: 860,
+                width: '100%',
+                marginTop: 25,
                 color: "green",
               }}
               onClick={handleClickAddRequest}
