@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Container, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addAppraiser,
   loadRequestById,
   selectAllRequests,
   selectRequestById,
@@ -10,6 +11,9 @@ import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import Button from '@material-ui/core/Button';
+import { selectCandidate } from '../../redux/features/login';
 
 const useStyles = makeStyles({
   root: {
@@ -35,9 +39,15 @@ function AgentRequest() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const request = useSelector(selectRequestById);
+  const candidate = useSelector(selectCandidate);
 
   useEffect(() => dispatch(loadRequestById(id)), [dispatch]);
   const classes = useStyles();
+
+  const handleAddAppraiser = (request, agent) => {
+    dispatch(addAppraiser(request, agent));
+  };
+
   return (
     <>
       <Container>
@@ -73,8 +83,16 @@ function AgentRequest() {
                     {item.appraisers.length}
                   </Typography>
                 </Box>
-
                 <Typography>Дата создания записи: {item.createdAt}</Typography>
+                <Button
+                  variant="contained"
+                  style={{ background: "#fbe122", width: "20%" }}
+                  onClick={() => handleAddAppraiser(item._id, candidate._id)}
+                  size="small"
+                >
+                  Откликнуться
+                  <PersonAddIcon fontSize="small" />
+                </Button>
               </CardContent>
             </Card>
           );
