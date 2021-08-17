@@ -12,6 +12,7 @@ import Box from "@material-ui/core/Box";
 import { addRequest } from "../../redux/features/requests";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(() => ({}));
 
@@ -24,6 +25,7 @@ function ClientAddRequest({ candidateId }) {
   const [source, setSource] = useState("");
   const [location, setLocation] = useState("");
   const [author, setAuthor] = useState(candidateId);
+  const history = useHistory()
 
   const handleAddTitle = (e) => {
     setTitle(e.target.value);
@@ -38,10 +40,12 @@ function ClientAddRequest({ candidateId }) {
     setLocation(e.target.value);
   };
 
-  const handleClickAddRequest = () => {
-    dispatch(
+  const handleClickAddRequest = async () => {
+   await dispatch(
       addRequest({ title, description, source, author, location }, candidateId)
     );
+
+   history.push('/')
   };
   return (
     <>

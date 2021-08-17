@@ -22,43 +22,45 @@ function ClientAddReviewToAgent({ agentId }) {
   const [author, setAuthor] = useState(candidate._id);
 
   const handleAddText = (e) => {
-    setText(e.target.value)}
+    setText(e.target.value);
+  };
 
-    const handleClickAddReview = () => {
-      dispatch(addReview({ text, author }, agentId));
-    };
-    return (
-      <>
-        <Accordion style={{ width: 900 }}>
-          <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-            <Typography style={{ margin: "auto" }}>Добавить отзыв</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box>
-              <Typography>Добавить отзыв</Typography>
-              <TextField
-                style={{
-                  width: 860,
-                  height: 100,
-                }}
-                value={text}
-                onChange={handleAddText}
-              />
-              <Button
-                variant="contained"
-                style={{
-                  width: 860,
-                  color: "green",
-                }}
-                onClick={handleClickAddReview}
-              >
-                Добавить отзыв
-              </Button>
-            </Box>
-          </AccordionDetails>
-        </Accordion>
-      </>
-    );
+  const handleClickAddReview = () => {
+    dispatch(addReview({ text, author }, agentId));
+  };
+  return (
+    <>
+      <Accordion style={{ width: 600 }}>
+        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+          <Typography style={{ margin: "auto" }}>Добавить отзыв</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Box>
+            <Typography>Добавить отзыв</Typography>
+            <TextField
+              style={{
+                width: 565,
+                height: 100,
+              }}
+              value={text}
+              onChange={handleAddText}
+            />
+            <Button
+              variant="contained"
+              style={{
+                width: "100%",
+                color: "black",
+                background: "#fbe122",
+              }}
+              onClick={handleClickAddReview}
+            >
+              Добавить отзыв
+            </Button>
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+    </>
+  );
 }
 
 export default ClientAddReviewToAgent;
