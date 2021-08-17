@@ -1,4 +1,5 @@
 const initialState = {
+  items: [],
   error: null,
   loading: false,
   currentItem: [],
@@ -43,6 +44,22 @@ const agent = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
+    case "agents/fetch/pending":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "agents/fetch/fulfilled":
+      return {
+        ...state,
+        items: action.payload,
+        loading: false,
+      };
+    case "agents/fetch/rejected":
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }
@@ -67,6 +84,22 @@ export const addClientsToAgent = (clientId, agentId) => {
   };
 };
 
+export const loadAllAgents = () => {
+  return async (dispatch) => {
+    dispatch({ type: "agents/fetch/pending" });
+
+    try {
+      const res = await fetch("/agents");
+
+      const json = await res.json();
+
+      dispatch({ type: "agents/fetch/fulfilled", payload: json });
+    } catch (e) {
+      dispatch({ type: "agents/fetch/rejected", error: e.toString() });
+    }
+  };
+};
+
 export const loadAgentById = (agentId) => {
   return async (dispatch) => {
     dispatch({ type: "agent/getById/pending" });
@@ -84,4 +117,5 @@ export const loadAgentById = (agentId) => {
 
 export default agent;
 
+export const selectAllAgents = (state) => state.agent.items;
 export const selectAgentById = (state) => state.agent.itemsById;
