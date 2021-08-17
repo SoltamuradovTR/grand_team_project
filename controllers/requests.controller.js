@@ -124,7 +124,8 @@ module.exports.requestsController = {
     try {
       const request = await Request.updateOne(
         { _id: id },
-        { $addToSet: { appraisers: data.request } }
+        { $addToSet: { appraisers: data.request } },
+        { new: true}
       );
       return res.json(request);
     } catch (e) {

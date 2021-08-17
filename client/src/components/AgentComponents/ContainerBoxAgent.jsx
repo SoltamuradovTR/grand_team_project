@@ -147,6 +147,7 @@ function ContainerBox() {
                 </Typography>
               </CardActions>
               <CardActions>
+                {request.active ?
                 <Button
                   variant="contained"
                   style={{ background: "#fbe122", width: "100%" }}
@@ -155,7 +156,13 @@ function ContainerBox() {
                 >
                   Откликнуться
                   <PersonAddIcon fontSize="small" />
-                </Button>
+                </Button> : <Button
+                    variant="contained"
+                    style={{ background: "#ff2424", width: "100%" }}
+                    size="small"
+                  >
+                    Завершено
+                  </Button>}
               </CardActions>
             </Card>
 
