@@ -119,3 +119,4 @@ export default agent;
 
 export const selectAllAgents = (state) => state.agent.items;
 export const selectAgentById = (state) => state.agent.itemsById;
+export const selectLoadingAgent = (state) => state.agent.loading
