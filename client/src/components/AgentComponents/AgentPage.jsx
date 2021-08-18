@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCandidate, } from "../../redux/features/login";
+import { selectCandidate } from "../../redux/features/login";
 import {
   Accordion,
   AccordionDetails,
@@ -15,7 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ClientAddReviewToAgent from '../ClientComponents/ClientAddReviewToAgent';
+import ClientAddReviewToAgent from "../ClientComponents/ClientAddReviewToAgent";
 import { useParams } from "react-router-dom";
 import { loadAgentById, selectAgentById } from "../../redux/features/agent";
 import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
@@ -53,9 +53,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -47,
   },
   paper1: {
-    height: 710,
+    background: "rgb(251, 225, 34)",
+    clipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+    height: 611,
     width: 500,
     marginLeft: 20,
+    marginTop: 40,
+  },
+  paper2: {
+    color: "black",
+    background: "rgb(251, 225, 34)",
+    marginTop: -47,
   },
   input: {
     display: "none",
@@ -146,19 +154,26 @@ function AgentPage() {
   });
 
   return (
-    <>
-      <Container style={{ display: "flex" }}>
+    <Box
+      style={{
+        backgroundImage:
+          'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")',
+        height: 986,
+      }}
+    >
+      <Container
+        style={{ display: "flex", width: "59%", height: "100%", marginTop: 40 }}
+      >
         <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
+          <Grid>
             <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Paper className={classes.paper}>
                   <div className={classes.root}>
-
                     <Box>
                       {agent.map((elem) => {
                         return (
-                          <div>
+                          <div style={{ display: "flex" }}>
                             <StyledBadge
                               overlap="circular"
                               anchorOrigin={{
@@ -170,36 +185,43 @@ function AgentPage() {
                               <Avatar
                                 alt="Remy Sharp"
                                 src={elem.avatar}
-                                style={{ width: 150, height: 150 }}
+                                style={{
+                                  width: 150,
+                                  height: 150,
+                                  marginTop: 45,
+                                }}
                               />
                             </StyledBadge>
 
-                          <Typography style={{marginTop: 45}} variant="h3">
-                            <Typography variant="h6">
-                              Имя: {elem.firstName}
-                            </Typography>
-                            <Typography variant="h6">
-                              Фамилия: {elem.lastName}
-                            </Typography>
-                            <Typography variant="h6">
-                              Город: {elem.location}
-                            </Typography>
-                            {client[0] === undefined ? (
+                            <Typography
+                              style={{ marginTop: 45, marginLeft: 20 }}
+                              variant="h3"
+                            >
                               <Typography variant="h6">
-                                Чтобы увидеть контактную информацию, вам нужно
-                                быть киентом
+                                Имя: {elem.firstName}
                               </Typography>
-                            ) : (
-                              <>
+                              <Typography variant="h6">
+                                Фамилия: {elem.lastName}
+                              </Typography>
+                              <Typography variant="h6">
+                                Город: {elem.location}
+                              </Typography>
+                              {client[0] === undefined ? (
                                 <Typography variant="h6">
-                                  Телефон: {elem.phone}
+                                  Чтобы увидеть контактную информацию, вам нужно
+                                  быть киентом
                                 </Typography>
-                                <Typography variant="h6">
-                                  Почта: {elem.email}
-                                </Typography>
-                              </>
-                            )}
-                          </Typography>
+                              ) : (
+                                <>
+                                  <Typography variant="h6">
+                                    Телефон: {elem.phone}
+                                  </Typography>
+                                  <Typography variant="h6">
+                                    Почта: {elem.email}
+                                  </Typography>
+                                </>
+                              )}
+                            </Typography>
                           </div>
                         );
                       })}
@@ -211,13 +233,17 @@ function AgentPage() {
                 <Grid item xs={12}>
                   <Grid container justifyContent="center" spacing={2}>
                     <Grid item>
-                      <Paper className={classes.paper}>
+                      <Paper className={classes.paper2}>
                         {client[0] === undefined ? (
-                            <Typography variant="h6">
-                              Чтобы добавить отзыв вам нужно быть клиентом
-                            </Typography>
-                          ) :
-                        <ClientAddReviewToAgent agentId={id}/> }
+                          <Typography
+                            variant="h6"
+                            style={{ textAlign: "center" }}
+                          >
+                            Чтобы добавить отзыв вам нужно быть клиентом
+                          </Typography>
+                        ) : (
+                          <ClientAddReviewToAgent agentId={id} />
+                        )}
                         <Accordion style={{ width: 600 }}>
                           <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
@@ -265,41 +291,74 @@ function AgentPage() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
-            <Grid container justifyContent="center" spacing={2}>
-              <Grid item>
-                <Paper className={classes.paper1}>
-                  <Typography variant="h6">Клиенты</Typography>
-                  {agent.map((elem) => {
-                    return (
-                      <>
-                        {elem.clients.map((client) => {
-                          return (
-                            <Typography>
-                              {client.firstName} {client.lastName}
-                            </Typography>
-                          );
-                        })}
-                      </>
-                    );
-                  })}
-                </Paper>
+        <Paper className={classes.paper1}
+        style={{
+          webkitClipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+          background: "#fbe122",
+        }}>
+          <Grid container className={classes.root} spacing={2}>
+            <Grid item xs={12}>
+              <Grid container spacing={2}>
+                <Grid item>
+                  <Accordion
+                    style={{
+                      width: "480px",
+                      background: "#fff",
+                      borderRadius: 10,
+                    }}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                      style={{
+                        background: "black",
+                        borderRadius: 10,
+                        color: "white",
+                      }}
+                    >
+                      <Typography style={{ margin: "auto" }}>Клиенты</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <AccordionDetails>
+                        <Box>
+                          {agent.map((elem) => {
+                            return (
+                              <>
+                                {elem.clients.map((client) => {
+                                  return (
+                                    <Box
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        width: "54%",
+                                        marginBottom: 10,
+                                      }}
+                                    >
+                                      <Box style={{}}>
+                                        {client.firstName} {client.lastName}
+                                      </Box>
+                                    </Box>
+                                  );
+                                })}
+                              </>
+                            );
+                          })}
+                        </Box>
+                      </AccordionDetails>
+                    </AccordionDetails>
+                  </Accordion>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Paper>
       </Container>
-    </>
+    </Box>
   );
 }
 
 export default AgentPage;
-
-
-
-
-
 
 //<Grid container className={classes.root} spacing={2}>
 //                 <Grid item xs={12}>
