@@ -166,8 +166,9 @@ function HeaderBoxClient(props) {
               style={{
                 position: "absolute",
                 transform: "skew(35deg)",
-                margin: "-3% 0% -3% 45%",
-                width: "42%",
+
+                margin: "0% 0% 0% 50%",
+                width: "50%",
               }}
             />
           </Box>

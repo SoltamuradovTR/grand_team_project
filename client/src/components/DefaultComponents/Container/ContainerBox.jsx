@@ -71,14 +71,6 @@ function ContainerBox() {
           }}
         >
           <Box className={classes.imageCar}>
-            <Box style={{ marginTop: -90 }}>
-              <NavLink
-                to="/"
-                style={{ color: "#fff", fontSize: 12, textDecoration: "none" }}
-              >
-                Home › Vehicle Grid
-              </NavLink>
-            </Box>
             <Box>
               <h2
                 style={{
@@ -89,7 +81,7 @@ function ContainerBox() {
                   color: "#fff",
                 }}
               >
-                Vehicle Grid
+                ВАША УВЕРЕННОСТЬ В НАШИХ РУКАХ
               </h2>
             </Box>
           </Box>
