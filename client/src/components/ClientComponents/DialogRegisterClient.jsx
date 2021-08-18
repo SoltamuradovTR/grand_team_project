@@ -1,33 +1,33 @@
-import React, {useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 import Dialog from "@material-ui/core/Dialog";
-import {useDispatch} from "react-redux";
-import {registrationClient} from "../../redux/features/registration";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registrationClient,
+  selectError,
+} from "../../redux/features/registration";
+import ShowError from "./ShowError";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: 'auto',
+    marginTop: "auto",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -51,23 +51,23 @@ const useStyles = makeStyles((theme) => ({
   dialog: {
     background: "rgba(250,205,0,.9)",
     clipPath: "polygon(0 35px, 100% 0, 100% 670px, 0 100%)",
-    /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
     padding: "60px 25px 30px",
-    height: 'auto',
-    width: 'auto',
+    height: "auto",
+    width: "auto",
     boxSizing: "revert",
   },
   button: {
-    background: 'rgba(255,255,255,0.91)'
+    background: "rgba(255,255,255,0.91)",
   },
   text: {
-    color: 'rgb(0 0 0)'
-  }
+    color: "rgb(0 0 0)",
+  },
 }));
 
-export default function DialogRegisterAgent({open, setOpen}) {
+export default function DialogRegisterAgent({ open, setOpen }) {
   const classes = useStyles();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const error = useSelector(selectError);
 
   const [login, setLogin] = useState();
   const [firstName, setFirstName] = useState();
@@ -78,38 +78,52 @@ export default function DialogRegisterAgent({open, setOpen}) {
   const [location, setLocation] = useState();
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
   const handleAddLogin = (e) => {
-    setLogin(e.target.value)
-  }
+    setLogin(e.target.value);
+  };
   const handleAddPassword = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
   const handleAddFirstName = (e) => {
-    setFirstName(e.target.value)
-  }
+    setFirstName(e.target.value);
+  };
   const handleAddLastName = (e) => {
-    setLastName(e.target.value)
-  }
+    setLastName(e.target.value);
+  };
   const handleAddNumber = (e) => {
-    setPhone(e.target.value)
-  }
+    setPhone(e.target.value);
+  };
   const handleAddEmail = (e) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
   const handleAddLocation = (e) => {
-    setLocation(e.target.value)
-  }
+    setLocation(e.target.value);
+  };
 
   const handleRegistration = () => {
-    dispatch(registrationClient({login, password, firstName, lastName, phone, email, location}))
-  }
-
+    dispatch(
+      registrationClient({
+        login,
+        password,
+        firstName,
+        lastName,
+        phone,
+        email,
+        location,
+      })
+    );
+  };
 
   function Copyright() {
     return (
-      <Typography variant="body2" className={classes.text} color="textSecondary" align="center">
+      <Typography
+        variant="body2"
+        className={classes.text}
+        color="textSecondary"
+        align="center"
+      >
         {"Copyright © "}
         <Link color="inherit" href="https://material-ui.com/">
           Your Website
@@ -230,9 +244,10 @@ export default function DialogRegisterAgent({open, setOpen}) {
             >
               Зарегистрироваться
             </Button>
+
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link style={{color: 'black'}} href="/" variant="body2">
+                <Link style={{ color: "black" }} href="/" variant="body2">
                   У вас уже есть аккаунт? Войти
                 </Link>
               </Grid>
