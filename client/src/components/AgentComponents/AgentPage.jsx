@@ -6,7 +6,7 @@ import { selectCandidate } from "../../redux/features/login";
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary,
+  AccordionSummary, CircularProgress,
   Container,
   Paper,
   Typography,
@@ -16,8 +16,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClientAddReviewToAgent from "../ClientComponents/ClientAddReviewToAgent";
-import { useParams } from "react-router-dom";
-import { loadAgentById, selectAgentById } from "../../redux/features/agent";
+import { NavLink, useParams } from "react-router-dom";
+import { loadAgentById, selectAgentById, selectLoadingAgent } from "../../redux/features/agent";
 import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     background: "rgb(251, 225, 34)",
     marginTop: -47,
+    width: 719
   },
   input: {
     display: "none",
@@ -146,12 +147,55 @@ function AgentPage() {
   }, [dispatch]);
 
   const reviews = useSelector(selectAllReviews);
+  const loading = useSelector(selectLoadingAgent)
 
   const client = agent.map((item) => {
     return item.clients.find((elem) => {
       return candidate._id === elem._id;
     });
   });
+
+  if (loading) {
+    return (
+      <>
+        <Box
+          style={{
+            left: 15,
+            boxSizing: "border-box",
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
+          <Box className={classes.imageCar}>
+            <Box style={{ marginTop: -90 }}>
+              <NavLink
+                to="/"
+                style={{ color: "#fff", fontSize: 12, textDecoration: "none" }}
+              >
+                Home › Vehicle Grid
+              </NavLink>
+            </Box>
+            <Box>
+              <h2
+                style={{
+                  fontFamily: "Saira Condensed', sans-serif",
+                  fontSize: 46,
+                  textTransform: "uppercase",
+                  margin: 5,
+                  color: "#fff",
+                }}
+              >
+                Vehicle Grid
+              </h2>
+            </Box>
+          </Box>
+        </Box>
+        <Box style={{ textAlign: "center", marginTop: "10%" }}>
+          <CircularProgress />
+        </Box>
+      </>
+    )
+  }
 
   return (
     <Box
@@ -162,7 +206,7 @@ function AgentPage() {
       }}
     >
       <Container
-        style={{ display: "flex", width: "59%", height: "100%", marginTop: 40 }}
+        style={{ display: "flex", width: "100%", height: "100%", marginTop: 40 }}
       >
         <Grid container className={classes.root} spacing={2}>
           <Grid>
@@ -244,7 +288,7 @@ function AgentPage() {
                         ) : (
                           <ClientAddReviewToAgent agentId={id} />
                         )}
-                        <Accordion style={{ width: 600 }}>
+                        <Accordion style={{ width: "100%" }}>
                           <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -320,7 +364,7 @@ function AgentPage() {
                       <Typography style={{ margin: "auto" }}>Клиенты</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <AccordionDetails>
+                      <AccordionDetails style={{ display: "block"}}>
                         <Box>
                           {agent.map((elem) => {
                             return (
@@ -331,12 +375,14 @@ function AgentPage() {
                                       style={{
                                         display: "flex",
                                         justifyContent: "space-between",
-                                        width: "54%",
+                                        width: "100%",
                                         marginBottom: 10,
                                       }}
                                     >
-                                      <Box style={{}}>
-                                        {client.firstName} {client.lastName}
+                                      <Box>
+                                        <Typography display="inline">
+                                          {client.firstName} {client.lastName}
+                                        </Typography>
                                       </Box>
                                     </Box>
                                   );
@@ -360,58 +406,3 @@ function AgentPage() {
 
 export default AgentPage;
 
-//<Grid container className={classes.root} spacing={2}>
-//                 <Grid item xs={12}>
-//                   <Grid container justifyContent="center" spacing={2}>
-//                     <Grid item>
-//                       <Paper className={classes.paper}>
-//                         {client[0] === undefined ? (
-//                             <Typography variant="h6">
-//                               Чтобы добавить отзыв вам нужно быть клиентом
-//                             </Typography>
-//                           ) :
-//                         <ClientAddReviewToAgent agentId={id}/> }
-//                         <Accordion style={{ width: 600 }}>
-//                           <AccordionSummary
-//                             expandIcon={<ExpandMoreIcon />}
-//                             aria-controls="panel1a-content"
-//                             id="panel1a-header"
-//                           >
-//                             <Typography className={classes.heading}>
-//                               Отзывы
-//                             </Typography>
-//                           </AccordionSummary>
-//                           <AccordionDetails>
-//                             {reviews.map((review) => {
-//                               return (
-//                                 <div
-//                                   className="container"
-//                                   style={{
-//                                     width: "100%",
-//                                     border: "2px solid #ccc",
-//                                     backgroundColor: "#eee",
-//                                     borderRadius: 5,
-//                                     padding: 16,
-//                                     margin: "16px auto",
-//                                   }}
-//                                 >
-//                                   <p>
-//                                     <span
-//                                       style={{ fontSize: 18, marginRight: 15 }}
-//                                     >
-//                                       {review.author.firstName}{" "}
-//                                       {review.author.lastName}
-//                                     </span>{" "}
-//                                     {review.author.location}
-//                                   </p>
-//                                   <p>{review.text}</p>
-//                                 </div>
-//                               );
-//                             })}
-//                           </AccordionDetails>
-//                         </Accordion>
-//                       </Paper>
-//                     </Grid>
-//                   </Grid>
-//                 </Grid>
-//               </Grid>
