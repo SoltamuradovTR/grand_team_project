@@ -1,12 +1,12 @@
 const Review = require("../models/Review.model");
-const Agent = require('../models/Agent.model')
+const Agent = require("../models/Agent.model");
 
 module.exports.reviewsController = {
   getReviewsById: async (req, res) => {
     const { id } = req.params;
     try {
       const review = await Review.find({
-        agent: id
+        agent: id,
       }).populate("author");
 
       return res.json(review);
@@ -32,10 +32,10 @@ module.exports.reviewsController = {
       const review = await Review.create({
         text,
         author,
-        agent: id
+        agent: id,
       });
 
-      const result = await Review.findById(review._id).populate('author')
+      const result = await Review.findById(review._id).populate("author");
       return res.json(result);
     } catch (e) {
       return res.status(400).json({

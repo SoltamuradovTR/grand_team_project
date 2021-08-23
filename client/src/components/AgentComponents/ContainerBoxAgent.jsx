@@ -10,13 +10,19 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { CardActionArea, CardMedia, CircularProgress, Container } from "@material-ui/core";
+import {
+  CardActionArea,
+  CardMedia,
+  CircularProgress,
+  Container,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import {
   addAppraiser,
   loadAllRequests,
-  selectAllRequests, selectLoadingRequests,
+  selectAllRequests,
+  selectLoadingRequests,
 } from "../../redux/features/requests";
 import { NavLink } from "react-router-dom";
 import { selectCandidate } from "../../redux/features/login";
@@ -182,80 +188,29 @@ function ContainerBox() {
                 </Typography>
               </CardActions>
               <CardActions>
-                {request.active ?
-                <Button
-                  variant="contained"
-                  style={{ background: "#fbe122", width: "100%" }}
-                  onClick={() => handleAddAppraiser(request._id, candidate._id)}
-                  size="small"
-                >
-                  Откликнуться
-                  <PersonAddIcon fontSize="small" />
-                </Button> : <Button
+                {request.active ? (
+                  <Button
+                    variant="contained"
+                    style={{ background: "#fbe122", width: "100%" }}
+                    onClick={() =>
+                      handleAddAppraiser(request._id, candidate._id)
+                    }
+                    size="small"
+                  >
+                    Откликнуться
+                    <PersonAddIcon fontSize="small" />
+                  </Button>
+                ) : (
+                  <Button
                     variant="contained"
                     style={{ background: "#45db45", width: "100%" }}
                     size="small"
                   >
                     Завершено
-                  </Button>}
+                  </Button>
+                )}
               </CardActions>
             </Card>
-
-            // <Box
-            //   className="container"
-            //   style={{
-            //     minWidth: 275,
-            //     width: 600,
-            //     borderRadius: 15,
-            //     height: 415,
-            //   }}
-            // >
-            //   <Box className="card">
-            //     <Box className="face face1">
-            //       <Box className="content">
-            //         <h3>{request.title}</h3>
-            //       </Box>
-            //     </Box>
-            //     <Box className="face face2">
-            //       <Box className="content">
-            //         <CardContent>
-            //           <Typography
-            //             className={classes.title}
-            //             color="textSecondary"
-            //             gutterBottom
-            //             style={{ marginTop: 25, display: "flex" }}
-            //           >
-            //             Город: {request.location}
-            //           </Typography>
-            //           <Typography color="textSecondary">
-            //             {request.author.firstName} {request.author.lastName}
-            //           </Typography>
-            //           <Typography variant="body2" component="p">
-            //             {request.description}
-            //           </Typography>
-            //         </CardContent>
-            //         <CardActions>
-            //           <Button>
-            //             <NavLink to={`request/${request._id}`}>
-            //               Подробнее
-            //             </NavLink>
-            //           </Button>
-            //           <Button
-            //             variant="contained"
-            //             color="primary"
-            //             onClick={() =>
-            //               handleAddAppraiser(request._id, candidate._id)
-            //             }
-            //             size="small"
-            //           >
-            //             Откликнуться
-            //             <PersonAddIcon fontSize="small" />
-            //           </Button>
-            //         </CardActions>
-            //       </Box>
-            //     </Box>
-            //   </Box>
-            // </Box>
           );
         })}
       </Container>

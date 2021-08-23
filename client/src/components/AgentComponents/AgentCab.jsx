@@ -249,7 +249,7 @@ function AgentCab() {
                     </Box>
                   </StyledBadge>
 
-                  <Box style={{  }}>
+                  <Box style={{}}>
                     <Typography style={{ marginTop: 45 }} variant="h3">
                       <Box>
                         <Typography variant="h6">
@@ -367,7 +367,7 @@ function AgentCab() {
                             color: "white",
                           }}
                         >
-                          <Typography style={{ margin: "auto", }}>
+                          <Typography style={{ margin: "auto" }}>
                             Клиенты
                           </Typography>
                         </AccordionSummary>
@@ -408,18 +408,3 @@ function AgentCab() {
 }
 
 export default AgentCab;
-
-//                        {reviews.map((review) => {
-//                           return (
-//                             <Box
-//                               style={{
-//                                 display: "flex",
-//                                 justifyContent: "space-between",
-//                                 width: 500,
-//                                 marginBottom: 10,
-//                               }}
-//                             >
-//                               <Box>{review.author.firstName}</Box>
-//                               <Box>{review.text}</Box>
-//                             </Box>
-//                           );

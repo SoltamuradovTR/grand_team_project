@@ -118,7 +118,6 @@ function HeaderBoxAgent() {
 
                 margin: "0% 0% 0% 50%",
                 width: "50%",
-
               }}
             />
           </Box>
@@ -179,44 +178,3 @@ function HeaderBoxAgent() {
 }
 
 export default HeaderBoxAgent;
-
-// <Box
-//   component="header"
-//   style={{
-//     backgroundColor: "rgba(0, 0, 0, .7)",
-//     backdropFilter: "blur(15px)",
-//     marginBottom: 20,
-//     color: "white",
-//   }}
-// >
-//   <Box className={classes.root}>
-//     <Toolbar>
-//       <IconButton
-//         edge="start"
-//         className={classes.menuButton}
-//         color="inherit"
-//         aria-label="open drawer"
-//       >
-//         <MenuIcon />
-//       </IconButton>
-//       <Typography className={classes.title} variant="h6" noWrap>
-//         <NavLink to="/">LOGO</NavLink>
-//       </Typography>
-//       <Box className={classes.search}>
-//         <Box className={classes.searchIcon}>
-//           <SearchIcon />
-//         </Box>
-//         <InputBase
-//           placeholder="Search…"
-//           onChange={handleSearch}
-//           classes={{
-//             root: classes.inputRoot,
-//             input: classes.inputInput,
-//           }}
-//           inputProps={{ "aria-label": "search" }}
-//         />
-//       </Box>
-//       <HeaderUserAgent />
-//     </Toolbar>
-//   </Box>
-// </Box>

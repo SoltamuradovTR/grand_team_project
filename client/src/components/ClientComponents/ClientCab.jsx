@@ -228,7 +228,11 @@ function ClientCab() {
               </Paper>
 
               <Paper
-                style={{ height: "63%", boxShadow: 'none', background: "rgb(251, 225, 34)" }}
+                style={{
+                  height: "63%",
+                  boxShadow: "none",
+                  background: "rgb(251, 225, 34)",
+                }}
               >
                 <Grid container className={classes.root} spacing={2}>
                   <Grid item xs={12}>

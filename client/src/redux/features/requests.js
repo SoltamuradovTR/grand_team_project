@@ -85,7 +85,7 @@ const requests = (state = initialState, action) => {
     case "requestActive/edit/pending":
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case "requestActive/edit/fulfilled":
       return {
@@ -96,7 +96,7 @@ const requests = (state = initialState, action) => {
         //     return item.active = false
         //   }
         // })
-      }
+      };
     default:
       return state;
   }
@@ -223,4 +223,4 @@ export const selectAllRequests = (state) => {
 
 export const selectRequestById = (state) => state.requests.itemsById;
 
-export const selectLoadingRequests = (state) => state.requests.loading
+export const selectLoadingRequests = (state) => state.requests.loading;

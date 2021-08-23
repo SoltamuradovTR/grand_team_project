@@ -25,19 +25,19 @@ const review = (state = initialState, action) => {
     case "review/add/pending":
       return {
         ...state,
-        loading: true
+        loading: true,
       };
-    case 'review/add/fulfilled':
+    case "review/add/fulfilled":
       return {
         ...state,
         loading: false,
-        items: [action.payload, ...state.items]
-      }
-    case 'review/add/rejected':
+        items: [action.payload, ...state.items],
+      };
+    case "review/add/rejected":
       return {
         ...state,
-        loading: false
-      }
+        loading: false,
+      };
     default:
       return state;
   }
@@ -60,24 +60,24 @@ export const loadAllReviews = (id) => {
 };
 
 export const addReview = (data, id) => {
-return async (dispatch, getState) => {
-  const state = getState();
-  dispatch({ type: "review/add/pending"});
-  try {
-    const res = await fetch(`/agent/${id}/review`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json"
-      },
-    });
-    const json = await res.json();
-    dispatch({ type: 'review/add/fulfilled', payload: json})
-  } catch (e) {
-    dispatch({ type: 'review/add/rejected', error: e.toString()})
-  }
-}
-}
+  return async (dispatch, getState) => {
+    const state = getState();
+    dispatch({ type: "review/add/pending" });
+    try {
+      const res = await fetch(`/agent/${id}/review`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const json = await res.json();
+      dispatch({ type: "review/add/fulfilled", payload: json });
+    } catch (e) {
+      dispatch({ type: "review/add/rejected", error: e.toString() });
+    }
+  };
+};
 
-export const selectAllReviews = (state) => state.review.items
-export const selectLoadingReviews = (state) => state.review.loading
+export const selectAllReviews = (state) => state.review.items;
+export const selectLoadingReviews = (state) => state.review.loading;

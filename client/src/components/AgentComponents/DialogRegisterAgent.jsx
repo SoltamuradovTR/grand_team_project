@@ -21,14 +21,14 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: 'auto',
+    marginTop: "auto",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -54,16 +54,16 @@ const useStyles = makeStyles((theme) => ({
     clipPath: "polygon(0 35px, 100% 0, 100% 810px, 0 100%)",
     /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
     padding: "60px 25px 30px",
-    height: 'auto',
-    width: 'auto',
+    height: "auto",
+    width: "auto",
     boxSizing: "revert",
   },
   button: {
-    background: 'rgba(255,255,255,0.91)'
+    background: "rgba(255,255,255,0.91)",
   },
   text: {
-    color: 'rgb(0 0 0)'
-  }
+    color: "rgb(0 0 0)",
+  },
 }));
 
 export default function DialogRegisterAgent({ open, setOpen }) {
@@ -126,7 +126,12 @@ export default function DialogRegisterAgent({ open, setOpen }) {
 
   function Copyright() {
     return (
-      <Typography variant="body2" className={classes.text} color="textSecondary" align="center">
+      <Typography
+        variant="body2"
+        className={classes.text}
+        color="textSecondary"
+        align="center"
+      >
         {"Copyright © "}
         <Link color="inherit" href="https://material-ui.com/">
           Your Website
@@ -277,7 +282,11 @@ export default function DialogRegisterAgent({ open, setOpen }) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link style={{color: 'black'}} href="http://risovach.ru/upload/2014/05/mem/muzhik_51187121_big_.jpg" variant="body2">
+                <Link
+                  style={{ color: "black" }}
+                  href="http://risovach.ru/upload/2014/05/mem/muzhik_51187121_big_.jpg"
+                  variant="body2"
+                >
                   У вас уже есть аккаунт? Войти
                 </Link>
               </Grid>

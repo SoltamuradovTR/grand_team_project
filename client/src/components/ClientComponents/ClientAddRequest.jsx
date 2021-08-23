@@ -12,7 +12,7 @@ import Box from "@material-ui/core/Box";
 import { addRequest } from "../../redux/features/requests";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({}));
 
@@ -25,7 +25,7 @@ function ClientAddRequest({ candidateId }) {
   const [source, setSource] = useState("");
   const [location, setLocation] = useState("");
   const [author, setAuthor] = useState(candidateId);
-  const history = useHistory()
+  const history = useHistory();
 
   const handleAddTitle = (e) => {
     setTitle(e.target.value);
@@ -41,17 +41,19 @@ function ClientAddRequest({ candidateId }) {
   };
 
   const handleClickAddRequest = async () => {
-   await dispatch(
+    await dispatch(
       addRequest({ title, description, source, author, location }, candidateId)
     );
 
-   history.push('/')
+    history.push("/");
   };
   return (
     <>
-      <Box style={{ width: '100%',  background: "#fff", borderRadius: 10 }}>
-        <AccordionSummary style={{background: 'black', borderRadius: 10, color: 'white', }}>
-          <Typography style={{ margin: "auto", }}>Добавить запись</Typography>
+      <Box style={{ width: "100%", background: "#fff", borderRadius: 10 }}>
+        <AccordionSummary
+          style={{ background: "black", borderRadius: 10, color: "white" }}
+        >
+          <Typography style={{ margin: "auto" }}>Добавить запись</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Box>
@@ -59,7 +61,7 @@ function ClientAddRequest({ candidateId }) {
             <TextField
               style={{
                 width: 450,
-                height: 'auto',
+                height: "auto",
               }}
               value={title}
               onChange={handleAddTitle}
@@ -67,7 +69,7 @@ function ClientAddRequest({ candidateId }) {
             <Typography
               style={{
                 height: 55,
-                marginTop: 25
+                marginTop: 25,
               }}
             >
               Добавить описание
@@ -90,16 +92,16 @@ function ClientAddRequest({ candidateId }) {
             <TextField
               style={{
                 width: 450,
-                height: 'auto',
+                height: "auto",
               }}
               value={source}
               onChange={handleAddSource}
             />
-            <Typography style={{marginTop: 25}}>Местонахождение</Typography>
+            <Typography style={{ marginTop: 25 }}>Местонахождение</Typography>
             <TextField
               style={{
                 width: 450,
-                height: 'auto',
+                height: "auto",
               }}
               value={location}
               onChange={handleAddLocation}
@@ -107,9 +109,9 @@ function ClientAddRequest({ candidateId }) {
             <Button
               variant="contained"
               style={{
-                width: '100%',
+                width: "100%",
                 marginTop: 25,
-                background: 'yellow',
+                background: "yellow",
                 color: "black",
               }}
               onClick={handleClickAddRequest}

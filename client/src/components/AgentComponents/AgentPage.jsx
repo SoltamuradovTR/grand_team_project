@@ -6,7 +6,8 @@ import { selectCandidate } from "../../redux/features/login";
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary, CircularProgress,
+  AccordionSummary,
+  CircularProgress,
   Container,
   Paper,
   Typography,
@@ -17,7 +18,11 @@ import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ClientAddReviewToAgent from "../ClientComponents/ClientAddReviewToAgent";
 import { NavLink, useParams } from "react-router-dom";
-import { loadAgentById, selectAgentById, selectLoadingAgent } from "../../redux/features/agent";
+import {
+  loadAgentById,
+  selectAgentById,
+  selectLoadingAgent,
+} from "../../redux/features/agent";
 import { loadAllReviews, selectAllReviews } from "../../redux/features/review";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     background: "rgb(251, 225, 34)",
     marginTop: -47,
-    width: 719
+    width: 719,
   },
   input: {
     display: "none",
@@ -147,7 +152,7 @@ function AgentPage() {
   }, [dispatch]);
 
   const reviews = useSelector(selectAllReviews);
-  const loading = useSelector(selectLoadingAgent)
+  const loading = useSelector(selectLoadingAgent);
 
   const client = agent.map((item) => {
     return item.clients.find((elem) => {
@@ -194,7 +199,7 @@ function AgentPage() {
           <CircularProgress />
         </Box>
       </>
-    )
+    );
   }
 
   return (
@@ -206,7 +211,12 @@ function AgentPage() {
       }}
     >
       <Container
-        style={{ display: "flex", width: "100%", height: "100%", marginTop: 40 }}
+        style={{
+          display: "flex",
+          width: "100%",
+          height: "100%",
+          marginTop: 40,
+        }}
       >
         <Grid container className={classes.root} spacing={2}>
           <Grid>
@@ -335,11 +345,13 @@ function AgentPage() {
             </Grid>
           </Grid>
         </Grid>
-        <Paper className={classes.paper1}
-        style={{
-          webkitClipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
-          background: "#fbe122",
-        }}>
+        <Paper
+          className={classes.paper1}
+          style={{
+            webkitClipPath: "polygon(0 35px, 100% 0, 100% 100%, 0 100%)",
+            background: "#fbe122",
+          }}
+        >
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
               <Grid container spacing={2}>
@@ -361,10 +373,12 @@ function AgentPage() {
                         color: "white",
                       }}
                     >
-                      <Typography style={{ margin: "auto" }}>Клиенты</Typography>
+                      <Typography style={{ margin: "auto" }}>
+                        Клиенты
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <AccordionDetails style={{ display: "block"}}>
+                      <AccordionDetails style={{ display: "block" }}>
                         <Box>
                           {agent.map((elem) => {
                             return (
@@ -405,4 +419,3 @@ function AgentPage() {
 }
 
 export default AgentPage;
-

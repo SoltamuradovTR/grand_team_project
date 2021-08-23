@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Header from './components/Header';
-import { Button, createTheme, MuiThemeProvider } from '@material-ui/core';
-import Routes from './components/Routes';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import { Button, createTheme, MuiThemeProvider } from "@material-ui/core";
+import Routes from "./components/Routes";
 
 const theme = {
   // light: createTheme({
@@ -12,7 +12,6 @@ const theme = {
   //     }
   //   }
   // }),
-
   // dark: createTheme({
   //   palette: {
   //     primary: {
@@ -21,16 +20,16 @@ const theme = {
   //     }
   //   }
   // })
-}
+};
 
 function App(props) {
-  const [currentTheme, setCurrentTheme] = useState('light')
+  const [currentTheme, setCurrentTheme] = useState("light");
 
   return (
     <MuiThemeProvider theme={theme[currentTheme]}>
       {/*<Button color="primary" variant="contained">button</Button>*/}
       <Header />
-      <Routes/>
+      <Routes />
     </MuiThemeProvider>
   );
 }

@@ -17,8 +17,8 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { loginAgent } from "../../redux/features/login";
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -31,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
   paper: {
-    marginTop: 'auto',
+    marginTop: "auto",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -60,24 +60,23 @@ const useStyles = makeStyles((theme) => ({
     /*-webkit-clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);*/
     padding: "60px 25px 30px",
     height: 455,
-    width: 'auto',
+    width: "auto",
     boxSizing: "revert",
   },
   login: {
-    background: 'rgba(255,255,255,0.91)'
+    background: "rgba(255,255,255,0.91)",
   },
   password: {
-    background: 'rgba(255,255,255,0.91)'
-  }
+    background: "rgba(255,255,255,0.91)",
+  },
 }));
 
-function DialogLoginAgent({open, setOpen}) {
+function DialogLoginAgent({ open, setOpen }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-
 
   const handleClose = () => {
     setOpen(false);
@@ -97,75 +96,83 @@ function DialogLoginAgent({open, setOpen}) {
 
   return (
     <>
-    <Dialog open={open} onClose={handleClose}  aria-labelledby="form-dialog-title">
-      <Container className={classes.dialog} component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="login"
-              value={login}
-              label="Login"
-              name="login"
-              onChange={handleAddLogin}
-              autoComplete="login"
-              autoFocus
-              className={classes.login}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={handleAddPassword}
-              autoComplete="current-password"
-              className={classes.password}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary"  />}
-              label="Запомнить меня"
-            />
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={handleLogin}
-            >
-              Войти
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link  style={{color: 'black'}} href="https://cs12.pikabu.ru/post_img/big/2020/05/27/4/1590555860163316761.jpg" variant="body2">
-                  Забыли пароль?
-                </Link>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <Container className={classes.dialog} component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="login"
+                value={login}
+                label="Login"
+                name="login"
+                onChange={handleAddLogin}
+                autoComplete="login"
+                autoFocus
+                className={classes.login}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                value={password}
+                onChange={handleAddPassword}
+                autoComplete="current-password"
+                className={classes.password}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Запомнить меня"
+              />
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleLogin}
+              >
+                Войти
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link
+                    style={{ color: "black" }}
+                    href="https://cs12.pikabu.ru/post_img/big/2020/05/27/4/1590555860163316761.jpg"
+                    variant="body2"
+                  >
+                    Забыли пароль?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link style={{ color: "black" }} href="#" variant="body2">
+                    {"Зарегистрироваться"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link style={{color: 'black'}} href="#" variant="body2">
-                  {"Зарегистрироваться"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </Box>
-        <Box mt={8}></Box>
-      </Container>
-    </Dialog>
+            </form>
+          </Box>
+          <Box mt={8}></Box>
+        </Container>
+      </Dialog>
     </>
   );
 }

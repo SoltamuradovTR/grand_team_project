@@ -1,35 +1,35 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const requestSchema = new mongoose.Schema({
+const requestSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Client'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
     },
     description: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     active: {
-        type: Boolean,
-        default: true
+      type: Boolean,
+      default: true,
     },
     source: String,
     appraisers: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Agent'
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Agent",
+      },
     ],
-    location: String
+    location: String,
+  },
+  { timestamps: true }
+);
 
-}, {timestamps: true})
+const RequestModel = mongoose.model("Request", requestSchema);
 
-
-const RequestModel = mongoose.model("Request", requestSchema)
-
-
-module.exports = RequestModel
+module.exports = RequestModel;

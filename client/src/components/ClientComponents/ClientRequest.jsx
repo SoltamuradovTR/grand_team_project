@@ -51,144 +51,160 @@ function ClientRequest() {
 
   const classes = useStyles();
   return (
-    <Box style={{
-      backgroundImage:
-        'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")',
-      height: 986,
-    }}>
-
-
     <Box
       style={{
-        display: "flex",
-        backgroundColor: "rgba(0, 0, 0, .8)",
-        backdropFilter: "blur(15px)",
-        marginTop: 40
+        backgroundImage:
+          'url("http://podarok.co.ua/land/048/design/megamotors/images/cars4.jpg")',
+        height: 986,
       }}
     >
-      {request.map((item) => {
-        return (
-          <Card
-            className={classes.root}
-            style={{
-              marginBottom: 25,
-              width: 1200,
-              background: "none",
-              color: "white",
-            }}
-          >
-            <CardContent>
-              <Typography variant="h5" component="h2" className={classes.title}>
-                {item.title}
-              </Typography>
-              { item.active ? null : <Typography variant="h5" component="h2" className={classes.title} style={{ color: 'green'}}>
-                ЗАВЕРШЕНО
-              </Typography>}
-              <Box>
-                <Typography variant="body2" component="p">
-                  {item.description}
+      <Box
+        style={{
+          display: "flex",
+          backgroundColor: "rgba(0, 0, 0, .8)",
+          backdropFilter: "blur(15px)",
+          marginTop: 40,
+        }}
+      >
+        {request.map((item) => {
+          return (
+            <Card
+              className={classes.root}
+              style={{
+                marginBottom: 25,
+                width: 1200,
+                background: "none",
+                color: "white",
+              }}
+            >
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  className={classes.title}
+                >
+                  {item.title}
                 </Typography>
-                <Typography className={classes.pos} color="textPrimary">
-                  Автор: {item.author.firstName} {item.author.lastName}
-                </Typography>
-                <Typography>
-                  <a href={item.source} target="_blank">
-                    Объявление
-                  </a>
-                </Typography>
-                <Typography>{item.location}</Typography>
-              </Box>
-              <Box>
-                {candidate.login === item.author?.login ? (
-                  <>
-                    <Box
-                      style={{
-                        textAlign: "center",
-                        fontSize: 25,
-                        color: "red",
-                      }}
-                    >
-                      Откликнувшиеся оценщики:
-                    </Box>
-                    <Box
-                      style={{
-                        borderRadius: 5,
-                        padding: 10,
-                        marginTop: 20,
-                      }}
-                    >
+                {item.active ? null : (
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    className={classes.title}
+                    style={{ color: "green" }}
+                  >
+                    ЗАВЕРШЕНО
+                  </Typography>
+                )}
+                <Box>
+                  <Typography variant="body2" component="p">
+                    {item.description}
+                  </Typography>
+                  <Typography className={classes.pos} color="textPrimary">
+                    Автор: {item.author.firstName} {item.author.lastName}
+                  </Typography>
+                  <Typography>
+                    <a href={item.source} target="_blank">
+                      Объявление
+                    </a>
+                  </Typography>
+                  <Typography>{item.location}</Typography>
+                </Box>
+                <Box>
+                  {candidate.login === item.author?.login ? (
+                    <>
                       <Box
                         style={{
-                          justifyContent: "flex-start",
+                          textAlign: "center",
+                          fontSize: 25,
+                          color: "red",
                         }}
                       >
-                        {item.appraisers.map((elem) => {
-                          return (
-                            <Box>
-                              <Box
-                                style={{
-                                  display: "flex",
-                                  border: "1px solid white",
-                                  borderRadius: 5,
-                                  marginBottom: 10,
-                                  width: 600,
-                                  marginLeft: 550,
-                                }}
-                              >
+                        Откликнувшиеся оценщики:
+                      </Box>
+                      <Box
+                        style={{
+                          borderRadius: 5,
+                          padding: 10,
+                          marginTop: 20,
+                        }}
+                      >
+                        <Box
+                          style={{
+                            justifyContent: "flex-start",
+                          }}
+                        >
+                          {item.appraisers.map((elem) => {
+                            return (
+                              <Box>
                                 <Box
                                   style={{
-                                    padding: 10,
-                                    margin: 5,
+                                    display: "flex",
+                                    border: "1px solid white",
                                     borderRadius: 5,
-                                    textAlign: "center",
+                                    marginBottom: 10,
+                                    width: 600,
+                                    marginLeft: 550,
                                   }}
                                 >
-                                  <Typography>
-                                    {elem.firstName} {elem.lastName}
-                                  </Typography>
-                                  <Typography>
-                                    Город: {elem.location}
-                                  </Typography>
-                                </Box>
-                                <Box style={{ marginTop: 20 }}>
-                                  <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    style={{ marginRight: 10, marginLeft: 70 }}
+                                  <Box
+                                    style={{
+                                      padding: 10,
+                                      margin: 5,
+                                      borderRadius: 5,
+                                      textAlign: "center",
+                                    }}
                                   >
-                                    <NavLink to={`/agent/${elem._id}`}>
-                                      Об оценщике
-                                    </NavLink>
-                                  </Button>
-                                  {item.active? <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() =>
-                                      handleApply(
-                                        candidate._id,
-                                        elem._id,
-                                        item._id
-                                      )
-                                    }
-                                  >
-                                    Подтвердить
-                                  </Button> : null}
+                                    <Typography>
+                                      {elem.firstName} {elem.lastName}
+                                    </Typography>
+                                    <Typography>
+                                      Город: {elem.location}
+                                    </Typography>
+                                  </Box>
+                                  <Box style={{ marginTop: 20 }}>
+                                    <Button
+                                      variant="outlined"
+                                      color="primary"
+                                      style={{
+                                        marginRight: 10,
+                                        marginLeft: 70,
+                                      }}
+                                    >
+                                      <NavLink to={`/agent/${elem._id}`}>
+                                        Об оценщике
+                                      </NavLink>
+                                    </Button>
+                                    {item.active ? (
+                                      <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        onClick={() =>
+                                          handleApply(
+                                            candidate._id,
+                                            elem._id,
+                                            item._id
+                                          )
+                                        }
+                                      >
+                                        Подтвердить
+                                      </Button>
+                                    ) : null}
+                                  </Box>
                                 </Box>
                               </Box>
-                            </Box>
-                          );
-                        })}
+                            );
+                          })}
+                        </Box>
                       </Box>
-                    </Box>
-                  </>
-                ) : null}
-              </Box>
-              <Typography>Дата создания записи: {item.createdAt}</Typography>
-            </CardContent>
-          </Card>
-        );
-      })}
-    </Box>
+                    </>
+                  ) : null}
+                </Box>
+                <Typography>Дата создания записи: {item.createdAt}</Typography>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </Box>
     </Box>
   );
 }

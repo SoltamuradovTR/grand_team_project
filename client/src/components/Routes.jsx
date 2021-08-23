@@ -4,7 +4,7 @@ import Main from "../pages/Main";
 import Cab from "../pages/Cab";
 import ClientRequest from "./ClientComponents/ClientRequest";
 import SingleRequest from "../pages/SingleRequest";
-import AgentPage from './AgentComponents/AgentPage';
+import AgentPage from "./AgentComponents/AgentPage";
 
 function Routes() {
   return (
@@ -18,12 +18,10 @@ function Routes() {
       <Route exact path={`/request/:id`}>
         <SingleRequest />
       </Route>
-      <Route exact path={'/agent/:id'}>
-        <AgentPage/>
+      <Route exact path={"/agent/:id"}>
+        <AgentPage />
       </Route>
-      <Route exact path={'/client/:id'}>
-
-      </Route>
+      <Route exact path={"/client/:id"}></Route>
     </Switch>
   );
 }

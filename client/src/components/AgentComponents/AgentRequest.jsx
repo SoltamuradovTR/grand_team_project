@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
-import { Box, CircularProgress, Container, Typography } from "@material-ui/core";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Typography,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addAppraiser,
   loadRequestById,
-  selectAllRequests, selectLoadingRequests,
+  selectAllRequests,
+  selectLoadingRequests,
   selectRequestById,
 } from "../../redux/features/requests";
 import { NavLink, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import Button from '@material-ui/core/Button';
-import { selectCandidate } from '../../redux/features/login';
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import Button from "@material-ui/core/Button";
+import { selectCandidate } from "../../redux/features/login";
 
 const useStyles = makeStyles({
   root: {
@@ -40,7 +46,7 @@ function AgentRequest() {
   const { id } = useParams();
   const request = useSelector(selectRequestById);
   const candidate = useSelector(selectCandidate);
-  const loading = useSelector(selectLoadingRequests)
+  const loading = useSelector(selectLoadingRequests);
 
   useEffect(() => dispatch(loadRequestById(id)), [dispatch]);
   const classes = useStyles();
@@ -88,7 +94,7 @@ function AgentRequest() {
           <CircularProgress />
         </Box>
       </>
-    )
+    );
   }
 
   return (
