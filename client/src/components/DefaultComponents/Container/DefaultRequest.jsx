@@ -58,7 +58,7 @@ function DefaultRequest(props) {
                   Автор: {item.author.firstName} {item.author.lastName}
                 </Typography>
                 <Typography>
-                  <a href={item.source}>Местоположение</a>
+                  <a href={item.source}>Объявление</a>
                 </Typography>
                 <Typography>{item.location}</Typography>
                 <Box
