@@ -27,6 +27,20 @@ ____
     + Вывод страницы агента. Если данный клиент находится в списке клиентов данного агента, у клиента есть возможность оставить отзыв об агенте, а также ему видны контактные данные агента.
 
 [comment]: <> (# Запуск проекта)
+# Запуск проекта
+Для запуска приложения нужно набрать следующие команды в терминале:
+___
+
+`npm i`
+
+`cd client`
+
+`npm i`
+
+`cd ..`
+
+`npm run dev`
+___
 
 [comment]: <> (Для запуска приложения нужно набрать следующие команды в терминале:)
 
@@ -90,39 +104,22 @@ ____
 
 [comment]: <> (___)
 
-[comment]: <> (# Наша команда:)
-
-[comment]: <> (<h3>)
-
-[comment]: <> (  <a href="https://github.com/saytkhanov">)
-
-[comment]: <> (    <img alt="Saytkhanov" src="https://img.shields.io/badge/-Shamil Saytkhanov-black?style=for-the-badge&logo=github&logoColor=white" />)
-
-[comment]: <> (  </a>)
-
-[comment]: <> (</h3>)
-
-[comment]: <> (<h3>)
-
-[comment]: <> (  <a href="https://github.com/danilbekk">)
-
-[comment]: <> (    <img alt="Danilbek" src="https://img.shields.io/badge/-Danilbek-black?style=for-the-badge&logo=github&logoColor=white" />)
-
-[comment]: <> (  </a>)
-
-[comment]: <> (</h3>)
-
-[comment]: <> (<h3>)
-
-[comment]: <> (  <a href="https://github.com/Muhammad-Magomedov">)
-
-[comment]: <> (    <img alt="Muhammad" src="https://img.shields.io/badge/-Muhammad Magomedov-black?style=for-the-badge&logo=github&logoColor=white" />)
-
-[comment]: <> (  </a>)
-
-[comment]: <> (</h3>)
-
-[comment]: <> (___)
+# Наша команда:
+<h3>
+  <a href="https://github.com/deni-in">
+    <img alt="Deni" src="https://img.shields.io/badge/-deni-black?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+</h3>
+<h3>
+  <a href="https://github.com/soltamuradov">
+    <img alt="Tashu-Khadzhi" src="https://img.shields.io/badge/-soltamuradov-black?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+</h3>
+<h3>
+  <a href="https://github.com/khizir-is">
+    <img alt="khizir" src="https://img.shields.io/badge/-khizir-black?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+</h3>
 
 [comment]: <> (# Выполненные мною задачи:)
 
